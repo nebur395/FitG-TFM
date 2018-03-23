@@ -1,0 +1,22 @@
+codecov:
+  token: c1e57976-f9d2-43b4-b0a6-647003e8f747
+comment: off
+coverage:
+  range: 25..80
+  round: down
+  precision: 2
+  status:
+    project:
+      default:
+        # basic
+        target: 10%
+        threshold: null
+        base: auto
+        # advanced
+        branches: null
+        if_no_uploads: error
+        if_not_found: success
+        if_ci_failed: error
+        only_pulls: false
+        flags: null
+        paths: null

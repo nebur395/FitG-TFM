@@ -1,0 +1,64 @@
+## generic files to ignore
+*~
+*.out
+out/*
+build/*
+*.log
+logs/*
+
+# npm ignores
+node_modules/
+
+# sonnar scanners
+.scannerwork/
+
+#mongo database ignore
+db/
+
+# eclipse specific
+.metadata
+jrebel.lic
+.settings
+.classpath
+.project
+
+.ensime*
+*.sublime-*
+.cache
+
+# intellij
+*.eml
+*.iml
+*.ipr
+*.iws
+.*.sw?
+.idea/
+
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+*.sw[mnpcod]
+*.tmp
+*.tmp.*
+log.txt
+.vscode/
+npm-debug.log*
+
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+dist/
+tmp/
+temp/
+hooks/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+www/
+$RECYCLE.BIN/
+
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
