@@ -1,5 +1,6 @@
 var express = require('express');
 var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
+var anaerobicExerciseParam = require('../common/aerobicExercise.param').anaerobicExerciseParam;
 
 module.exports = function (app) {
 
@@ -7,6 +8,48 @@ module.exports = function (app) {
     var AnaerobicExercise = app.models.AnaerobicExercise;
     var AnaerobicMark = app.models.AnaerobicMark;
 
+    /**
+     * @swagger
+     * /anaerobicExercises/:
+     *   get:
+     *     tags:
+     *       - Anaerobic exercises
+     *     summary: Listar ejercicios anaeróbicos.
+     *     description: Lista todos los ejercicios anaeróbicos predefinidos del sistema mas los
+     *       personalizados del usuario.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *     responses:
+     *       200:
+     *         description: Lista con todos los ejercicios.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              exercises:
+     *               type: array
+     *               items:
+     *                $ref: '#/definitions/AnaerobicExercise'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.get("/", function (req, res) {
         AnaerobicExercise.find({$or: [
                 {idUser: req.jwtPayload._id},
