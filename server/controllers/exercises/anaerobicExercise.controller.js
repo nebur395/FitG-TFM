@@ -177,6 +177,50 @@ module.exports = function (app) {
         });
     });
 
+    /**
+     * @swagger
+     * /anaerobicExercises/{anaerobicExercise}:
+     *   post:
+     *     tags:
+     *       - Anaerobic exercises
+     *     summary: Listar ejercicio anaeróbico.
+     *     description: Lista toda la información de un ejercicio anaeróbico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: anaerobicExercise
+     *         description: Identificador del ejercicio que se quiere listar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Un ejercicio anaeróbico con toda su información.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              exercise:
+     *                $ref: '#/definitions/AnaerobicExercise'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.get("/:anaerobicExercise", function (req, res) {
         var exercise = req.anaerobicExercise.toJSON();
         delete exercise.__v;
