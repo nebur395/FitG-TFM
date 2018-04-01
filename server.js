@@ -40,13 +40,13 @@ app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 app.use(express.static('./public/desktop'));
 require('./server/config/swagger-setup.config')(app);
 // Midelware to access handler and JWT
-//         require('./server/security/jwt-handler')(app);
+require('./server/security/jwt-handler')(app);
 // Inject models and routes
-//         app.models = require('./server/models');
-//         require('./server/controllers')(app);
+app.models = require('./server/models');
+require('./server/controllers')(app);
 // Initialize passport strategies
-//         require('./server/security/local-passport');
-//         app.use(passport.initialize());
+require('./server/security/local-passport');
+app.use(passport.initialize());
 
 // Database connection and server launching
 var dbUri = 'mongodb://localhost:27017/fitgDb';
