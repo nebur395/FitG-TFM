@@ -1,14 +1,14 @@
 # FitG
 
 [![Build Status](https://travis-ci.org/nebur395/FitG-TFM.svg?branch=master)](https://travis-ci.org/nebur395/FitG-TFM)
-
+[![codecov](https://codecov.io/gh/nebur395/FitG-TFM/branch/master/graph/badge.svg)](https://codecov.io/gh/nebur395/FitG-TFM) 
 
 ## Start using this App!
 
 In order to run this project you have to have installed
 [node.js](http://nodejs.org) and npm. Once you have them, follow these steps:
 
-1. Clone this repo: `git clone https://github.com/nebur395/Anisclo`
+1. Clone this repo: `git clone https://github.com/nebur395/FitG-TFM`
 1. Open a terminal on the root folder of this project.
 1. Run the command `npm install`. This must be done the first time only, in order to
 install the dependencies of the project.
