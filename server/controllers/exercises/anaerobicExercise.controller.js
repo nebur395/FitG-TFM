@@ -156,25 +156,7 @@ module.exports = function (app) {
 
     // Preload post objects on routes with ':anaerobicExercise'
     router.param('anaerobicExercise', function(req, res, next, id) {
-
-        AnaerobicExercise.findOne({_id: id}, function (err, exercise) {
-            if (err) {
-                return errorMessageHandler(err, res);
-            }
-            if (!exercise) {
-                return res.status(400).send({
-                    "message": "Anaerobic exercise does not exist."
-                });
-            }
-            if (exercise.idUser && (req.jwtPayload._id !== exercise.idUser.toString())) {
-                return res.status(401).send({
-                    "message": "Invalid or non-existent token. Please, send a correct token."
-                });
-            }
-
-            req.anaerobicExercise = exercise;
-            return next();
-        });
+        anaerobicExerciseParam(req, res, next, id)
     });
 
     /**
