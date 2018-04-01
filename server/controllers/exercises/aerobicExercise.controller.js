@@ -8,6 +8,48 @@ module.exports = function (app) {
     var AerobicExercise = app.models.AerobicExercise;
     var AerobicMark = app.models.AerobicMark;
 
+    /**
+     * @swagger
+     * /aerobicExercises/:
+     *   get:
+     *     tags:
+     *       - Aerobic exercises
+     *     summary: Listar ejercicios aeróbicos.
+     *     description: Lista todos los ejercicios aeróbicos predefinidos del sistema mas los
+     *       personalizados del usuario.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *     responses:
+     *       200:
+     *         description: Lista con todos los ejercicios.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              exercises:
+     *               type: array
+     *               items:
+     *                $ref: '#/definitions/AerobicExercise'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.get("/", function (req, res) {
         AerobicExercise.find({$or: [
                 {idUser: req.jwtPayload._id},
@@ -25,6 +67,71 @@ module.exports = function (app) {
             });
     });
 
+    /**
+     * @swagger
+     * /aerobicExercises/:
+     *   post:
+     *     tags:
+     *       - Aerobic exercises
+     *     summary: Crear un ejercicio aeróbico
+     *     description: Crea un nuevo ejercicio aeróbico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: name
+     *         description: Nombre del ejercicio.
+     *         in: body
+     *         required: true
+     *         type: string
+     *       - name: category
+     *         description: Categoría del ejercicio aeróbico (p.ej., running, swimming).
+     *         in: body
+     *         required: true
+     *         type: string
+     *       - name: type
+     *         description: Tipo del ejercicio aeróbico (p.ej., crawl, butterfly, marathon, sprint).
+     *         in: body
+     *         required: true
+     *         type: string
+     *       - name: idUser
+     *         description: Identificador único del usuario.
+     *         in: body
+     *         required: true
+     *         type: string
+     *       - name: description
+     *         description: Descripción del ejercicio.
+     *         in: body
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       400:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.post("/", function (req, res) {
 
         var newExercise = new AerobicExercise();

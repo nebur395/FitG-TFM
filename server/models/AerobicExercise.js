@@ -26,11 +26,11 @@ mongoose.Promise = global.Promise;
  *       category:
  *         type: string
  *         required: true
- *         description: Categoría del ejercicio aeróbico (p.ej., ).
+ *         description: Categoría del ejercicio aeróbico (p.ej., running, swimming).
  *       type:
  *         type: string
  *         required: true
- *         description: Tipo del ejercicio aeróbico (p.ej., ).
+ *         description: Tipo del ejercicio aeróbico (p.ej., crawl, butterfly, marathon, sprint).
  *       custom:
  *         type: boolean
  *         required: true
