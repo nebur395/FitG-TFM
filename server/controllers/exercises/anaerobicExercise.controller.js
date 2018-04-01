@@ -320,7 +320,51 @@ module.exports = function (app) {
         }
     });
 
-
+    /**
+     * @swagger
+     * /anaerobicExercises/{anaerobicExercise}:
+     *   delete:
+     *     tags:
+     *       - Anaerobic exercises
+     *     summary: Elimina un ejercicio anaeróbico
+     *     description: Elimina un ejercicio anaeróbico existente únicamente si es personalizado.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: anaerobicExercise
+     *         description: Identificador del ejercicio que se quiere editar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       400:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.delete("/:anaerobicExercise", function (req, res) {
 
         // Check if the exercise is custom
