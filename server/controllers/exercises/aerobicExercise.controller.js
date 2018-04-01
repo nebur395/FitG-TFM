@@ -110,9 +110,12 @@ module.exports = function (app) {
      *         type: string
      *     responses:
      *       200:
-     *         description: Mensaje de feedback para el usuario.
+     *         description: Un ejercicio aeróbico con toda su información.
      *         schema:
-     *           $ref: '#/definitions/FeedbackMessage'
+     *           type: object
+     *           properties:
+     *              exercise:
+     *                $ref: '#/definitions/AerobicExercise'
      *       400:
      *         description: Mensaje de feedback para el usuario.
      *         schema:
@@ -184,7 +187,7 @@ module.exports = function (app) {
      *         type: string
      *     responses:
      *       200:
-     *         description: Lista con todos los ejercicios.
+     *         description: Un ejercicio aeróbico con toda su información.
      *         schema:
      *           type: object
      *           properties:
