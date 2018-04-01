@@ -161,6 +161,45 @@ module.exports = function (app) {
         aerobicExerciseParam(req, res, next, id)
     });
 
+    /**
+     * @swagger
+     * /aerobicExercises/{aerobicExercise}:
+     *   post:
+     *     tags:
+     *       - Aerobic exercises
+     *     summary: Listar ejercicio aeróbico.
+     *     description: Lista toda la información de un ejercicio aeróbico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *     responses:
+     *       200:
+     *         description: Lista con todos los ejercicios.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              exercise:
+     *                $ref: '#/definitions/AerobicExercise'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.get("/:aerobicExercise", function (req, res) {
         var exercise = req.aerobicExercise.toJSON();
         delete exercise.__v;
