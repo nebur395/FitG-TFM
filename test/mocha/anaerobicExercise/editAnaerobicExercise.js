@@ -54,7 +54,7 @@ describe('AnaerobicExercise', function () {
      */
     describe('#createAnaerobicExercise()', function () {
 
-        it('should create a new anaerobic exercise', function (done) {
+        it('should edit an existing anaerobic exercise', function (done) {
 
             chai.request(server)
                 .put('/anaerobicExercises/' + exercisesId[0])
