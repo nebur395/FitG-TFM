@@ -17,6 +17,7 @@ describe('AnaerobicExercise', function () {
 
     var username = "Testing",
         email = "Testing@email.com",
+        email2 = "Testing2@email.com",
         password = "Testing";
 
     var exerciseName = "exercise test",
@@ -25,10 +26,11 @@ describe('AnaerobicExercise', function () {
         type = "chest";
 
     var exercisesId = [],
-        idUser;
+        idUsers = [];
 
     var notExists = "Anaerobic exercise does not exist.",
         isNotCustom = "Predefined exercises can not be deleted.",
+        invalidToken = "Invalid or non-existent token. Please, send a correct token.",
         successMessage = "Anaerobic exercise deleted successfully.";
 
     /*
@@ -36,17 +38,19 @@ describe('AnaerobicExercise', function () {
      */
     before(function (done) {
 
-        userCommon.createUser(username, email, password, function(id) {
-            idUser = id;
-            anaerobicExerciseCommon.createAnaerobicExercise(exerciseName, category, type, true, idUser, "", function (id) {
-                exercisesId.push(id);
-                anaerobicExerciseCommon.createAnaerobicExercise(exerciseName2, category, type, false, idUser, "", function(id){
+        userCommon.createUser(username, email, password, function (id) {
+            idUsers.push(id);
+            userCommon.createUser(username, email2, password, function(id) {
+                idUsers.push(id);
+                anaerobicExerciseCommon.createAnaerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
                     exercisesId.push(id);
-                    done();
+                    anaerobicExerciseCommon.createAnaerobicExercise(exerciseName2, category, type, false, idUsers[0], "", function(id){
+                        exercisesId.push(id);
+                        done();
+                    });
                 });
             });
         });
-
     });
 
     /**
@@ -54,11 +58,24 @@ describe('AnaerobicExercise', function () {
      */
     describe('#createAnaerobicExercise()', function () {
 
+        it('should return an error message since the user isn\'t the owner of the exercise', function (done) {
+
+            chai.request(server)
+                .delete('/anaerobicExercises/' + exercisesId[0])
+                .set('Authorization','Bearer ' + createUserToken(idUsers[1], email, username))
+                .end(function (err, result) {
+
+                    feedbackMessageCommon.checkMessageCode(result, 401, invalidToken);
+
+                    done();
+                });
+        });
+
         it('should delete an existing anaerobic exercise', function (done) {
 
             chai.request(server)
                 .delete('/anaerobicExercises/' + exercisesId[0])
-                .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
+                .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
                     feedbackMessageCommon.checkMessageCode(result, 200, successMessage);
@@ -70,7 +87,7 @@ describe('AnaerobicExercise', function () {
 
             chai.request(server)
                 .delete('/anaerobicExercises/' + exercisesId[0])
-                .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
+                .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
                     feedbackMessageCommon.checkMessageCode(result, 404, notExists);
@@ -83,7 +100,7 @@ describe('AnaerobicExercise', function () {
 
             chai.request(server)
                 .delete('/anaerobicExercises/' + exercisesId[1])
-                .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
+                .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
                     feedbackMessageCommon.checkMessageCode(result, 400, isNotCustom);
@@ -97,8 +114,10 @@ describe('AnaerobicExercise', function () {
          */
         after(function (done) {
 
-            userCommon.deleteUserById(idUser, function () {
-                anaerobicExerciseCommon.deleteAnaerobicExerciseById(exercisesId, done);
+            userCommon.deleteUserById(idUsers[0], function () {
+                userCommon.deleteUserById(idUsers[1], function () {
+                    anaerobicExerciseCommon.deleteAnaerobicExerciseById(exercisesId, done);
+                });
             });
         });
 
