@@ -76,5 +76,32 @@ module.exports = function (app) {
             });
     });
 
+
+    router.post("/:aerobicExercise/aerobicMarks", function (req, res) {
+
+        var newMark = new AerobicMark();
+
+        // Add the new attributes to the exercise object
+        newMark.distance = req.body.distance;
+        newMark.time = req.body.time;
+        newMark.intensity = req.body.intensity;
+        newMark.heartRate = req.body.heartRate;
+        newMark.idUser = req.jwtPayload._id;
+        newMark.idExercise = req.aerobicExercise._id;
+        newMark.comment = req.body.comment;
+
+        newMark.save(function (err, mark) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                mark = mark.toJSON();
+                delete mark.__v;
+                return res.status(200).send({
+                    "mark": mark
+                });
+            }
+        });
+    });
+
     return router;
 };
