@@ -4,13 +4,15 @@ var AnaerobicExercise = server.models.AnaerobicExercise;
 /*
  * Create an anaerobic exercise
  */
-function createAnaerobicExercise(name, category, type, callback) {
+function createAnaerobicExercise(name, category, type, custom, idUser, description, callback) {
 
     var AnaerobicExercise = new AnaerobicExercise();
     AnaerobicExercise.name = name;
     AnaerobicExercise.category = category;
     AnaerobicExercise.type = type;
     AnaerobicExercise.custom = custom;
+    AnaerobicExercise.idUser = idUser;
+    AnaerobicExercise.description = description;
 
     AnaerobicExercise.save(function (err, result) {
         callback(result._id);

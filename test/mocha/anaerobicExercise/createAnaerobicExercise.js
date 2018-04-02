@@ -29,7 +29,7 @@ describe('AnaerobicExercise', function () {
     var entityExist = "Unique key duplicated.";
 
     /*
-     * It creates a new user before the test suite starts executing.
+     * It creates a new exercise before the test suite starts executing.
      */
     before(function (done) {
 
