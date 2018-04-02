@@ -11,7 +11,7 @@ var chai = require('chai'),
 chai.use(chaiHttp);
 
 /**
- * Test suite for User functionalities.
+ * Test suite for anaerobic exercise functionalities.
  */
 describe('AnaerobicExercise', function () {
 

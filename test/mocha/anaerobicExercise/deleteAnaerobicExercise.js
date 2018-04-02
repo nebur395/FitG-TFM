@@ -1,7 +1,6 @@
 var chai = require('chai'),
     chaiHttp = require('chai-http'),
     should = chai.should(),
-    ObjectId = require('mongoose').Types.ObjectId,
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
@@ -11,7 +10,7 @@ var chai = require('chai'),
 chai.use(chaiHttp);
 
 /**
- * Test suite for User functionalities.
+ * Test suite for anaerobic exercise functionalities.
  */
 describe('AnaerobicExercise', function () {
 
