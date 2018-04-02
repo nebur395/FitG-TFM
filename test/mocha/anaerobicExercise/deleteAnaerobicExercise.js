@@ -27,7 +27,7 @@ describe('AnaerobicExercise', function () {
     var exercisesId = [],
         idUser;
 
-    var entityExist = "Unique key duplicated.",
+    var notExists = "Anaerobic exercise does not exist.",
         isNotCustom = "Predefined exercises can not be deleted.",
         successMessage = "Anaerobic exercise deleted successfully.";
 
@@ -62,6 +62,19 @@ describe('AnaerobicExercise', function () {
                 .end(function (err, result) {
 
                     feedbackMessageCommon.checkMessageCode(result, 200, successMessage);
+                    done();
+                });
+        });
+
+        it('should return an error message since the exercise doesn\'t exists', function (done) {
+
+            chai.request(server)
+                .delete('/anaerobicExercises/' + exercisesId[0])
+                .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
+                .end(function (err, result) {
+
+                    feedbackMessageCommon.checkMessageCode(result, 404, notExists);
+
                     done();
                 });
         });

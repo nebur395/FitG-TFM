@@ -1,5 +1,7 @@
 var models = require('../../models');
 var AerobicExercise = models.AerobicExercise;
+var errorMessageHandler = require('./errorMessageHandler').errorMessageHandler;
+
 /**
  * @name errorMessageHandler
  * @desc Manage a http message from  a Mongoose error
