@@ -31,6 +31,7 @@ describe('AnaerobicExercise', function () {
     var notExists = "Anaerobic exercise does not exist.",
         isNotCustom = "Predefined exercises can not be deleted.",
         invalidToken = "Invalid or non-existent token. Please, send a correct token.",
+        invalidID = "Cast to ObjectId failed",
         successMessage = "Anaerobic exercise deleted successfully.";
 
     /*
@@ -91,6 +92,19 @@ describe('AnaerobicExercise', function () {
                 .end(function (err, result) {
 
                     feedbackMessageCommon.checkMessageCode(result, 404, notExists);
+
+                    done();
+                });
+        });
+
+        it('should return an error message since the exercise doesn\'t exists', function (done) {
+
+            chai.request(server)
+                .delete('/anaerobicExercises/' + '123')
+                .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
+                .end(function (err, result) {
+
+                    feedbackMessageCommon.checkMessageCode(result, 500, invalidID);
 
                     done();
                 });
