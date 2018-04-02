@@ -56,9 +56,7 @@ describe('AnaerobicExercise', function () {
                     result.should.have.status(200);
                     result.body.should.be.a('object');
                     result.body.should.have.property('exercises');
-                    result.body.exercise.should.be.a('array');
-
-                    exercisesId.push(new ObjectId(result.body.exercise._id));
+                    result.body.exercises.should.be.a('array');
 
                     done();
                 });

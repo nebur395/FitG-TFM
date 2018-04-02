@@ -6,15 +6,15 @@ var AnaerobicExercise = server.models.AnaerobicExercise;
  */
 function createAnaerobicExercise(name, category, type, custom, idUser, description, callback) {
 
-    var AnaerobicExercise = new AnaerobicExercise();
-    AnaerobicExercise.name = name;
-    AnaerobicExercise.category = category;
-    AnaerobicExercise.type = type;
-    AnaerobicExercise.custom = custom;
-    AnaerobicExercise.idUser = idUser;
-    AnaerobicExercise.description = description;
+    var newExercise = new AnaerobicExercise();
+    newExercise.name = name;
+    newExercise.category = category;
+    newExercise.type = type;
+    newExercise.custom = custom;
+    newExercise.idUser = idUser;
+    newExercise.description = description;
 
-    AnaerobicExercise.save(function (err, result) {
+    newExercise.save(function (err, result) {
         callback(result._id);
     });
 }
