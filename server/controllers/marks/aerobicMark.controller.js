@@ -104,22 +104,22 @@ module.exports = function (app) {
      *         required: true
      *         type: string
      *       - name: distance
-     *         description: Descripción del ejercicio.
+     *         description: Distancia recorrida durante del ejercicio en km [0,3431].
      *         in: body
      *         required: true
      *         type: number
      *       - name: time
-     *         description: Descripción del ejercicio.
+     *         description: Duración del ejercicio en minutos [0,1440].
      *         in: body
      *         required: true
      *         type: number
      *       - name: intensity
-     *         description: Descripción del ejercicio.
+     *         description: Intensidad con la que se ha realizado el ejercicio. Escala Borg 1-10.
      *         in: body
      *         required: true
      *         type: number
      *       - name: heartRate
-     *         description: Descripción del ejercicio.
+     *         description: Ritmo cardiaco medio durante el ejercicio. Pulsaciones/minuto [0,225].
      *         in: body
      *         required: true
      *         type: number
@@ -238,7 +238,81 @@ module.exports = function (app) {
         });
     });
 
-
+    /**
+     * @swagger
+     * /aerobicExercises/{aerobicExercise}/aerobicMarks/{aerobicMark}:
+     *   put:
+     *     tags:
+     *       - Aerobic exercises
+     *     summary: Edita una marca de ejercicio aeróbico
+     *     description: Edita una marca de ejercicio aeróbico existente.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: aerobicExercise
+     *         description: ID del ejercicio al que se quiere añadir la marca.
+     *         in: path
+     *         required: true
+     *         type: string
+     *       - name: aerobicMark
+     *         description: Identificador de la marca que se quiere listar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *       - name: distance
+     *         description: Distancia recorrida durante del ejercicio en km [0,3431].
+     *         in: body
+     *         required: true
+     *         type: number
+     *       - name: time
+     *         description: Duración del ejercicio en minutos [0,1440].
+     *         in: body
+     *         required: true
+     *         type: number
+     *       - name: intensity
+     *         description: Intensidad con la que se ha realizado el ejercicio. Escala Borg 1-10.
+     *         in: body
+     *         required: true
+     *         type: number
+     *       - name: heartRate
+     *         description: Ritmo cardiaco medio durante el ejercicio. Pulsaciones/minuto [0,225].
+     *         in: body
+     *         required: true
+     *         type: number
+     *       - name: comment
+     *         description: Descripción del ejercicio.
+     *         in: body
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       400:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.put("/:aerobicExercise/aerobicMarks/:aerobicMark", function (req, res) {
         // Add the new attributes to the mark object
         req.aerobicMark.distance = req.body.distance;
