@@ -20,7 +20,6 @@ describe('AerobicMark', function () {
         password = "Testing";
 
     var exerciseName = "exercise test",
-        exerciseName2 = "exercise test2",
         category = "running",
         type = "sprint";
 
@@ -212,7 +211,7 @@ describe('AerobicMark', function () {
         });
 
         /*
-         * Removes the exercises created during the signIn tests.
+         * Removes the entities created during the signIn tests.
          */
         after(function (done) {
 
