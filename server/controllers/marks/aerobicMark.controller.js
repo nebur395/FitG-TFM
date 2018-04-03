@@ -183,7 +183,7 @@ module.exports = function (app) {
 
     /**
      * @swagger
-     * /aerobicExercises/{aerobicExercise}:
+     * /aerobicExercises/{aerobicExercise}/aerobicMarks/{aerobicMark}:
      *   post:
      *     tags:
      *       - Aerobic exercises
@@ -208,7 +208,7 @@ module.exports = function (app) {
      *         required: true
      *         type: string
      *       - name: aerobicMark
-     *         description: Identificador del ejercicio que se quiere listar.
+     *         description: Identificador de la marca que se quiere listar.
      *         in: path
      *         required: true
      *         type: string
