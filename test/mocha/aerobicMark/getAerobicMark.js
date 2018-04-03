@@ -99,7 +99,9 @@ describe('AerobicMark', function () {
         after(function (done) {
 
             userCommon.deleteUserById(idUser, function () {
-                aerobicExerciseCommon.deleteAerobicExerciseById(exercisesId, done);
+                aerobicExerciseCommon.deleteAerobicExerciseById(exercisesId, function () {
+                    aerobicMarkCommon.deleteAerobicMarkById(marksId, done);
+                });
             });
         });
 
