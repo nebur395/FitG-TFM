@@ -154,7 +154,7 @@ module.exports = function (app) {
 
         var newMark = new AerobicMark();
 
-        // Add the new attributes to the exercise object
+        // Add the new attributes to the mark object
         newMark.distance = req.body.distance;
         newMark.time = req.body.time;
         newMark.intensity = req.body.intensity;
@@ -235,6 +235,26 @@ module.exports = function (app) {
         delete mark.__v;
         return res.status(200).send({
             "mark": mark
+        });
+    });
+
+
+    router.put("/:aerobicExercise/aerobicMarks/:aerobicMark", function (req, res) {
+        // Add the new attributes to the mark object
+        req.aerobicMark.distance = req.body.distance;
+        req.aerobicMark.time = req.body.time;
+        req.aerobicMark.intensity = req.body.intensity;
+        req.aerobicMark.heartRate = req.body.heartRate;
+        req.aerobicMark.comment = req.body.comment;
+
+        req.aerobicMark.save(function (err) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                return res.status(200).send({
+                    "message": "Aerobic mark updated successfully."
+                });
+            }
         });
     });
 
