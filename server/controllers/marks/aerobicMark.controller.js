@@ -6,7 +6,6 @@ var aerobicMarkParam = require('../common/aerobicMark.param').aerobicMarkParam;
 module.exports = function (app) {
 
     var router = express.Router();
-    var AerobicExercise = app.models.AerobicExercise;
     var AerobicMark = app.models.AerobicMark;
 
     // Preload post objects on routes with ':aerobicExercise'
@@ -327,6 +326,20 @@ module.exports = function (app) {
             } else {
                 return res.status(200).send({
                     "message": "Aerobic mark updated successfully."
+                });
+            }
+        });
+    });
+
+
+    router.delete("/:aerobicExercise/aerobicMarks/:aerobicMark", function (req, res) {
+        // Remove the aerobic mark
+        AerobicMark.remove({_id: req.aerobicMark._id}, function (err) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                return res.status(200).send({
+                    "message": "Aerobic mark deleted successfully."
                 });
             }
         });
