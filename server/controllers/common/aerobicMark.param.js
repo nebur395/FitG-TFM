@@ -8,9 +8,12 @@ var errorMessageHandler = require('./errorMessageHandler').errorMessageHandler;
  * @param {Object} err - Mongoose error object
  * @param {Object } res - Http response
  */
-function aerobicMarkParam(req, res, next, id){
+function aerobicMarkParam(req, res, next, id) {
 
-    AerobicMark.findOne({_id: id}, function (err, mark) {
+    AerobicMark.findOne({$and: [
+            {_id: id},
+            {idExercise: req.aerobicExercise._id}
+        ]}, function (err, mark) {
         if (err) {
             return errorMessageHandler(err, res);
         }

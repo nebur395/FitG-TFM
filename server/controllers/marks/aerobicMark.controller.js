@@ -1,6 +1,7 @@
 var express = require('express');
 var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
 var aerobicExerciseParam = require('../common/aerobicExercise.param').aerobicExerciseParam;
+var aerobicMarkParam = require('../common/aerobicMark.param').aerobicMarkParam;
 
 module.exports = function (app) {
 
@@ -172,6 +173,68 @@ module.exports = function (app) {
                     "mark": mark
                 });
             }
+        });
+    });
+
+    // Preload post objects on routes with ':aerobicMark'
+    router.param('aerobicMark', function(req, res, next, id) {
+        aerobicMarkParam(req, res, next, id)
+    });
+
+    /**
+     * @swagger
+     * /aerobicExercises/{aerobicExercise}:
+     *   post:
+     *     tags:
+     *       - Aerobic exercises
+     *     summary: Listar ejercicio aeróbico.
+     *     description: Lista toda la información de un ejercicio aeróbico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: aerobicExercise
+     *         description: Identificador del ejercicio al que pertenece la marca.
+     *         in: path
+     *         required: true
+     *         type: string
+     *       - name: aerobicMark
+     *         description: Identificador del ejercicio que se quiere listar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Un ejercicio aeróbico con toda su información.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              mark:
+     *                $ref: '#/definitions/AerobicMark'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
+    router.get("/:aerobicExercise/aerobicMarks/:aerobicMark", function (req, res) {
+        var mark = req.aerobicMark.toJSON();
+        delete mark.__v;
+        return res.status(200).send({
+            "mark": mark
         });
     });
 
