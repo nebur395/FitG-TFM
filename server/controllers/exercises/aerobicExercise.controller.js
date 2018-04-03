@@ -324,7 +324,7 @@ module.exports = function (app) {
      *         type: string
      *         format: byte
      *       - name: aerobicExercise
-     *         description: Identificador del ejercicio que se quiere editar.
+     *         description: Identificador del ejercicio que se quiere eliminar.
      *         in: path
      *         required: true
      *         type: string
