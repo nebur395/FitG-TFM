@@ -51,7 +51,7 @@ describe('AerobicExercise', function () {
     /**
      * Tests for aerobicExercise functionality.
      */
-    describe('#createAerobicExercise()', function () {
+    describe('#editAerobicExercise()', function () {
 
         it('should edit an existing aerobic exercise', function (done) {
 

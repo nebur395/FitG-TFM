@@ -5,12 +5,13 @@ var chai = require('chai'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
     aerobicExerciseCommon = require('../../common/aerobicExerciseCommon'),
+    aerobicMarkCommon = require('../../common/aerobicMarkCommon'),
     feedbackMessageCommon = require('../../common/feedbackMessageCommon');
 
 chai.use(chaiHttp);
 
 /**
- * Test suite for aerobic exercise functionalities.
+ * Test suite for aerobic mark functionalities.
  */
 describe('AerobicExercise', function () {
 
@@ -20,21 +21,25 @@ describe('AerobicExercise', function () {
         password = "Testing";
 
     var exerciseName = "exercise test",
-        exerciseName2 = "exercise test2",
         category = "running",
         type = "sprint";
 
+    var intensity = 1,
+        distance = 1,
+        time = 1,
+        heartRate = 1;
+
     var exercisesId = [],
+        marksId = [],
         idUsers = [];
 
-    var notExists = "Aerobic exercise does not exist.",
-        isNotCustom = "Predefined exercises can not be deleted.",
+    var notExists = "Aerobic mark does not exist.",
         invalidToken = "Invalid or non-existent token. Please, send a correct token.",
         invalidID = "Cast to ObjectId failed",
-        successMessage = "Aerobic exercise deleted successfully.";
+        successMessage = "Aerobic mark deleted successfully.";
 
     /*
-     * It creates a new exercise before the test suite starts executing.
+     * It creates some entities before the test suite starts executing.
      */
     before(function (done) {
 
@@ -44,8 +49,8 @@ describe('AerobicExercise', function () {
                 idUsers.push(id);
                 aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
                     exercisesId.push(id);
-                    aerobicExerciseCommon.createAerobicExercise(exerciseName2, category, type, false, idUsers[0], "", function(id){
-                        exercisesId.push(id);
+                    aerobicMarkCommon.createAerobicMark(exercisesId[0], idUsers[0], distance, time, intensity, heartRate, "", function(id){
+                        marksId.push(id);
                         done();
                     });
                 });
@@ -54,27 +59,28 @@ describe('AerobicExercise', function () {
     });
 
     /**
-     * Tests for aerobicExercise functionality.
+     * Tests for aerobicMark functionality.
      */
-    describe('#deleteAerobicExercise()', function () {
+    describe('#deleteAerobicMark()', function () {
 
-        it('should return an error message since the user isn\'t the owner of the exercise', function (done) {
+        it('should return an error message since the user isn\'t the owner of the mark', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0])
+                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[1], email, username))
                 .end(function (err, result) {
 
+                    console.log(err);
                     feedbackMessageCommon.checkMessageCode(result, 401, invalidToken);
 
                     done();
                 });
         });
 
-        it('should delete an existing aerobic exercise', function (done) {
+        it('should delete an existing aerobic mark', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0])
+                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -83,10 +89,10 @@ describe('AerobicExercise', function () {
                 });
         });
 
-        it('should return an error message since the exercise doesn\'t exists', function (done) {
+        it('should return an error message since the mark doesn\'t exists', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0])
+                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -99,24 +105,11 @@ describe('AerobicExercise', function () {
         it('should return an error message since is not a valid mark id', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + '123')
+                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + '123')
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
                     feedbackMessageCommon.checkMessageCode(result, 500, invalidID);
-
-                    done();
-                });
-        });
-
-        it('should return an error message since is not a custom exercise', function (done) {
-
-            chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[1])
-                .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
-                .end(function (err, result) {
-
-                    feedbackMessageCommon.checkMessageCode(result, 400, isNotCustom);
 
                     done();
                 });
@@ -129,7 +122,9 @@ describe('AerobicExercise', function () {
 
             userCommon.deleteUserById(idUsers[0], function () {
                 userCommon.deleteUserById(idUsers[1], function () {
-                    aerobicExerciseCommon.deleteAerobicExerciseById(exercisesId, done);
+                    aerobicExerciseCommon.deleteAerobicExerciseById(exercisesId, function () {
+                        aerobicMarkCommon.deleteAerobicMarkById(marksId, done);
+                    });
                 });
             });
         });
