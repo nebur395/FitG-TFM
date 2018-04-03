@@ -116,7 +116,7 @@ describe('AerobicExercise', function () {
         });
 
         /*
-         * Removes the exercises created during the signIn tests.
+         * Removes the marks created during the signIn tests.
          */
         after(function (done) {
 

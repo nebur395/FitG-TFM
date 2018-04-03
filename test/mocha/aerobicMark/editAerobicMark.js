@@ -1,7 +1,6 @@
 var chai = require('chai'),
     chaiHttp = require('chai-http'),
     should = chai.should(),
-    ObjectId = require('mongoose').Types.ObjectId,
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
@@ -12,7 +11,7 @@ var chai = require('chai'),
 chai.use(chaiHttp);
 
 /**
- * Test suite for Aerobic Mark functionalities.
+ * Test suite for aerobic mark functionalities.
  */
 describe('AerobicMark', function () {
 
@@ -21,6 +20,7 @@ describe('AerobicMark', function () {
         password = "Testing";
 
     var exerciseName = "exercise test",
+        exerciseName2 = "exercise test2",
         category = "running",
         type = "sprint";
 
@@ -33,6 +33,8 @@ describe('AerobicMark', function () {
         marksId = [],
         idUser;
 
+    var successMessage = "Aerobic mark updated successfully.";
+
     /*
      * It creates some entities before the test suite starts executing.
      */
@@ -40,41 +42,31 @@ describe('AerobicMark', function () {
 
         userCommon.createUser(username, email, password, function(id) {
             idUser = id;
-            aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, false, idUser, "", function(id){
+            aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, true, idUser, "", function (id) {
                 exercisesId.push(id);
-                done();
+                aerobicMarkCommon.createAerobicMark(exercisesId[0], idUser, distance, time, intensity, heartRate, "", function(id){
+                    marksId.push(id);
+                    done();
+                });
             });
         });
 
     });
 
     /**
-     * Tests for anaerobicMark functionality.
+     * Tests for aerobicMark functionality.
      */
-    describe('#createAerobicMark()', function () {
+    describe('#editAerobicMark()', function () {
 
-        it('should create a new aerobic mark', function (done) {
+        it('should edit an existing aerobic mark', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: distance, time: time, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
-                    result.should.have.status(200);
-                    result.body.should.be.a('object');
-                    result.body.should.have.property('mark');
-                    result.body.mark.should.be.a('object');
-                    result.body.mark.should.have.property('_id');
-                    result.body.mark.should.have.property('intensity');
-                    result.body.mark.should.have.property('distance');
-                    result.body.mark.should.have.property('time');
-                    result.body.mark.should.have.property('heartRate');
-                    result.body.mark.should.have.property('idUser');
-                    result.body.mark.should.have.property('idExercise');
-
-                    marksId.push(new ObjectId(result.body.mark._id));
-
+                    feedbackMessageCommon.checkMessageCode(result, 200, successMessage);
                     done();
                 });
         });
@@ -82,7 +74,7 @@ describe('AerobicMark', function () {
         it('should return an error message since distance is blank', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: "", time: time, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -96,7 +88,7 @@ describe('AerobicMark', function () {
         it('should return an error message since time is blank', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: distance, time: "", heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -110,7 +102,7 @@ describe('AerobicMark', function () {
         it('should return an error message since time is too short', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: distance, time: -1, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -124,7 +116,7 @@ describe('AerobicMark', function () {
         it('should return an error message since time is too long', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: distance, time: 1441, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -138,7 +130,7 @@ describe('AerobicMark', function () {
         it('should return an error message since distance is too short', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: -1, time: time, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -152,7 +144,7 @@ describe('AerobicMark', function () {
         it('should return an error message since distance is too long', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: 3432, time: time, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -166,7 +158,7 @@ describe('AerobicMark', function () {
         it('should return an error message since intensity is too short', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: -1, distance: distance, time: time, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -180,7 +172,7 @@ describe('AerobicMark', function () {
         it('should return an error message since intensity is too long', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: 11, distance: distance, time: time, heartRate: heartRate})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -194,7 +186,7 @@ describe('AerobicMark', function () {
         it('should return an error message since heartRate is too short', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: distance, time: time, heartRate: -1})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -208,7 +200,7 @@ describe('AerobicMark', function () {
         it('should return an error message since heartRate is too long', function (done) {
 
             chai.request(server)
-                .post('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks')
+                .put('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
                 .send({intensity: intensity, distance: distance, time: time, heartRate: 226})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
@@ -220,7 +212,7 @@ describe('AerobicMark', function () {
         });
 
         /*
-         * Removes the marks created during the signIn tests.
+         * Removes the exercises created during the signIn tests.
          */
         after(function (done) {
 
