@@ -32,25 +32,20 @@ mongoose.Promise = global.Promise;
  *       repetitions:
  *         type: number
  *         format: double
- *         required: true
- *         description: Número de repeticiones del ejercicio realizadas.
- *       series:
- *         type: number
- *         format: double
- *         description: Lista en la que cada elemento corresponde con el número de series
- *           realizadas en cada repetición del ejercicio. La lista tiene el mismo tamaño que el
- *           número de repeticiones.
+ *         description: Lista en la que cada elemento corresponde con el número de repeticiones
+ *           realizadas en cada repetición del ejercicio. La lista tiene el mismo tamaño que la
+ *           lista del campo weight.
  *       weight:
  *         type: number
  *         format: double
  *         description: Lista en la que cada elemento corresponde con el peso realzado en cada
- *           repetición del ejercicio. La lista tiene el mismo tamaño que el número de repeticiones.
+ *           repetición del ejercicio. La lista tiene el mismo tamaño que la lista del campo repetitions.
  *       time:
  *         type: number
  *         format: double
  *         description: Lista en la que cada elemento corresponde con la duración en segundos
- *           del ejercicio realizada en cada repetición. La lista tiene el mismo tamaño que el
- *           número de repeticiones.
+ *           del ejercicio realizada en cada repetición. La lista tiene el mismo tamaño que la lista
+ *           del campo repetitions.
  *       comment:
  *         type: string
  *         format: double
@@ -69,8 +64,7 @@ mongoose.Promise = global.Promise;
 var AnaerobicMarkSchema = mongoose.Schema({
     idExercise: {type: mongoose.Schema.Types.ObjectId, required: true},
     idUser: {type: mongoose.Schema.Types.ObjectId, required: true},
-    repetitions: {type: Number, required: true, min: 1, max: 50},
-    series: {type: [Number]},
+    repetitions: {type: [Number]},
     weight: {type: [Number]},
     time: {type: [Number]},
     comment: {type: String},
