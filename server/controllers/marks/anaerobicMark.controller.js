@@ -76,5 +76,30 @@ module.exports = function (app) {
             });
     });
 
+    router.post("/:anaerobicExercise/anaerobicMarks", function (req, res) {
+
+        var newMark = new AnaerobicMark();
+
+        // Add the new attributes to the mark object
+        newMark.repetitions = req.body.repetitions;
+        newMark.weight = req.body.weight;
+        newMark.time = req.body.time;
+        newMark.idUser = req.jwtPayload._id;
+        newMark.idExercise = req.anaerobicExercise._id;
+        newMark.comment = req.body.comment;
+
+        newMark.save(function (err, mark) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                mark = mark.toJSON();
+                delete mark.__v;
+                return res.status(200).send({
+                    "mark": mark
+                });
+            }
+        });
+    });
+
     return router;
 };
