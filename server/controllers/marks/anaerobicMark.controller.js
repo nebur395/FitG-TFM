@@ -76,6 +76,75 @@ module.exports = function (app) {
             });
     });
 
+    /**
+     * @swagger
+     * /anaerobicExercises/{anaerobicExercise}/anaerobicMarks:
+     *   post:
+     *     tags:
+     *       - Anaerobic exercises
+     *     summary: Crear una marca para un ejercicio anaeróbico
+     *     description: Crea una nueva marca para un ejercicio anaeróbico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: anaerobicExercise
+     *         description: ID del ejercicio al que se quiere añadir la marca.
+     *         in: path
+     *         required: true
+     *         type: string
+     *       - name: repetitions
+     *         description: Lista en la que cada elemento corresponde con el número de repeticiones
+     *           realizadas en cada serie del ejercicio.
+     *         in: body
+     *         type: number
+     *       - name: weight
+     *         description: Lista en la que cada elemento corresponde con el peso en kg realizado en
+     *           cada serie del ejercicio.
+     *         in: body
+     *         type: number
+     *       - name: time
+     *         description: Lista en la que cada elemento corresponde con la duración en segundos
+     *           del ejercicio realizada en cada serie.
+     *         in: body
+     *         required: true
+     *         type: number
+     *       - name: comment
+     *         description: Descripción del ejercicio.
+     *         in: body
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Un ejercicio anaeróbico con toda su información.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              mark:
+     *                $ref: '#/definitions/AnaerobicExercise'
+     *       400:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.post("/:anaerobicExercise/anaerobicMarks", function (req, res) {
 
         var newMark = new AnaerobicMark();
