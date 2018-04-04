@@ -321,7 +321,18 @@ module.exports = function (app) {
         });
     });
 
-
+    router.delete("/:anaerobicExercise/anaerobicMarks/:anaerobicMark", function (req, res) {
+        // Remove the anaerobic mark
+        AnaerobicMark.remove({_id: req.anaerobicMark._id}, function (err) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                return res.status(200).send({
+                    "message": "Anaerobic mark deleted successfully."
+                });
+            }
+        });
+    });
 
     return router;
 };
