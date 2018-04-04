@@ -4,16 +4,16 @@ var chai = require('chai'),
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
-    aerobicExerciseCommon = require('../../common/aerobicExerciseCommon'),
-    aerobicMarkCommon = require('../../common/aerobicMarkCommon'),
+    anaerobicExerciseCommon = require('../../common/anaerobicExerciseCommon'),
+    anaerobicMarkCommon = require('../../common/anaerobicMarkCommon'),
     feedbackMessageCommon = require('../../common/feedbackMessageCommon');
 
 chai.use(chaiHttp);
 
 /**
- * Test suite for aerobic mark functionalities.
+ * Test suite for anaerobic mark functionalities.
  */
-describe('AerobicExercise', function () {
+describe('AnaerobicExercise', function () {
 
     var username = "Testing",
         email = "Testing@email.com",
@@ -21,22 +21,21 @@ describe('AerobicExercise', function () {
         password = "Testing";
 
     var exerciseName = "exercise test",
-        category = "running",
-        type = "sprint";
+        category = "muscle training",
+        type = "chest";
 
-    var intensity = 1,
-        distance = 1,
-        time = 1,
-        heartRate = 1;
+    var repetitions = [1,1],
+        weight = [1,1],
+        time = [1,1];
 
     var exercisesId = [],
         marksId = [],
         idUsers = [];
 
-    var notExists = "Aerobic mark does not exist.",
+    var notExists = "Anaerobic mark does not exist.",
         invalidToken = "Invalid or non-existent token. Please, send a correct token.",
         invalidID = "Cast to ObjectId failed",
-        successMessage = "Aerobic mark deleted successfully.";
+        successMessage = "Anaerobic mark deleted successfully.";
 
     /*
      * It creates some entities before the test suite starts executing.
@@ -47,9 +46,9 @@ describe('AerobicExercise', function () {
             idUsers.push(id);
             userCommon.createUser(username, email2, password, function(id) {
                 idUsers.push(id);
-                aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
+                anaerobicExerciseCommon.createAnaerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
                     exercisesId.push(id);
-                    aerobicMarkCommon.createAerobicMark(exercisesId[0], idUsers[0], distance, time, intensity, heartRate, "", function(id){
+                    anaerobicMarkCommon.createAnaerobicMark(exercisesId[0], idUsers[0], repetitions, weight, time, "", function(id){
                         marksId.push(id);
                         done();
                     });
@@ -59,14 +58,14 @@ describe('AerobicExercise', function () {
     });
 
     /**
-     * Tests for aerobicMark functionality.
+     * Tests for anaerobicMark functionality.
      */
-    describe('#deleteAerobicMark()', function () {
+    describe('#deleteAnaerobicMark()', function () {
 
         it('should return an error message since the user isn\'t the owner of the mark', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
+                .delete('/anaerobicExercises/' + exercisesId[0] + '/anaerobicMarks/' + marksId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[1], email, username))
                 .end(function (err, result) {
 
@@ -76,10 +75,10 @@ describe('AerobicExercise', function () {
                 });
         });
 
-        it('should delete an existing aerobic mark', function (done) {
+        it('should delete an existing anaerobic mark', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
+                .delete('/anaerobicExercises/' + exercisesId[0] + '/anaerobicMarks/' + marksId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -91,7 +90,7 @@ describe('AerobicExercise', function () {
         it('should return an error message since the mark doesn\'t exists', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + marksId[0])
+                .delete('/anaerobicExercises/' + exercisesId[0] + '/anaerobicMarks/' + marksId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -104,7 +103,7 @@ describe('AerobicExercise', function () {
         it('should return an error message since is not a valid mark id', function (done) {
 
             chai.request(server)
-                .delete('/aerobicExercises/' + exercisesId[0] + '/aerobicMarks/' + '123')
+                .delete('/anaerobicExercises/' + exercisesId[0] + '/anaerobicMarks/' + '123')
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -121,8 +120,8 @@ describe('AerobicExercise', function () {
 
             userCommon.deleteUserById(idUsers[0], function () {
                 userCommon.deleteUserById(idUsers[1], function () {
-                    aerobicExerciseCommon.deleteAerobicExerciseById(exercisesId, function () {
-                        aerobicMarkCommon.deleteAerobicMarkById(marksId, done);
+                    anaerobicExerciseCommon.deleteAnaerobicExerciseById(exercisesId, function () {
+                        anaerobicMarkCommon.deleteAnaerobicMarkById(marksId, done);
                     });
                 });
             });

@@ -6,8 +6,7 @@ var chai = require('chai'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
     anaerobicExerciseCommon = require('../../common/anaerobicExerciseCommon'),
-    anaerobicMarkCommon = require('../../common/anaerobicMarkCommon'),
-    feedbackMessageCommon = require('../../common/feedbackMessageCommon');
+    anaerobicMarkCommon = require('../../common/anaerobicMarkCommon');
 
 chai.use(chaiHttp);
 
