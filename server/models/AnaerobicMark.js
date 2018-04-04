@@ -33,19 +33,17 @@ mongoose.Promise = global.Promise;
  *         type: number
  *         format: double
  *         description: Lista en la que cada elemento corresponde con el número de repeticiones
- *           realizadas en cada repetición del ejercicio. La lista tiene el mismo tamaño que la
- *           lista del campo weight.
+ *           realizadas en cada serie del ejercicio.
  *       weight:
  *         type: number
  *         format: double
- *         description: Lista en la que cada elemento corresponde con el peso realzado en cada
- *           repetición del ejercicio. La lista tiene el mismo tamaño que la lista del campo repetitions.
+ *         description: Lista en la que cada elemento corresponde con el peso en kg realizado en
+ *           cada serie del ejercicio.
  *       time:
  *         type: number
  *         format: double
  *         description: Lista en la que cada elemento corresponde con la duración en segundos
- *           del ejercicio realizada en cada repetición. La lista tiene el mismo tamaño que la lista
- *           del campo repetitions.
+ *           del ejercicio realizada en cada serie.
  *       comment:
  *         type: string
  *         format: double

@@ -133,7 +133,7 @@ module.exports = function (app) {
      *         schema:
      *           type: object
      *           properties:
-     *              exercise:
+     *              mark:
      *                $ref: '#/definitions/AerobicExercise'
      *       400:
      *         description: Mensaje de feedback para el usuario.
