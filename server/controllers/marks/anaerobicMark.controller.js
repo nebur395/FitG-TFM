@@ -175,6 +175,55 @@ module.exports = function (app) {
         anaerobicMarkParam(req, res, next, id)
     });
 
+    /**
+     * @swagger
+     * /anaerobicExercises/{anaerobicExercise}/anaerobicMarks/{anaerobicMark}:
+     *   post:
+     *     tags:
+     *       - Anaerobic exercises
+     *     summary: Listar ejercicio anaeróbico.
+     *     description: Lista toda la información de un ejercicio anaeróbico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: anaerobicExercise
+     *         description: Identificador del ejercicio al que pertenece la marca.
+     *         in: path
+     *         required: true
+     *         type: string
+     *       - name: anaerobicMark
+     *         description: Identificador de la marca que se quiere listar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Un ejercicio anaeróbico con toda su información.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              mark:
+     *                $ref: '#/definitions/AnaerobicMark'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.get("/:anaerobicExercise/anaerobicMarks/:anaerobicMark", function (req, res) {
         var mark = req.anaerobicMark.toJSON();
         delete mark.__v;
