@@ -170,5 +170,20 @@ module.exports = function (app) {
         });
     });
 
+    // Preload post objects on routes with ':anaerobicMark'
+    router.param('anaerobicMark', function(req, res, next, id) {
+        anaerobicMarkParam(req, res, next, id)
+    });
+
+    router.get("/:anaerobicExercise/anaerobicMarks/:anaerobicMark", function (req, res) {
+        var mark = req.anaerobicMark.toJSON();
+        delete mark.__v;
+        return res.status(200).send({
+            "mark": mark
+        });
+    });
+
+
+
     return router;
 };
