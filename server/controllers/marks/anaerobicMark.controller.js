@@ -233,6 +233,25 @@ module.exports = function (app) {
     });
 
 
+    router.put("/:anaerobicExercise/anaerobicMarks/:anaerobicMark", function (req, res) {
+        // Add the new attributes to the mark object
+        req.anaerobicMark.repetitions = req.body.repetitions;
+        req.anaerobicMark.weight = req.body.weight;
+        req.anaerobicMark.time = req.body.time;
+        req.anaerobicMark.comment = req.body.comment;
+
+        req.anaerobicMark.save(function (err) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                return res.status(200).send({
+                    "message": "Anaerobic mark updated successfully."
+                });
+            }
+        });
+    });
+
+
 
     return router;
 };
