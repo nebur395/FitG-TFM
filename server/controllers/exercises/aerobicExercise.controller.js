@@ -1,6 +1,6 @@
 var express = require('express');
 var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
-var aerobicExerciseParam = require('../common/aerobicExercise.param').aerobicExerciseParam;
+var aerobicExerciseParam = require('./aerobicExercise.param').aerobicExerciseParam;
 
 module.exports = function (app) {
 

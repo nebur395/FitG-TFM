@@ -1,6 +1,6 @@
-var models = require('../../models');
+var models = require('../../models/index');
 var BodyAnalisis = models.BodyAnalisis;
-var errorMessageHandler = require('./errorMessageHandler').errorMessageHandler;
+var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
 
 /**
  * @name errorMessageHandler

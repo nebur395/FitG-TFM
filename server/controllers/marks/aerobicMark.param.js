@@ -1,6 +1,6 @@
-var models = require('../../models');
-var AnaerobicMark = models.AnaerobicMark;
-var errorMessageHandler = require('./errorMessageHandler').errorMessageHandler;
+var models = require('../../models/index');
+var AerobicMark = models.AerobicMark;
+var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
 
 /**
  * @name errorMessageHandler
@@ -8,18 +8,18 @@ var errorMessageHandler = require('./errorMessageHandler').errorMessageHandler;
  * @param {Object} err - Mongoose error object
  * @param {Object } res - Http response
  */
-function anaerobicMarkParam(req, res, next, id) {
+function aerobicMarkParam(req, res, next, id) {
 
-    AnaerobicMark.findOne({$and: [
-        {_id: id},
-        {idExercise: req.anaerobicExercise._id}
-    ]}, function (err, mark) {
+    AerobicMark.findOne({$and: [
+            {_id: id},
+            {idExercise: req.aerobicExercise._id}
+        ]}, function (err, mark) {
         if (err) {
             return errorMessageHandler(err, res);
         }
         if (!mark) {
             return res.status(404).send({
-                "message": "Anaerobic mark does not exist."
+                "message": "Aerobic mark does not exist."
             });
         }
         if (mark.idUser && (req.jwtPayload._id !== mark.idUser.toString())) {
@@ -28,9 +28,9 @@ function anaerobicMarkParam(req, res, next, id) {
             });
         }
 
-        req.anaerobicMark = mark;
+        req.aerobicMark = mark;
         return next();
     });
 }
 
-exports.anaerobicMarkParam = anaerobicMarkParam;
+exports.aerobicMarkParam = aerobicMarkParam;

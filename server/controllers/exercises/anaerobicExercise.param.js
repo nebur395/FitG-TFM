@@ -1,6 +1,6 @@
-var models = require('../../models');
+var models = require('../../models/index');
 var AnaerobicExercise = models.AnaerobicExercise;
-var errorMessageHandler = require('./errorMessageHandler').errorMessageHandler;
+var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
 
 /**
  * @name errorMessageHandler
