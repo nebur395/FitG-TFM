@@ -190,5 +190,19 @@ module.exports = function (app) {
         });
     });
 
+    // Preload post objects on routes with ':analisis'
+    router.param('analisis', function(req, res, next, id) {
+        bodyAnalisisParam(req, res, next, id)
+    });
+
+    router.get("/:analisis", function (req, res) {
+        var analisis = req.bodyAnalisis.toJSON();
+        delete analisis.__v;
+        return res.status(200).send({
+            "analisis": analisis
+        });
+    });
+
+
     return router;
 };
