@@ -248,5 +248,29 @@ module.exports = function (app) {
     });
 
 
+    router.put("/:analisis", function (req, res) {
+        // Edit the new attributes to the exercise object
+        req.bodyAnalisis.weight = req.body.weight;
+        req.bodyAnalisis.bmi = req.body.bmi;
+        req.bodyAnalisis.metabolicAge = req.body.metabolicAge;
+        req.bodyAnalisis.basalMetabolism = req.body.basalMetabolism;
+        req.bodyAnalisis.bodyFat = req.body.bodyFat;
+        req.bodyAnalisis.muscleMass = req.body.muscleMass;
+        req.bodyAnalisis.boneMass = req.body.boneMass;
+        req.bodyAnalisis.bodyFluids = req.body.bodyFluids;
+        req.bodyAnalisis.visceralAdiposity = req.body.visceralAdiposity;
+        req.bodyAnalisis.dailyCaloricIntake = req.body.dailyCaloricIntake;
+
+        req.bodyAnalisis.save(function (err) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                return res.status(200).send({
+                    "message": "Body analisis updated successfully."
+                });
+            }
+        });
+    });
+
     return router;
 };
