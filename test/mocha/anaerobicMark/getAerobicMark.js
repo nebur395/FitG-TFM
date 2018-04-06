@@ -18,10 +18,6 @@ describe('AnaerobicMark', function () {
         email = "Testing@email.com",
         password = "Testing";
 
-    var exerciseName = "exercise test",
-        category = "muscle training",
-        type = "chest";
-
     var exercisesId = [],
         marksId = [],
         idUser;
@@ -33,7 +29,7 @@ describe('AnaerobicMark', function () {
 
         userCommon.createUser(username, email, password, function(id) {
             idUser = id;
-            anaerobicExerciseCommon.createAnaerobicExercise(exerciseName, category, type, true, idUser, "", function (id) {
+            anaerobicExerciseCommon.createCustomAnaerobicExercise(idUser, function (id) {
                 exercisesId.push(id);
                 anaerobicMarkCommon.createAnaerobicMark(exercisesId[0], idUser, function(id){
                     marksId.push(id);

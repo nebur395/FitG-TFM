@@ -19,7 +19,7 @@ describe('AnaerobicExercise', function () {
         email = "Testing@email.com",
         password = "Testing";
 
-    var exerciseName = "exercise test",
+    var exerciseName = "Custom anaerobic exercise test",
         category = "muscle training",
         type = "chest";
 
