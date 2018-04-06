@@ -356,7 +356,51 @@ module.exports = function (app) {
         });
     });
 
-
+    /**
+     * @swagger
+     * /aerobicExercises/{aerobicExercise}:
+     *   delete:
+     *     tags:
+     *       - Aerobic exercises
+     *     summary: Elimina un ejercicio aeróbico
+     *     description: Elimina un ejercicio aeróbico existente únicamente si es personalizado.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: aerobicExercise
+     *         description: Identificador del ejercicio que se quiere eliminar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       400:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.delete("/:analisis", function (req, res) {
         // Remove the body analisis
         BodyAnalisis.remove({_id: req.bodyAnalisis._id}, function (err) {
