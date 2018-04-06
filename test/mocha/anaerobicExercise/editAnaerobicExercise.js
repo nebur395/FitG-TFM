@@ -31,7 +31,7 @@ describe('AnaerobicExercise', function () {
         successMessage = "Anaerobic exercise updated successfully.";
 
     /*
-     * It creates a new exercise before the test suite starts executing.
+     * It creates a new entities before the test suite starts executing.
      */
     before(function (done) {
 
@@ -51,7 +51,7 @@ describe('AnaerobicExercise', function () {
     /**
      * Tests for anaerobicExercise functionality.
      */
-    describe('#createAnaerobicExercise()', function () {
+    describe('#editAnaerobicExercise()', function () {
 
         it('should edit an existing anaerobic exercise', function (done) {
 
@@ -164,7 +164,7 @@ describe('AnaerobicExercise', function () {
         });
 
         /*
-         * Removes the exercises created during the signIn tests.
+         * Removes the entities created during the signIn tests.
          */
         after(function (done) {
 
