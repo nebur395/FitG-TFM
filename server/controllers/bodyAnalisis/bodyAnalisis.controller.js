@@ -152,10 +152,13 @@ module.exports = function (app) {
         endToday.setHours(23,59,59,999);
 
         // Find if there is any body analisis created in the same day
-        BodyAnalisis.find({creationDate: {$gte: startToday, $lt: endToday}}, function (err, analisis) {
+        BodyAnalisis.find({$and: [
+            {creationDate: {$gte: startToday, $lt: endToday}},
+            {idUser: req.jwtPayload._id}
+        ]}, function (err, analisis) {
             if (err) {
                 return errorMessageHandler(err, res);
-            } else if (analisis) {
+            } else if (analisis.length !== 0) {
                 return res.status(400).send({
                     "message": "Body analisis already created today."
                 });
@@ -175,12 +178,12 @@ module.exports = function (app) {
                 newAnalisis.dailyCaloricIntake = req.body.dailyCaloricIntake;
                 newAnalisis.idUser = req.jwtPayload._id;
 
-                newAnalisis.save(function (err, exercise) {
+                newAnalisis.save(function (err, analisis) {
                     if (err) {
                         return errorMessageHandler(err, res);
                     } else {
-                        exercise = exercise.toJSON();
-                        delete exercise.__v;
+                        analisis = analisis.toJSON();
+                        delete analisis.__v;
                         return res.status(200).send({
                             "analisis": analisis
                         });
