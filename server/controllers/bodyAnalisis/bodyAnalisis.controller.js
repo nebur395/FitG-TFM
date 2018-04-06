@@ -333,7 +333,7 @@ module.exports = function (app) {
      *           $ref: '#/definitions/FeedbackMessage'
      */
     router.put("/:analisis", function (req, res) {
-        // Edit the new attributes to the exercise object
+        // Edit the new attributes to the analisis object
         req.bodyAnalisis.weight = req.body.weight;
         req.bodyAnalisis.bmi = req.body.bmi;
         req.bodyAnalisis.metabolicAge = req.body.metabolicAge;
@@ -351,6 +351,20 @@ module.exports = function (app) {
             } else {
                 return res.status(200).send({
                     "message": "Body analisis updated successfully."
+                });
+            }
+        });
+    });
+
+
+    router.delete("/:analisis", function (req, res) {
+        // Remove the body analisis
+        BodyAnalisis.remove({_id: req.bodyAnalisis._id}, function (err) {
+            if (err) {
+                return errorMessageHandler(err, res);
+            } else {
+                return res.status(200).send({
+                    "message": "Body analisis deleted successfully."
                 });
             }
         });
