@@ -247,7 +247,91 @@ module.exports = function (app) {
         });
     });
 
-
+    /**
+     * @swagger
+     * /bodyAnalisis/{analisis}:
+     *   put:
+     *     tags:
+     *       - Body Analisis
+     *     summary: Edita un análisis físico
+     *     description: Edita un análisis físico existente.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: analisis
+     *         description: Identificador del análisis que se quiere listar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *       - name: bmi
+     *         description: Indice de masa corporal (I.M.C.). Se calcula como masa/(estatura²).
+     *         in: body
+     *         type: number
+     *       - name: weight
+     *         description: Peso en expresado en kg.
+     *         in: body
+     *         type: number
+     *       - name: metabolicAge
+     *         description: Edad metabólica.
+     *         in: body
+     *         type: number
+     *       - name: basalMetabolism
+     *         description: Metabolismo basal.
+     *         in: body
+     *         type: number
+     *       - name: bodyFat
+     *         description: Grasa corporal expresado en %.
+     *         in: body
+     *         type: number
+     *       - name: muscleMass
+     *         description: Masa muscular expresada en kg.
+     *         in: body
+     *         type: number
+     *       - name: boneMass
+     *         description: Masa ósea expresada en kg.
+     *         in: body
+     *         type: number
+     *       - name: bodyFluids
+     *         description: Líquidos corporales expresados en %.
+     *         in: body
+     *         type: number
+     *       - name: visceralAdiposity
+     *         description: Adiposidad visceral recogida en la escala de 1-59.
+     *         in: body
+     *         type: number
+     *       - name: dailyCaloricIntake
+     *         description: Aporte calórico diario.
+     *         in: body
+     *         type: number
+     *     responses:
+     *       200:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       400:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.put("/:analisis", function (req, res) {
         // Edit the new attributes to the exercise object
         req.bodyAnalisis.weight = req.body.weight;
