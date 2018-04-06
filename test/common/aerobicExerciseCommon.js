@@ -2,17 +2,35 @@ var server = require('../../server');
 var AerobicExercise = server.models.AerobicExercise;
 
 /*
- * Create an aerobic exercise
+ * Create a predefined aerobic exercise
  */
-function createAerobicExercise(name, category, type, custom, idUser, description, callback) {
+function createPredefinedAerobicExercise(idUser, callback) {
 
     var newExercise = new AerobicExercise();
-    newExercise.name = name;
-    newExercise.category = category;
-    newExercise.type = type;
-    newExercise.custom = custom;
+    newExercise.name = "Predefined aerobic exercise test";
+    newExercise.category = "running";
+    newExercise.type = "sprint";
+    newExercise.custom = false;
     newExercise.idUser = idUser;
-    newExercise.description = description;
+    newExercise.description = "test";
+
+    newExercise.save(function (err, result) {
+        callback(result._id);
+    });
+}
+
+/*
+ * Create a custom aerobic exercise
+ */
+function createCustomAerobicExercise(idUser, callback) {
+
+    var newExercise = new AerobicExercise();
+    newExercise.name = "Custom aerobic exercise test";
+    newExercise.category = "running";
+    newExercise.type = "sprint";
+    newExercise.custom = true;
+    newExercise.idUser = idUser;
+    newExercise.description = "test";
 
     newExercise.save(function (err, result) {
         callback(result._id);
@@ -29,5 +47,6 @@ function deleteAerobicExerciseById(exercisesId, callback) {
     });
 }
 
-exports.createAerobicExercise = createAerobicExercise;
+exports.createPredefinedAerobicExercise = createPredefinedAerobicExercise;
+exports.createCustomAerobicExercise = createCustomAerobicExercise;
 exports.deleteAerobicExerciseById = deleteAerobicExerciseById;

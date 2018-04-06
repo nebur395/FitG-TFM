@@ -19,11 +19,6 @@ describe('AerobicExercise', function () {
         email2 = "Testing2@email.com",
         password = "Testing";
 
-    var exerciseName = "exercise test",
-        exerciseName2 = "exercise test2",
-        category = "running",
-        type = "sprint";
-
     var exercisesId = [],
         idUsers = [];
 
@@ -42,9 +37,9 @@ describe('AerobicExercise', function () {
             idUsers.push(id);
             userCommon.createUser(username, email2, password, function(id) {
                 idUsers.push(id);
-                aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
+                aerobicExerciseCommon.createCustomAerobicExercise(idUsers[0], function (id) {
                     exercisesId.push(id);
-                    aerobicExerciseCommon.createAerobicExercise(exerciseName2, category, type, false, idUsers[0], "", function(id){
+                    aerobicExerciseCommon.createPredefinedAerobicExercise(idUsers[0], function(id){
                         exercisesId.push(id);
                         done();
                     });

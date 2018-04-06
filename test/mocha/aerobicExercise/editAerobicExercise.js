@@ -18,8 +18,8 @@ describe('AerobicExercise', function () {
         email = "Testing@email.com",
         password = "Testing";
 
-    var exerciseName = "exercise test",
-        exerciseName2 = "exercise test2",
+    var predefinedExerciseName = "Predefined aerobic exercise test",
+        customExerciseName = "Custom aerobic exercise test",
         category = "running",
         type = "sprint";
 
@@ -37,9 +37,9 @@ describe('AerobicExercise', function () {
 
         userCommon.createUser(username, email, password, function(id) {
             idUser = id;
-            aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, true, idUser, "", function (id) {
+            aerobicExerciseCommon.createCustomAerobicExercise(idUser, function (id) {
                 exercisesId.push(id);
-                aerobicExerciseCommon.createAerobicExercise(exerciseName2, category, type, false, idUser, "", function(id){
+                aerobicExerciseCommon.createPredefinedAerobicExercise(idUser, function(id){
                     exercisesId.push(id);
                     done();
                 });
@@ -57,7 +57,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[0])
-                .send({name: exerciseName, category: category, type: type})
+                .send({name: customExerciseName, category: category, type: type})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
@@ -70,7 +70,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[0])
-                .send({name: exerciseName2, category: category, type: type})
+                .send({name: predefinedExerciseName, category: category, type: type})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
@@ -97,7 +97,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[0])
-                .send({name: exerciseName, category: "", type: type})
+                .send({name: customExerciseName, category: "", type: type})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
@@ -111,7 +111,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[0])
-                .send({name: exerciseName, category: category, type: ""})
+                .send({name: customExerciseName, category: category, type: ""})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
@@ -125,7 +125,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[0])
-                .send({name: exerciseName, category: "category", type: type})
+                .send({name: customExerciseName, category: "category", type: type})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
@@ -139,7 +139,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[0])
-                .send({name: exerciseName, category: category, type: "type"})
+                .send({name: customExerciseName, category: category, type: "type"})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
@@ -153,7 +153,7 @@ describe('AerobicExercise', function () {
 
             chai.request(server)
                 .put('/aerobicExercises/' + exercisesId[1])
-                .send({name: exerciseName, category: category, type: type})
+                .send({name: customExerciseName, category: category, type: type})
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
