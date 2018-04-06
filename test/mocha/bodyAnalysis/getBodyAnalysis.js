@@ -4,7 +4,7 @@ var chai = require('chai'),
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
-    bodyAnalisisCommon = require('../../common/bodyAnalisisCommon');
+    bodyAnalysisCommon = require('../../common/bodyAnalysisCommon');
 
 chai.use(chaiHttp);
 
@@ -17,7 +17,7 @@ describe('BodyAnalysis', function () {
         email = "Testing@email.com",
         password = "Testing";
 
-    var analisisId = [],
+    var analysisId = [],
         idUser;
 
     /*
@@ -27,8 +27,8 @@ describe('BodyAnalysis', function () {
 
         userCommon.createUser(username, email, password, function(id) {
             idUser = id;
-            bodyAnalisisCommon.createBodyAnalisis(idUser, function (id) {
-                analisisId.push(id);
+            bodyAnalysisCommon.createBodyAnalysis(idUser, function (id) {
+                analysisId.push(id);
                 done();
             });
         });
@@ -43,14 +43,14 @@ describe('BodyAnalysis', function () {
         it('should get a list of body analysis', function (done) {
 
             chai.request(server)
-                .get('/bodyAnalisis/')
+                .get('/bodyAnalysis/')
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
                     result.should.have.status(200);
                     result.body.should.be.a('object');
-                    result.body.should.have.property('analisis');
-                    result.body.analisis.should.be.a('array');
+                    result.body.should.have.property('analysis');
+                    result.body.analysis.should.be.a('array');
 
                     done();
                 });
@@ -59,26 +59,26 @@ describe('BodyAnalysis', function () {
         it('should get a body analysis', function (done) {
 
             chai.request(server)
-                .get('/bodyAnalisis/' + analisisId[0])
+                .get('/bodyAnalysis/' + analysisId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUser, email, username))
                 .end(function (err, result) {
 
                     result.should.have.status(200);
                     result.body.should.be.a('object');
-                    result.body.should.have.property('analisis');
-                    result.body.analisis.should.be.a('object');
-                    result.body.analisis.should.have.property('_id');
-                    result.body.analisis.should.have.property('weight');
-                    result.body.analisis.should.have.property('bmi');
-                    result.body.analisis.should.have.property('metabolicAge');
-                    result.body.analisis.should.have.property('basalMetabolism');
-                    result.body.analisis.should.have.property('bodyFat');
-                    result.body.analisis.should.have.property('muscleMass');
-                    result.body.analisis.should.have.property('boneMass');
-                    result.body.analisis.should.have.property('bodyFluids');
-                    result.body.analisis.should.have.property('visceralAdiposity');
-                    result.body.analisis.should.have.property('dailyCaloricIntake');
-                    result.body.analisis.should.have.property('idUser');
+                    result.body.should.have.property('analysis');
+                    result.body.analysis.should.be.a('object');
+                    result.body.analysis.should.have.property('_id');
+                    result.body.analysis.should.have.property('weight');
+                    result.body.analysis.should.have.property('bmi');
+                    result.body.analysis.should.have.property('metabolicAge');
+                    result.body.analysis.should.have.property('basalMetabolism');
+                    result.body.analysis.should.have.property('bodyFat');
+                    result.body.analysis.should.have.property('muscleMass');
+                    result.body.analysis.should.have.property('boneMass');
+                    result.body.analysis.should.have.property('bodyFluids');
+                    result.body.analysis.should.have.property('visceralAdiposity');
+                    result.body.analysis.should.have.property('dailyCaloricIntake');
+                    result.body.analysis.should.have.property('idUser');
 
                     done();
                 });
@@ -90,7 +90,7 @@ describe('BodyAnalysis', function () {
         after(function (done) {
 
             userCommon.deleteUserById(idUser, function () {
-                bodyAnalisisCommon.deleteBodyAnalisisById(analisisId, done);
+                bodyAnalysisCommon.deleteBodyAnalysisById(analysisId, done);
             });
         });
 

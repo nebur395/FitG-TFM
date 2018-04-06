@@ -5,15 +5,15 @@ var chai = require('chai'),
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
-    bodyAnalisisCommon = require('../../common/bodyAnalisisCommon'),
+    bodyAnalysisCommon = require('../../common/bodyAnalysisCommon'),
     feedbackMessageCommon = require('../../common/feedbackMessageCommon');
 
 chai.use(chaiHttp);
 
 /**
- * Test suite for body analisis functionalities.
+ * Test suite for body analysis functionalities.
  */
-describe('BodyAnalisis', function () {
+describe('BodyAnalysis', function () {
 
     var username = "Testing",
         email = "Testing@email.com",
@@ -30,10 +30,10 @@ describe('BodyAnalisis', function () {
         visceralAdiposity = 1,
         dailyCaloricIntake = 1;
 
-    var analisisId = [],
+    var analysisId = [],
         idUser;
 
-    var entityExist = "Body analisis already created today.";
+    var entityExist = "Body analysis already created today.";
 
     /*
      * It creates a new entities before the test suite starts executing.
@@ -48,14 +48,14 @@ describe('BodyAnalisis', function () {
     });
 
     /**
-     * Tests for create body analisis functionality.
+     * Tests for create body analysis functionality.
      */
-    describe('#createBodyAnalisis()', function () {
+    describe('#createBodyAnalysis()', function () {
 
         it('should return an error message since weight is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: 401, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -72,7 +72,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since weight is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: -1, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -89,7 +89,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since bmi is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: 201, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -106,7 +106,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since bmi is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: -1, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -123,7 +123,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since metabolicAge is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: 151,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -140,7 +140,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since metabolicAge is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: -1,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -157,7 +157,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since basalMetabolism is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: 10001, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -174,7 +174,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since basalMetabolism is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: -1, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -191,7 +191,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since bodyFat is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: 101, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -208,7 +208,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since bodyFat is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: -1, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -225,7 +225,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since muscleMass is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: 151,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -242,7 +242,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since muscleMass is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: -1,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -259,7 +259,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since boneMass is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: 51, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -276,7 +276,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since boneMass is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: -1, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -293,7 +293,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since bodyFluids is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: 101, visceralAdiposity: visceralAdiposity,
@@ -310,7 +310,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since bodyFluids is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: -1, visceralAdiposity: visceralAdiposity,
@@ -327,7 +327,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since visceralAdiposity is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: 60,
@@ -344,7 +344,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since visceralAdiposity is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: -1,
@@ -361,7 +361,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since dailyCaloricIntake is too long', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -378,7 +378,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since dailyCaloricIntake is too short', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -392,10 +392,10 @@ describe('BodyAnalisis', function () {
                 });
         });
 
-        it('should create a new body analisis', function (done) {
+        it('should create a new body analysis', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -405,22 +405,22 @@ describe('BodyAnalisis', function () {
 
                     result.should.have.status(200);
                     result.body.should.be.a('object');
-                    result.body.should.have.property('analisis');
-                    result.body.analisis.should.be.a('object');
-                    result.body.analisis.should.have.property('_id');
-                    result.body.analisis.should.have.property('weight');
-                    result.body.analisis.should.have.property('bmi');
-                    result.body.analisis.should.have.property('metabolicAge');
-                    result.body.analisis.should.have.property('basalMetabolism');
-                    result.body.analisis.should.have.property('bodyFat');
-                    result.body.analisis.should.have.property('muscleMass');
-                    result.body.analisis.should.have.property('boneMass');
-                    result.body.analisis.should.have.property('bodyFluids');
-                    result.body.analisis.should.have.property('visceralAdiposity');
-                    result.body.analisis.should.have.property('dailyCaloricIntake');
-                    result.body.analisis.should.have.property('idUser');
+                    result.body.should.have.property('analysis');
+                    result.body.analysis.should.be.a('object');
+                    result.body.analysis.should.have.property('_id');
+                    result.body.analysis.should.have.property('weight');
+                    result.body.analysis.should.have.property('bmi');
+                    result.body.analysis.should.have.property('metabolicAge');
+                    result.body.analysis.should.have.property('basalMetabolism');
+                    result.body.analysis.should.have.property('bodyFat');
+                    result.body.analysis.should.have.property('muscleMass');
+                    result.body.analysis.should.have.property('boneMass');
+                    result.body.analysis.should.have.property('bodyFluids');
+                    result.body.analysis.should.have.property('visceralAdiposity');
+                    result.body.analysis.should.have.property('dailyCaloricIntake');
+                    result.body.analysis.should.have.property('idUser');
 
-                    analisisId.push(new ObjectId(result.body.analisis._id));
+                    analysisId.push(new ObjectId(result.body.analysis._id));
 
                     done();
                 });
@@ -429,7 +429,7 @@ describe('BodyAnalisis', function () {
         it('should return an error message since the exercise already exists today', function (done) {
 
             chai.request(server)
-                .post('/bodyAnalisis/')
+                .post('/bodyAnalysis/')
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -448,7 +448,7 @@ describe('BodyAnalisis', function () {
         after(function (done) {
 
             userCommon.deleteUserById(idUser, function () {
-                bodyAnalisisCommon.deleteBodyAnalisisById(analisisId, done);
+                bodyAnalysisCommon.deleteBodyAnalysisById(analysisId, done);
             });
         });
 

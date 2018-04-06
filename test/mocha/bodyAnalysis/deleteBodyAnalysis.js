@@ -4,7 +4,7 @@ var chai = require('chai'),
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
-    bodyAnalisisCommon = require('../../common/bodyAnalisisCommon'),
+    bodyAnalysisCommon = require('../../common/bodyAnalysisCommon'),
     feedbackMessageCommon = require('../../common/feedbackMessageCommon');
 
 chai.use(chaiHttp);
@@ -19,13 +19,13 @@ describe('AnaerobicExercise', function () {
         email2 = "Testing2@email.com",
         password = "Testing";
 
-    var analisisId = [],
+    var analysisId = [],
         idUsers = [];
 
-    var notExists = "Body analisis does not exist.",
+    var notExists = "Body analysis does not exist.",
         invalidToken = "Invalid or non-existent token. Please, send a correct token.",
         invalidID = "Cast to ObjectId failed",
-        successMessage = "Body analisis deleted successfully.";
+        successMessage = "Body analysis deleted successfully.";
 
     /*
      * It creates a new entities before the test suite starts executing.
@@ -36,8 +36,8 @@ describe('AnaerobicExercise', function () {
             idUsers.push(id);
             userCommon.createUser(username, email2, password, function(id) {
                 idUsers.push(id);
-                bodyAnalisisCommon.createBodyAnalisis(idUsers[0], function (id) {
-                    analisisId.push(id);
+                bodyAnalysisCommon.createBodyAnalysis(idUsers[0], function (id) {
+                    analysisId.push(id);
                     done();
                 });
             });
@@ -45,14 +45,14 @@ describe('AnaerobicExercise', function () {
     });
 
     /**
-     * Tests for delete body analisis functionality.
+     * Tests for delete body analysis functionality.
      */
-    describe('#deleteBodyAnalisis()', function () {
+    describe('#deleteBodyAnalysis()', function () {
 
-        it('should return an error message since the user isn\'t the owner of the analisis', function (done) {
+        it('should return an error message since the user isn\'t the owner of the analysis', function (done) {
 
             chai.request(server)
-                .delete('/bodyAnalisis/' + analisisId[0])
+                .delete('/bodyAnalysis/' + analysisId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[1], email, username))
                 .end(function (err, result) {
 
@@ -65,7 +65,7 @@ describe('AnaerobicExercise', function () {
         it('should delete an existing body analysis', function (done) {
 
             chai.request(server)
-                .delete('/bodyAnalisis/' + analisisId[0])
+                .delete('/bodyAnalysis/' + analysisId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -77,7 +77,7 @@ describe('AnaerobicExercise', function () {
         it('should return an error message since the analysis doesn\'t exists', function (done) {
 
             chai.request(server)
-                .delete('/bodyAnalisis/' + analisisId[0])
+                .delete('/bodyAnalysis/' + analysisId[0])
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -90,7 +90,7 @@ describe('AnaerobicExercise', function () {
         it('should return an error message since the analysis doesn\'t exists', function (done) {
 
             chai.request(server)
-                .delete('/bodyAnalisis/' + '123')
+                .delete('/bodyAnalysis/' + '123')
                 .set('Authorization','Bearer ' + createUserToken(idUsers[0], email, username))
                 .end(function (err, result) {
 
@@ -107,7 +107,7 @@ describe('AnaerobicExercise', function () {
 
             userCommon.deleteUserById(idUsers[0], function () {
                 userCommon.deleteUserById(idUsers[1], function () {
-                    bodyAnalisisCommon.deleteBodyAnalisisById(analisisId, done);
+                    bodyAnalysisCommon.deleteBodyAnalysisById(analysisId, done);
                 });
             });
         });

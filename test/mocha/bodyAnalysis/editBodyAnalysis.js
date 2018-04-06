@@ -4,7 +4,7 @@ var chai = require('chai'),
     server = require('../../../server'),
     userCommon = require('../../common/userCommon'),
     createUserToken = require('../../common/jwtCreator').createUserToken,
-    bodyAnalisisCommon = require('../../common/bodyAnalisisCommon'),
+    bodyAnalysisCommon = require('../../common/bodyAnalysisCommon'),
     feedbackMessageCommon = require('../../common/feedbackMessageCommon');
 
 chai.use(chaiHttp);
@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 /**
  * Test suite for body analysis functionalities.
  */
-describe('BodyAnalisis', function () {
+describe('BodyAnalysis', function () {
 
     var username = "Testing",
         email = "Testing@email.com",
@@ -29,10 +29,10 @@ describe('BodyAnalisis', function () {
         visceralAdiposity = 1,
         dailyCaloricIntake = 1;
 
-    var analisisId = [],
+    var analysisId = [],
         idUser;
 
-    var successMessage = "Body analisis updated successfully.";
+    var successMessage = "Body analysis updated successfully.";
 
     /*
      * It creates a new entities before the test suite starts executing.
@@ -41,8 +41,8 @@ describe('BodyAnalisis', function () {
 
         userCommon.createUser(username, email, password, function(id) {
             idUser = id;
-            bodyAnalisisCommon.createBodyAnalisis(idUser, function (id) {
-                analisisId.push(id);
+            bodyAnalysisCommon.createBodyAnalysis(idUser, function (id) {
+                analysisId.push(id);
                 done();
             });
         });
@@ -50,14 +50,14 @@ describe('BodyAnalisis', function () {
     });
 
     /**
-     * Tests for bodyAnalisis functionality.
+     * Tests for bodyAnalysis functionality.
      */
-    describe('#editBodyAnalisis()', function () {
+    describe('#editBodyAnalysis()', function () {
 
         it('should edit an existing body analysis', function (done) {
 
             chai.request(server)
-                .put('/bodyAnalisis/' + analisisId[0])
+                .put('/bodyAnalysis/' + analysisId[0])
                 .send({weight: weight, bmi: bmi, metabolicAge: metabolicAge,
                     basalMetabolism: basalMetabolism, bodyFat: bodyFat, muscleMass: muscleMass,
                     boneMass: boneMass, bodyFluids: bodyFluids, visceralAdiposity: visceralAdiposity,
@@ -76,7 +76,7 @@ describe('BodyAnalisis', function () {
         after(function (done) {
 
             userCommon.deleteUserById(idUser, function () {
-                bodyAnalisisCommon.deleteBodyAnalisisById(analisisId, done);
+                bodyAnalysisCommon.deleteBodyAnalysisById(analysisId, done);
             });
         });
 

@@ -9,8 +9,8 @@ mongoose.Promise = global.Promise;
 /**
  * @swagger
  * definitions:
- *   BodyAnalisis:
- *     description: Schema del modelo de BodyAnalisis que representa un análisis físico.
+ *   BodyAnalysis:
+ *     description: Schema del modelo de BodyAnalysis que representa un análisis físico.
  *     type: object
  *     properties:
  *       _id:
@@ -70,11 +70,11 @@ mongoose.Promise = global.Promise;
  */
 
 /**
- * @namespace BodyAnalisis
- * @desc BodyAnalisis Schema
+ * @namespace BodyAnalysis
+ * @desc BodyAnalysis Schema
  * @memberOf Models
  */
-var BodyAnalisisSchema = mongoose.Schema({
+var BodyAnalysisSchema = mongoose.Schema({
     idUser: {type: mongoose.Schema.Types.ObjectId, required: true},
     weight: {type: Number, required: true, min: 0, max: 400},
     bmi: {type: Number, required: true, min: 0, max: 200},
@@ -90,4 +90,4 @@ var BodyAnalisisSchema = mongoose.Schema({
 });
 
 // Create the model if it does not exists
-module.exports = mongoose.model('BodyAnalisis', BodyAnalisisSchema);
+module.exports = mongoose.model('BodyAnalysis', BodyAnalysisSchema);

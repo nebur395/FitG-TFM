@@ -1,5 +1,5 @@
 var models = require('../../models/index');
-var BodyAnalisis = models.BodyAnalisis;
+var BodyAnalysis = models.BodyAnalysis;
 var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
 
 /**
@@ -8,26 +8,26 @@ var errorMessageHandler = require('../common/errorMessageHandler').errorMessageH
  * @param {Object} err - Mongoose error object
  * @param {Object } res - Http response
  */
-function bodyAnalisisParam(req, res, next, id){
+function bodyAnalysisParam(req, res, next, id){
 
-    BodyAnalisis.findOne({_id: id}, function (err, analisis) {
+    BodyAnalysis.findOne({_id: id}, function (err, analysis) {
         if (err) {
             return errorMessageHandler(err, res);
         }
-        if (!analisis) {
+        if (!analysis) {
             return res.status(404).send({
-                "message": "Body analisis does not exist."
+                "message": "Body analysis does not exist."
             });
         }
-        if (analisis.idUser && (req.jwtPayload._id !== analisis.idUser.toString())) {
+        if (analysis.idUser && (req.jwtPayload._id !== analysis.idUser.toString())) {
             return res.status(401).send({
                 "message": "Invalid or non-existent token. Please, send a correct token."
             });
         }
 
-        req.bodyAnalisis = analisis;
+        req.bodyAnalysis = analysis;
         return next();
     });
 }
 
-exports.bodyAnalisisParam = bodyAnalisisParam;
+exports.bodyAnalysisParam = bodyAnalysisParam;

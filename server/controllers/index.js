@@ -6,6 +6,6 @@ module.exports = function (app) {
     app.use("/anaerobicExercises", require('./marks/anaerobicMark.controller')(app));
     app.use("/aerobicExercises", require('./exercises/aerobicExercise.controller')(app));
     app.use("/aerobicExercises", require('./marks/aerobicMark.controller')(app));
-    app.use("/bodyAnalisis", require('./bodyAnalisis/bodyAnalisis.controller')(app));
+    app.use("/bodyAnalysis", require('./bodyAnalysis/bodyAnalysis.controller')(app));
 
 };

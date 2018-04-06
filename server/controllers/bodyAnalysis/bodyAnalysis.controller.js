@@ -1,18 +1,18 @@
 var express = require('express');
 var errorMessageHandler = require('../common/errorMessageHandler').errorMessageHandler;
-var bodyAnalisisParam = require('./bodyAnalisis.param').bodyAnalisisParam;
+var bodyAnalysisParam = require('./bodyAnalysis.param').bodyAnalysisParam;
 
 module.exports = function (app) {
 
     var router = express.Router();
-    var BodyAnalisis = app.models.BodyAnalisis;
+    var BodyAnalysis = app.models.BodyAnalysis;
 
     /**
      * @swagger
-     * /bodyAnalisis/:
+     * /bodyAnalysis/:
      *   get:
      *     tags:
-     *       - Body Analisis
+     *       - Body Analysis
      *     summary: Listar análisis físicos.
      *     description: Lista todos los análisis físicos.
      *     consumes:
@@ -34,10 +34,10 @@ module.exports = function (app) {
      *         schema:
      *           type: object
      *           properties:
-     *              analisis:
+     *              analysis:
      *               type: array
      *               items:
-     *                $ref: '#/definitions/BodyAnalisis'
+     *                $ref: '#/definitions/BodyAnalysis'
      *       401:
      *         description: Mensaje de feedback para el usuario. Normalmente causado por no
      *           tener un token correcto o tenerlo caducado.
@@ -49,13 +49,13 @@ module.exports = function (app) {
      *           $ref: '#/definitions/FeedbackMessage'
      */
     router.get("/", function (req, res) {
-        BodyAnalisis.find({idUser: req.jwtPayload._id}, '-__v', function (err, analisis) {
+        BodyAnalysis.find({idUser: req.jwtPayload._id}, '-__v', function (err, analysis) {
                 if (err) {
                     return errorMessageHandler(err, res);
 
                 } else {
                     return res.status(200).send({
-                        "analisis": analisis
+                        "analysis": analysis
                     });
                 }
             });
@@ -63,10 +63,10 @@ module.exports = function (app) {
 
     /**
      * @swagger
-     * /bodyAnalisis/:
+     * /bodyAnalysis/:
      *   post:
      *     tags:
-     *       - Body Analisis
+     *       - Body Analysis
      *     summary: Crear un análisis físico
      *     description: Crea un análisis físico si no se ha creado ya uno en el mismo día.
      *     consumes:
@@ -128,8 +128,8 @@ module.exports = function (app) {
      *         schema:
      *           type: object
      *           properties:
-     *              analisisgit story:
-     *                $ref: '#/definitions/BodyAnalisis'
+     *              analysisgit story:
+     *                $ref: '#/definitions/BodyAnalysis'
      *       400:
      *         description: Mensaje de feedback para el usuario.
      *         schema:
@@ -151,41 +151,41 @@ module.exports = function (app) {
         var endToday = new Date();
         endToday.setHours(23,59,59,999);
 
-        // Find if there is any body analisis created in the same day
-        BodyAnalisis.find({$and: [
+        // Find if there is any body analysis created in the same day
+        BodyAnalysis.find({$and: [
             {creationDate: {$gte: startToday, $lt: endToday}},
             {idUser: req.jwtPayload._id}
-        ]}, function (err, analisis) {
+        ]}, function (err, analysis) {
             if (err) {
                 return errorMessageHandler(err, res);
-            } else if (analisis.length !== 0) {
+            } else if (analysis.length !== 0) {
                 return res.status(400).send({
-                    "message": "Body analisis already created today."
+                    "message": "Body analysis already created today."
                 });
             } else {
-                var newAnalisis = new BodyAnalisis();
+                var newAnalysis = new BodyAnalysis();
 
-                // Add the new attributes to the body analisis object
-                newAnalisis.weight = req.body.weight;
-                newAnalisis.bmi = req.body.bmi;
-                newAnalisis.metabolicAge = req.body.metabolicAge;
-                newAnalisis.basalMetabolism = req.body.basalMetabolism;
-                newAnalisis.bodyFat = req.body.bodyFat;
-                newAnalisis.muscleMass = req.body.muscleMass;
-                newAnalisis.boneMass = req.body.boneMass;
-                newAnalisis.bodyFluids = req.body.bodyFluids;
-                newAnalisis.visceralAdiposity = req.body.visceralAdiposity;
-                newAnalisis.dailyCaloricIntake = req.body.dailyCaloricIntake;
-                newAnalisis.idUser = req.jwtPayload._id;
+                // Add the new attributes to the body analysis object
+                newAnalysis.weight = req.body.weight;
+                newAnalysis.bmi = req.body.bmi;
+                newAnalysis.metabolicAge = req.body.metabolicAge;
+                newAnalysis.basalMetabolism = req.body.basalMetabolism;
+                newAnalysis.bodyFat = req.body.bodyFat;
+                newAnalysis.muscleMass = req.body.muscleMass;
+                newAnalysis.boneMass = req.body.boneMass;
+                newAnalysis.bodyFluids = req.body.bodyFluids;
+                newAnalysis.visceralAdiposity = req.body.visceralAdiposity;
+                newAnalysis.dailyCaloricIntake = req.body.dailyCaloricIntake;
+                newAnalysis.idUser = req.jwtPayload._id;
 
-                newAnalisis.save(function (err, analisis) {
+                newAnalysis.save(function (err, analysis) {
                     if (err) {
                         return errorMessageHandler(err, res);
                     } else {
-                        analisis = analisis.toJSON();
-                        delete analisis.__v;
+                        analysis = analysis.toJSON();
+                        delete analysis.__v;
                         return res.status(200).send({
-                            "analisis": analisis
+                            "analysis": analysis
                         });
                     }
                 });
@@ -193,17 +193,17 @@ module.exports = function (app) {
         });
     });
 
-    // Preload post objects on routes with ':analisis'
-    router.param('analisis', function(req, res, next, id) {
-        bodyAnalisisParam(req, res, next, id)
+    // Preload post objects on routes with ':analysis'
+    router.param('analysis', function(req, res, next, id) {
+        bodyAnalysisParam(req, res, next, id)
     });
 
     /**
      * @swagger
-     * /bodyAnalisis/{analisis}:
+     * /bodyAnalysis/{analysis}:
      *   post:
      *     tags:
-     *       - Body Analisis
+     *       - Body Analysis
      *     summary: Listar análisis físico.
      *     description: Lista toda la información de un análisis físico.
      *     consumes:
@@ -219,7 +219,7 @@ module.exports = function (app) {
      *         required: true
      *         type: string
      *         format: byte
-     *       - name: analisis
+     *       - name: analysis
      *         description: Identificador del análisis que se quiere listar.
      *         in: path
      *         required: true
@@ -230,8 +230,8 @@ module.exports = function (app) {
      *         schema:
      *           type: object
      *           properties:
-     *              analisis:
-     *                $ref: '#/definitions/BodyAnalisis'
+     *              analysis:
+     *                $ref: '#/definitions/BodyAnalysis'
      *       401:
      *         description: Mensaje de feedback para el usuario. Normalmente causado por no
      *           tener un token correcto o tenerlo caducado.
@@ -242,20 +242,20 @@ module.exports = function (app) {
      *         schema:
      *           $ref: '#/definitions/FeedbackMessage'
      */
-    router.get("/:analisis", function (req, res) {
-        var analisis = req.bodyAnalisis.toJSON();
-        delete analisis.__v;
+    router.get("/:analysis", function (req, res) {
+        var analysis = req.bodyAnalysis.toJSON();
+        delete analysis.__v;
         return res.status(200).send({
-            "analisis": analisis
+            "analysis": analysis
         });
     });
 
     /**
      * @swagger
-     * /bodyAnalisis/{analisis}:
+     * /bodyAnalysis/{analysis}:
      *   put:
      *     tags:
-     *       - Body Analisis
+     *       - Body Analysis
      *     summary: Edita un análisis físico
      *     description: Edita un análisis físico existente.
      *     consumes:
@@ -271,7 +271,7 @@ module.exports = function (app) {
      *         required: true
      *         type: string
      *         format: byte
-     *       - name: analisis
+     *       - name: analysis
      *         description: Identificador del análisis que se quiere listar.
      *         in: path
      *         required: true
@@ -335,25 +335,25 @@ module.exports = function (app) {
      *         schema:
      *           $ref: '#/definitions/FeedbackMessage'
      */
-    router.put("/:analisis", function (req, res) {
-        // Edit the new attributes to the analisis object
-        req.bodyAnalisis.weight = req.body.weight;
-        req.bodyAnalisis.bmi = req.body.bmi;
-        req.bodyAnalisis.metabolicAge = req.body.metabolicAge;
-        req.bodyAnalisis.basalMetabolism = req.body.basalMetabolism;
-        req.bodyAnalisis.bodyFat = req.body.bodyFat;
-        req.bodyAnalisis.muscleMass = req.body.muscleMass;
-        req.bodyAnalisis.boneMass = req.body.boneMass;
-        req.bodyAnalisis.bodyFluids = req.body.bodyFluids;
-        req.bodyAnalisis.visceralAdiposity = req.body.visceralAdiposity;
-        req.bodyAnalisis.dailyCaloricIntake = req.body.dailyCaloricIntake;
+    router.put("/:analysis", function (req, res) {
+        // Edit the new attributes to the analysis object
+        req.bodyAnalysis.weight = req.body.weight;
+        req.bodyAnalysis.bmi = req.body.bmi;
+        req.bodyAnalysis.metabolicAge = req.body.metabolicAge;
+        req.bodyAnalysis.basalMetabolism = req.body.basalMetabolism;
+        req.bodyAnalysis.bodyFat = req.body.bodyFat;
+        req.bodyAnalysis.muscleMass = req.body.muscleMass;
+        req.bodyAnalysis.boneMass = req.body.boneMass;
+        req.bodyAnalysis.bodyFluids = req.body.bodyFluids;
+        req.bodyAnalysis.visceralAdiposity = req.body.visceralAdiposity;
+        req.bodyAnalysis.dailyCaloricIntake = req.body.dailyCaloricIntake;
 
-        req.bodyAnalisis.save(function (err) {
+        req.bodyAnalysis.save(function (err) {
             if (err) {
                 return errorMessageHandler(err, res);
             } else {
                 return res.status(200).send({
-                    "message": "Body analisis updated successfully."
+                    "message": "Body analysis updated successfully."
                 });
             }
         });
@@ -404,14 +404,14 @@ module.exports = function (app) {
      *         schema:
      *           $ref: '#/definitions/FeedbackMessage'
      */
-    router.delete("/:analisis", function (req, res) {
-        // Remove the body analisis
-        BodyAnalisis.remove({_id: req.bodyAnalisis._id}, function (err) {
+    router.delete("/:analysis", function (req, res) {
+        // Remove the body analysis
+        BodyAnalysis.remove({_id: req.bodyAnalysis._id}, function (err) {
             if (err) {
                 return errorMessageHandler(err, res);
             } else {
                 return res.status(200).send({
-                    "message": "Body analisis deleted successfully."
+                    "message": "Body analysis deleted successfully."
                 });
             }
         });
