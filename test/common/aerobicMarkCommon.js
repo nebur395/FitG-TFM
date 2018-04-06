@@ -4,14 +4,14 @@ var AerobicMark = server.models.AerobicMark;
 /*
  * Create an aerobic mark
  */
-function createAerobicMark(idExercise, idUser, distance, time, intensity, heartRate, comment, callback) {
+function createAerobicMark(idExercise, idUser, callback) {
 
     var newMark = new AerobicMark();
-    newMark.distance = distance;
-    newMark.time = time;
-    newMark.intensity = intensity;
-    newMark.heartRate = heartRate;
-    newMark.comment = comment;
+    newMark.distance = 1;
+    newMark.time = 1;
+    newMark.intensity = 1;
+    newMark.heartRate = 1;
+    newMark.comment = "test";
     newMark.idUser = idUser;
     newMark.idExercise = idExercise;
 

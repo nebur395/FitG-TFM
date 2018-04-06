@@ -24,11 +24,6 @@ describe('AerobicExercise', function () {
         category = "running",
         type = "sprint";
 
-    var intensity = 1,
-        distance = 1,
-        time = 1,
-        heartRate = 1;
-
     var exercisesId = [],
         marksId = [],
         idUsers = [];
@@ -49,7 +44,7 @@ describe('AerobicExercise', function () {
                 idUsers.push(id);
                 aerobicExerciseCommon.createAerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
                     exercisesId.push(id);
-                    aerobicMarkCommon.createAerobicMark(exercisesId[0], idUsers[0], distance, time, intensity, heartRate, "", function(id){
+                    aerobicMarkCommon.createAerobicMark(exercisesId[0], idUsers[0], function(id){
                         marksId.push(id);
                         done();
                     });
