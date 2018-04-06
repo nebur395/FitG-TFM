@@ -195,6 +195,50 @@ module.exports = function (app) {
         bodyAnalisisParam(req, res, next, id)
     });
 
+    /**
+     * @swagger
+     * /bodyAnalisis/{analisis}:
+     *   post:
+     *     tags:
+     *       - Body Analisis
+     *     summary: Listar análisis físico.
+     *     description: Lista toda la información de un análisis físico.
+     *     consumes:
+     *       - application/json
+     *       - charset=utf-8
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         description: |
+     *           JWT estándar: `Authorization: Bearer + JWT`.
+     *         in: header
+     *         required: true
+     *         type: string
+     *         format: byte
+     *       - name: analisis
+     *         description: Identificador del análisis que se quiere listar.
+     *         in: path
+     *         required: true
+     *         type: string
+     *     responses:
+     *       200:
+     *         description: Un análisis físico con toda su información.
+     *         schema:
+     *           type: object
+     *           properties:
+     *              analisis:
+     *                $ref: '#/definitions/BodyAnalisis'
+     *       401:
+     *         description: Mensaje de feedback para el usuario. Normalmente causado por no
+     *           tener un token correcto o tenerlo caducado.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     *       500:
+     *         description: Mensaje de feedback para el usuario.
+     *         schema:
+     *           $ref: '#/definitions/FeedbackMessage'
+     */
     router.get("/:analisis", function (req, res) {
         var analisis = req.bodyAnalisis.toJSON();
         delete analisis.__v;
