@@ -42,7 +42,7 @@ describe('AnaerobicMark', function () {
             idUser = id;
             anaerobicExerciseCommon.createAnaerobicExercise(exerciseName, category, type, true, idUser, "", function (id) {
                 exercisesId.push(id);
-                anaerobicMarkCommon.createAnaerobicMark(exercisesId[0], idUser, repetitions, weight, time, "", function(id){
+                anaerobicMarkCommon.createAnaerobicMark(exercisesId[0], idUser, function(id){
                     marksId.push(id);
                     done();
                 });

@@ -4,13 +4,13 @@ var AnaerobicMark = server.models.AnaerobicMark;
 /*
  * Create an anaerobic mark
  */
-function createAnaerobicMark(idExercise, idUser, repetitions, weight, time, comment, callback) {
+function createAnaerobicMark(idExercise, idUser, callback) {
 
     var newMark = new AnaerobicMark();
-    newMark.repetitions = repetitions;
-    newMark.weight = weight;
-    newMark.time = time;
-    newMark.comment = comment;
+    newMark.repetitions = [1,1];
+    newMark.weight = [1,1];
+    newMark.time = [1,1];
+    newMark.comment = "test";
     newMark.idUser = idUser;
     newMark.idExercise = idExercise;
 

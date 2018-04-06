@@ -24,10 +24,6 @@ describe('AnaerobicExercise', function () {
         category = "muscle training",
         type = "chest";
 
-    var repetitions = [1,1],
-        weight = [1,1],
-        time = [1,1];
-
     var exercisesId = [],
         marksId = [],
         idUsers = [];
@@ -48,7 +44,7 @@ describe('AnaerobicExercise', function () {
                 idUsers.push(id);
                 anaerobicExerciseCommon.createAnaerobicExercise(exerciseName, category, type, true, idUsers[0], "", function (id) {
                     exercisesId.push(id);
-                    anaerobicMarkCommon.createAnaerobicMark(exercisesId[0], idUsers[0], repetitions, weight, time, "", function(id){
+                    anaerobicMarkCommon.createAnaerobicMark(exercisesId[0], idUsers[0], function(id){
                         marksId.push(id);
                         done();
                     });
