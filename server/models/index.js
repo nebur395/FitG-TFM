@@ -4,6 +4,7 @@ module.exports = {
     AnaerobicExercise: require('./AnaerobicExercise.js'),
     AnaerobicMark: require('./AnaerobicMark.js'),
     AerobicExercise: require('./AerobicExercise.js'),
-    AerobicMark: require('./AerobicMark.js')
+    AerobicMark: require('./AerobicMark.js'),
+    BodyAnalisis: require('./BodyAnalisis.js')
 
 };
