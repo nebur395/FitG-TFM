@@ -10,6 +10,21 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
+
+        function checkIsLogged($state, authService){
+            if (authService.isAuthenticated()) {
+                $state.go('exercises');
+            }
+        }
+
+        function checkIsNotLogged ($state, authService, notificationService) {
+            if (!authService.isAuthenticated()) {
+                notificationService.showError("Error de autenticación", "Token inválido" +
+                    " o no existente. Por favor, envíe un token correcto.");
+                $state.go('starter');
+            }
+        }
+
         $stateProvider
 
         // starter screen
@@ -17,11 +32,7 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                 url: "/starter",
                 templateUrl: "pages/starter/starter-page.state.html",
                 controller: "starterCtrl",
-                onEnter: function ($state, authService) {
-                    if (authService.isAuthenticated()) {
-                        $state.go('exercises');
-                    }
-                }
+                onEnter: ['$state', 'authService', checkIsLogged]
             })
 
             // profile screen
@@ -29,13 +40,7 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                 url: "/exercises",
                 templateUrl: "pages/starter/exercises-page.state.html",
                 controller: "exercisesCtrl",
-                onEnter: function ($state, authService, notificationService) {
-                    if (!authService.isAuthenticated()) {
-                        notificationService.showError("Error de autenticación", "Token inválido" +
-                            " o no existente. Por favor, envíe un token correcto.");
-                        $state.go('starter');
-                    }
-                }
+                onEnter: ['$state', 'authService', 'notificationService', checkIsLogged]
             });
 
         $urlRouterProvider.otherwise('starter');
