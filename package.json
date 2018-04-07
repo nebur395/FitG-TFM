@@ -4,6 +4,7 @@
   "description": "My final master project and an application web of fitness goals control.",
   "main": "server.js",
   "scripts": {
+    "postinstall": "cd public/desktop; npm install;",
     "install": "node_modules/protractor/bin/webdriver-manager update",
     "test": "mocha test/mocha/**/*.js"
   },
