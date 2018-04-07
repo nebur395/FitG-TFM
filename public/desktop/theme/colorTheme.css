@@ -1,0 +1,20 @@
+.w3-theme-light {color:#000 !important; background-color:#D7CCC8 !important}
+.w3-theme-dark {color:#fff !important; background-color:#5D4037 !important}
+.w3-theme-action {color:#fff !important; background-color:#FF9800 !important}
+
+.w3-theme {color:#fff !important; background-color:#795548 !important}
+.w3-text-theme {color:#795548 !important}
+.w3-text-secondary {color: #757575 !important}
+.w3-border-theme {border-color:#553c33 !important}
+
+.w3-theme:hover {color:#fff !important; background-color:#795548 !important}
+.w3-text-theme:hover {color: #795548 !important}
+.w3-border-theme:hover {border-color: #553c33 !important}
+.w3-theme-action:hover {color:#fff !important; background-color: #eb8c00 !important}
+
+.w3-navbar-theme {
+  color:#fff !important;
+  background-color:#795548 !important; /*w3-theme*/
+  border: none;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
