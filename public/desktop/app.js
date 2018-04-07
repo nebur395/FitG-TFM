@@ -15,7 +15,7 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
         // starter screen
             .state('starter', {
                 url: "/starter",
-                templateUrl: "pages/starter.html",
+                templateUrl: "pages/starter/starter-page.state.html",
                 controller: "starterCtrl",
                 onEnter: function ($state, authService) {
                     if (authService.isAuthenticated()) {
@@ -27,7 +27,7 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
             // profile screen
             .state('exercises', {
                 url: "/exercises",
-                templateUrl: "pages/exercises.html",
+                templateUrl: "pages/starter/exercises-page.state.html",
                 controller: "exercisesCtrl",
                 onEnter: function ($state, authService, notificationService) {
                     if (!authService.isAuthenticated()) {

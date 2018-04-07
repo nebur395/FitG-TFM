@@ -90,7 +90,7 @@ angular.module('fitGApp')
                 }).then(function (successData) {
                     //that.authenticate(successData.data.token);
                     //$state.go('adminManagement');
-                    callbackError(successData.data.message);
+                    callbackError(successData.data.token);
                 }, function (errorData) {
                     callbackError(errorData.data.message);
                 });

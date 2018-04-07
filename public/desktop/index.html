@@ -22,7 +22,7 @@
 
   <!-- AngularJS external libraries -->
   <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.15/angular-ui-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
   <script src="node_modules/angular-base64/angular-base64.min.js"></script>
   <script type="text/javascript" src="node_modules/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
   <link rel="stylesheet" href="node_modules/angular-ui-notification/dist/angular-ui-notification.min.css"/>
@@ -42,13 +42,13 @@
   <!-- App constants -->
   <script src="constants/API.constants.js"></script>
   <!-- services -->
-  <script src="providers/services/authService.js"></script>
-  <script src="providers/services/notificationService.js"></script>
+  <script src="providers/auth.service.js"></script>
+  <script src="providers/notification.service.js"></script>
   <!-- directives -->
   <script src="directives.js"></script>
   <!-- controllers -->
   <script src="pages/navbar/navbar-component.directive.js"></script>
-  <script src="pages/starter/starter-page.component.js"></script>
+  <script src="pages/starter/starter-page.state.js"></script>
 </head>
 
 <body ng-app="fitGApp">
