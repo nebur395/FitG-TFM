@@ -1,0 +1,32 @@
+<div id="starterStyle">
+  <div class="container">
+
+    <!-- used for right align the form -->
+    <div class="col-xs-8 col-xs-offset-2">
+      <h1 id="firstContent" class="text-center">¡Inicia sesión en FitG!</h1>
+
+      <form role="form" ng-submit="login()">
+
+        <!-- user name input form -->
+        <div class="form-group">
+          <input ng-click="hideError()" type="email" ng-model="email" class="form-control"
+                 placeholder="Introduce tu correo electrónico" required/>
+        </div>
+
+        <!-- password input form-->
+        <div class="form-group">
+          <input ng-click="hideError()" type="password" ng-model="password" class="form-control"
+                 placeholder="Introduce tu contraseña" required/>
+        </div>
+
+        <!-- submit button form-->
+        <p class="text-center">
+          <button type="submit" class="btn btn-default w3-theme-action customButton">
+            Iniciar sesión
+          </button>
+        </p>
+
+      </form>
+    </div>
+  </div>
+</div>
