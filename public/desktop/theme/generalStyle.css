@@ -1,0 +1,74 @@
+body {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #f1f1f1f1;
+  font-family: 'Noto Sans', sans-serif;
+  /*font-family: 'Audiowide', cursive;*/
+}
+
+/* remove the underline link style */
+a:focus, a:hover {
+  text-decoration: none;
+}
+
+/* add a gap under the navbar */
+#firstContent:before {
+  display: block;
+  content: " ";
+  height: 70px;
+  visibility: hidden;
+}
+
+h1 {
+  font-size: 200%;
+}
+
+.customButton {
+  font-weight: 600 !important;
+  padding: 10px 20px !important;
+  transition: background-color .25s, color .15s, box-shadow .15s, opacity .25s, filter .25s, border .15s;
+}
+
+.customButton:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.customDisabled {
+  cursor: not-allowed !important;
+  color: #000000 !important;
+  background-color: #e7e7e7 !important;
+  border: 1px solid #c7c7c7 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+.divider {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 1px;
+  background: -webkit-gradient(linear, 0 0, 100% 0, from(#BDBDBD), to(#BDBDBD), color-stop(50%, #696969));
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ui-notification, .ui-notification > h3 {
+  text-align: center !important;
+}
+
+::-webkit-scrollbar {
+  width: .5em;
+  height: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #aaaaaa;
+}
+
+::-webkit-scrollbar-track {
+  background: #dddddd;
+}
