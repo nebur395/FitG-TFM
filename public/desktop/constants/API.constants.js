@@ -1,5 +1,5 @@
 angular.module('fitGApp')
 
     .constant("API", {
-        "AUTH_ENDPOINT": "/login"
+        "AUTH_ENDPOINT": "/login/"
     });

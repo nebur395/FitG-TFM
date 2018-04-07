@@ -1,7 +1,7 @@
 angular.module('fitGApp')
 
 // 'auth' service manage the authentication function of the page with the server
-    .factory('authService', function ($state, $http, $base64, jwtHelper) {
+    .factory('authService', function ($state, $http, $base64, jwtHelper, API) {
 
         var _identity = undefined,
             _authenticated = false;
@@ -82,7 +82,7 @@ angular.module('fitGApp')
                 var that = this;
                 $http({
                     method: 'POST',
-                    url: 'login/',
+                    url: API.AUTH_ENDPOINT,
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8'
                     },
