@@ -61,14 +61,6 @@ angular.module('fitGApp')
                 }
             },
 
-            getAdmin: function () {
-                if (typeof _identity !== 'undefined' && _identity !== null) {
-                    return jwtHelper.decodeToken(_identity).admin;
-                } else {
-                    return "";
-                }
-            },
-
             getToken: function () {
                 if (typeof _identity !== 'undefined' && _identity !== null) {
                     return _identity;
@@ -86,19 +78,19 @@ angular.module('fitGApp')
             },
 
             //send the login info to the server
-            login: function (user, password, callbackError) {
+            login: function (user, callbackError) {
                 var that = this;
                 $http({
-                    method: 'GET',
+                    method: 'POST',
                     url: 'login/',
                     headers: {
-                        'Content-Type': 'application/json; charset=UTF-8',
-                        'Authorization': 'Basic ' +
-                        $base64.encode(user + ":" + password)
-                    }
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    data: JSON.stringify(user)
                 }).then(function (successData) {
-                    that.authenticate(successData.data.token);
-                    $state.go('adminManagement');
+                    //that.authenticate(successData.data.token);
+                    //$state.go('adminManagement');
+                    callbackError(successData.data.message);
                 }, function (errorData) {
                     callbackError(errorData.data.message);
                 });
