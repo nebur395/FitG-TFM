@@ -38,9 +38,9 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
             // profile screen
             .state('exercises', {
                 url: "/exercises",
-                templateUrl: "pages/starter/exercises-page.state.html",
+                templateUrl: "pages/exercises/exercises-page.state.html",
                 controller: "exercisesCtrl",
-                onEnter: ['$state', 'authService', 'notificationService', checkIsLogged]
+                onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]
             });
 
         $urlRouterProvider.otherwise('starter');
@@ -67,7 +67,9 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                     if (response.status === 401 || response.status === 403) {
                         let authService = $injector.get('authService');
 
-                        if (authService.getToken() && authService.isTokenExpired()) {
+                        if (!authService.getToken()) {
+                            authService.logout();
+                        } else if (authService.getToken() && authService.isTokenExpired()) {
                             authService.logout();
                         }
                     }
