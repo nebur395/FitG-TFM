@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div id="exercisesStyle">
+  <div class="container">
+
+    <h1 id="firstContent" class="text-center">Gestiona los ejercicios</h1>
+
+    <!-- Tarjetas para representar la info -->
+    <div style="padding-top: 5%" class="row">
+      <div ng-repeat="exercise in exercisesList" class="col-lg-3 col-md-4 col-sm-6">
+
+        <!-- mouse events to show or hide the delete option -->
+        <div class="exerciseCardStyle" ng-click="enterHistory()">
+
+          <i ng-click="deleteEx()" ng-if="exercise.custom" class="fa fa-trash fa-lg exerciseIcons"></i>
+          <i ng-click="modifyEx()" ng-if="exercise.custom" class="fa fa-pencil fa-lg exerciseIcons"></i>
+
+          <h1 class="text-center">{{exercise.name}}</h1>
+
+          <div class="row">
+            <div class="col-xs-6 col-md-12">
+              <p><strong>Categoría:</strong> {{exercise.category}}</p>
+            </div>
+            <div class="col-xs-6 col-md-12">
+              <p><strong>Tipo:</strong> {{exercise.type}}</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
