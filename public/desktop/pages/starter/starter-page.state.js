@@ -1,7 +1,7 @@
 angular.module('fitGApp')
 
-    .controller('starterCtrl', ['$scope', 'authService', 'notificationService',
-        function ($scope, authService, notificationService) {
+    .controller('starterCtrl', ['$scope', '$state', 'authService', 'notificationService',
+        function ($scope, $state, authService, notificationService) {
 
             // inputs visual variables
             $scope.email = "";
@@ -15,9 +15,8 @@ angular.module('fitGApp')
                 };
                 authService.login(user)
                     .then(token => {
-                        //authService.authenticate(token);
-                        //$state.go('adminManagement');
-                        notificationService.showSuccess('&#10004', token);
+                        authService.authenticate(token);
+                        $state.go('exercises');
                     })
                     .catch(error => {
                         notificationService.showError('&#10008', error.message);
