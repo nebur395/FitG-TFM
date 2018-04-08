@@ -9,13 +9,18 @@ angular.module('fitGApp')
 
             // send the login form to the auth service
             $scope.login = function () {
-                var user = {
+                let user = {
                     email: $scope.email,
                     password: $scope.password
                 };
-                // Standard 'authorization basic'
-                authService.login(user, function (data) {
-                    notificationService.showError('&#10008', data);
-                });
+                authService.login(user)
+                    .then(token => {
+                        //authService.authenticate(token);
+                        //$state.go('adminManagement');
+                        notificationService.showSuccess('&#10004', token);
+                    })
+                    .catch(error => {
+                        notificationService.showError('&#10008', error.message);
+                    });
             };
         }]);
