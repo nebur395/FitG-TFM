@@ -16,7 +16,7 @@ module.exports = function (app) {
     /**
      * @swagger
      * /aerobicExercises/{aerobicExercise}/aerobicMarks:
-     *   post:
+     *   get:
      *     tags:
      *       - Aerobic marks
      *     summary: Listar las marcas de un ejercicio aeróbico.
@@ -81,7 +81,7 @@ module.exports = function (app) {
      * /aerobicExercises/{aerobicExercise}/aerobicMarks:
      *   post:
      *     tags:
-     *       - Aerobic exercises
+     *       - Aerobic marks
      *     summary: Crear una marca para un ejercicio aeróbico
      *     description: Crea una nueva marca para un ejercicio aeróbico.
      *     consumes:
@@ -183,9 +183,9 @@ module.exports = function (app) {
     /**
      * @swagger
      * /aerobicExercises/{aerobicExercise}/aerobicMarks/{aerobicMark}:
-     *   post:
+     *   get:
      *     tags:
-     *       - Aerobic exercises
+     *       - Aerobic marks
      *     summary: Listar ejercicio aeróbico.
      *     description: Lista toda la información de un ejercicio aeróbico.
      *     consumes:
@@ -242,7 +242,7 @@ module.exports = function (app) {
      * /aerobicExercises/{aerobicExercise}/aerobicMarks/{aerobicMark}:
      *   put:
      *     tags:
-     *       - Aerobic exercises
+     *       - Aerobic marks
      *     summary: Edita una marca de ejercicio aeróbico
      *     description: Edita una marca de ejercicio aeróbico existente.
      *     consumes:
@@ -336,7 +336,7 @@ module.exports = function (app) {
      * /aerobicExercises/{aerobicExercise}/aerobicMarks/{aerobicMark}:
      *   delete:
      *     tags:
-     *       - Aerobic exercises
+     *       - Aerobic marks
      *     summary: Elimina una marca ejercicio aeróbico
      *     description: Elimina una marca ejercicio aeróbico existente.
      *     consumes:

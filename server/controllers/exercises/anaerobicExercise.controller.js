@@ -162,7 +162,7 @@ module.exports = function (app) {
     /**
      * @swagger
      * /anaerobicExercises/{anaerobicExercise}:
-     *   post:
+     *   get:
      *     tags:
      *       - Anaerobic exercises
      *     summary: Listar ejercicio anaeróbico.
