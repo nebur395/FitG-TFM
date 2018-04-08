@@ -6,7 +6,7 @@ angular.module('fitGApp')
         let _identity = undefined,
             _authenticated = false;
 
-        return ({
+        return {
             isAuthenticated: isAuthenticated,
             authenticate: authenticate,
             logout: logout,
@@ -16,7 +16,7 @@ angular.module('fitGApp')
             getToken: getToken,
             isTokenExpired: isTokenExpired,
             login: login
-        });
+        };
 
 
         //return true if the user is authenticated
