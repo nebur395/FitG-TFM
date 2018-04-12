@@ -1,39 +1,39 @@
 <!--menu -->
-<nav class="navbar navbar-inverse navbar-fixed-top w3-navbar-theme">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
+
+    <a class="navbar-brand mr-auto" ng-href="#!/{{home}}">
+      <img src="../../assets/images/navbar-logo.png" alt="logo" style="width:55px;">
+    </a>
+
     <!-- collapsed NavBar-->
-    <div class="navbar-header">
-      <!-- Right button collapsed-->
-      <button type="button" class="navbar-toggle"
-              data-toggle="collapse"
-              data-target="#myNavbar">
-        <!-- collapsed button bars -->
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" rel="home" id="appLogo" ng-href="#!/{{home}}">
-        FitG
-      </a>
-    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#myNavbar" ng-if="logged">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <!-- NavBar buttons-->
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="navbar-nav ml-auto">
 
         <!-- view stats of admin user button -->
-        <li ng-if="logged"><a href="#!/exercises">Ejercicios</a></li>
+        <li class="nav-item" ng-if="logged">
+          <a class="nav-link" href="#!/exercises">EJERCICIOS</a>
+        </li>
 
         <!-- view stats of admin user button -->
-        <li ng-if="logged"><a href="#!/analysis">Análisis Físicos</a></li>
+        <li class="nav-item" ng-if="logged">
+          <a class="nav-link" href="#!/analysis">ANÁLISIS FÍSICOS</a>
+        </li>
 
         <!-- log out button -->
-        <li ng-if="logged"><a href="#!/profile">
-          <em class="fa fa-cogs fa-lg" aria-hidden="true"></em>Cuenta</a></li>
+        <li class="nav-item" ng-if="logged">
+          <a class="nav-link" href="#!/profile">CUENTA</a>
+        </li>
 
         <!-- log out button -->
-        <li ng-if="logged"><a ng-click="logout()">
-          <em class="fa fa-sign-out fa-lg" aria-hidden="true"></em>Salir</a></li>
+        <li class="nav-item" ng-if="logged">
+          <a class="nav-link" href="" ng-click="logout()">SALIR</a>
+        </li>
       </ul>
     </div>
-  </div>
 </nav>

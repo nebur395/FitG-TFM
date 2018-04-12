@@ -3,9 +3,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-color: #f1f1f1f1;
+  background-color: #fafafafa;
   font-family: 'Noto Sans', sans-serif;
-  /*font-family: 'Audiowide', cursive;*/
 }
 
 /* remove the underline link style */
