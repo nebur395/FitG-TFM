@@ -1,11 +1,29 @@
 <div id="exercisesStyle">
   <div class="container-fluid">
 
-    <h1 class="page-title">Gestiona los ejercicios</h1>
+    <h1 class="page-title">Select an exercise</h1>
+
+    <div class="row">
+      <div class="col-md-4 col-sm-6 col-xs-12" style="padding: 0">
+        <button id="exerciseType-filter" ng-click="showDropdown = !showDropdown">
+          <strong>Type:</strong>{{exerciseType}}
+        </button>
+        <ul id="exerciseType-filter-dropdown" ng-if="showDropdown">
+          <li ng-class="{selected: exerciseType === 'Aerobic'}"
+              ng-click="changeExerciseType('Aerobic');$parent.showDropdown = !$parent.showDropdown">
+            Aerobic
+          </li>
+          <li ng-class="{selected: exerciseType === 'Anaerobic'}"
+              ng-click="changeExerciseType('Anaerobic');$parent.showDropdown = !$parent.showDropdown">
+            Anaerobic
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <!-- Tarjetas para representar la info -->
-    <div style="padding-top: 5%" class="row">
-      <div ng-repeat="exercise in exercisesList" class="col-lg-3 col-md-4 col-sm-6"
+    <div class="row">
+      <div ng-repeat="exercise in aerobicExerciseList" class="col-lg-3 col-md-4 col-sm-6"
            ng-click="enterHistory()">
 
         <div class="exerciseCard">
