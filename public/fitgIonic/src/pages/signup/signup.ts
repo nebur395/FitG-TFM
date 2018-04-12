@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
@@ -14,7 +14,11 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { name: string, email: string, password: string } = {
+  account: {
+    name: string,
+    email: string,
+    password: string
+  } = {
     name: 'Test Human',
     email: 'test@example.com',
     password: 'test'
@@ -23,14 +27,26 @@ export class SignupPage {
   // Our translated text strings
   private signupErrorString: string;
 
-  constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+  constructor(
+    private menu: MenuController,
+    private navCtrl: NavController,
+    private user: User,
+    private toastCtrl: ToastController,
+    private translateService: TranslateService) {
 
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     })
+  }
+
+  ionViewDidEnter(): void {
+    // the root left menu should be disabled on this page
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave(): void {
+    // enable the root left menu when leaving this page
+    this.menu.enable(true);
   }
 
   doSignup() {
@@ -45,7 +61,8 @@ export class SignupPage {
       let toast = this.toastCtrl.create({
         message: this.signupErrorString,
         duration: 3000,
-        position: 'top'
+        position: 'top',
+        cssClass: 'toast-error'
       });
       toast.present();
     });

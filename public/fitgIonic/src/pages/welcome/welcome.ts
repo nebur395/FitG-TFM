@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController } from 'ionic-angular';
 
 /**
  * The Welcome Page is a splash page that quickly describes the app,
@@ -14,7 +14,20 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(
+    private navCtrl: NavController,
+    private menu: MenuController,
+    ) { }
+
+  ionViewDidEnter(): void {
+    // the root left menu should be disabled on the tutorial page
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave(): void {
+    // enable the root left menu when leaving the tutorial page
+    this.menu.enable(true);
+  }
 
   login() {
     this.navCtrl.push('LoginPage');
