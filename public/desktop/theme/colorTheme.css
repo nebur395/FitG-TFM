@@ -13,8 +13,8 @@
 .w3-theme-action:hover {color:#fff !important; background-color: #eb8c00 !important}
 
 .w3-navbar-theme {
-  color:#fff !important;
-  background-color:#795548 !important; /*w3-theme*/
+  color: #fff !important;
+  background-color: #795548 !important; /*w3-theme*/
   border: none;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
 }

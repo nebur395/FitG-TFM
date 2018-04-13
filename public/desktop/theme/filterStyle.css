@@ -93,7 +93,7 @@
 }
 
 #search-filter input:focus {
-  box-shadow: 0 4px 4px rgba(66,165,245,.24), 0 0 4px rgba(66,165,245,.12);
+  box-shadow: 0 4px 4px rgba(66, 165, 245, .24), 0 0 4px rgba(66, 165, 245, .12);
   border: 1px solid rgba(66, 165, 245, 0.4);
 }
 

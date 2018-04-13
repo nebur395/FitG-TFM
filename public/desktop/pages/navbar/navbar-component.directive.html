@@ -1,39 +1,39 @@
 <!--menu -->
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
 
-    <a class="navbar-brand mr-auto" ng-href="#!/{{home}}">
-      <img src="../../assets/images/navbar-logo.png" alt="logo" style="width:55px;">
-    </a>
+  <a class="navbar-brand mr-auto" ng-href="#!/{{home}}">
+    <img src="../../assets/images/navbar-logo.png" alt="logo" style="width:55px;">
+  </a>
 
-    <!-- collapsed NavBar-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#myNavbar" ng-if="logged">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- collapsed NavBar-->
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#myNavbar" ng-if="logged">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- NavBar buttons-->
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="navbar-nav ml-auto">
+  <!-- NavBar buttons-->
+  <div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="navbar-nav ml-auto">
 
-        <!-- view stats of admin user button -->
-        <li class="nav-item" ng-if="logged">
-          <a class="nav-link" href="#!/exercises">EJERCICIOS</a>
-        </li>
+      <!-- view stats of admin user button -->
+      <li class="nav-item" ng-if="logged">
+        <a class="nav-link" href="#!/exercises">EXERCISES</a>
+      </li>
 
-        <!-- view stats of admin user button -->
-        <li class="nav-item" ng-if="logged">
-          <a class="nav-link" href="#!/analysis">ANÁLISIS FÍSICOS</a>
-        </li>
+      <!-- view stats of admin user button -->
+      <li class="nav-item" ng-if="logged">
+        <a class="nav-link" href="#!/analysis">BODY ANALYSIS</a>
+      </li>
 
-        <!-- log out button -->
-        <li class="nav-item" ng-if="logged">
-          <a class="nav-link" href="#!/profile">CUENTA</a>
-        </li>
+      <!-- log out button -->
+      <li class="nav-item" ng-if="logged">
+        <a class="nav-link" href="#!/profile">SETTINGS</a>
+      </li>
 
-        <!-- log out button -->
-        <li class="nav-item" ng-if="logged">
-          <a class="nav-link" href="" ng-click="logout()">SALIR</a>
-        </li>
-      </ul>
-    </div>
+      <!-- log out button -->
+      <li class="nav-item" ng-if="logged">
+        <a class="nav-link" href="" ng-click="logout()">LOGOUT</a>
+      </li>
+    </ul>
+  </div>
 </nav>

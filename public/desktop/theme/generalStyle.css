@@ -18,7 +18,7 @@ a:focus, a:hover {
 
 .page-title:after {
   content: "";
-  display:block;
+  display: block;
   height: 1px;
   width: 40%;
   margin: 24px 0 10px;
