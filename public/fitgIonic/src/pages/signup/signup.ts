@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
+import { IonicPage, ToastController, MenuController } from 'ionic-angular';
 
 import { UserService } from '../../providers/providers';
-import { MainPage } from '../pages';
 
 @IonicPage()
 @Component({
@@ -15,13 +14,15 @@ export class SignupPage {
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: {
-    name: string,
+    username: string,
     email: string,
-    password: string
+    password: string,
+    rePassword
   } = {
-    name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
+    username: '',
+    email: '',
+    password: '',
+    rePassword: ''
   };
 
   // Our translated text strings
@@ -29,7 +30,6 @@ export class SignupPage {
 
   constructor(
     private menu: MenuController,
-    private navCtrl: NavController,
     private user: UserService,
     private toastCtrl: ToastController,
     private translateService: TranslateService) {
@@ -51,17 +51,22 @@ export class SignupPage {
 
   doSignup() {
     // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+    this.user.signup(this.account).subscribe((resp: any) => {
+      // User created
+      let toast = this.toastCtrl.create({
+        message: resp.message,
+        position: 'bottom',
+        duration: 3000,
+        cssClass: 'toast-success'
+      });
+      toast.present();
     }, (err) => {
-
-      this.navCtrl.push(MainPage);
 
       // Unable to sign up
       let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
+        message: err.error.message,
         duration: 3000,
-        position: 'top',
+        position: 'bottom',
         cssClass: 'toast-error'
       });
       toast.present();
