@@ -3,12 +3,12 @@
 
     <h1 class="page-title">Select an exercise</h1>
 
-    <div class="row">
-      <div class="col-md-4 col-sm-6 col-xs-12" style="padding: 0">
-        <button id="exerciseType-filter" ng-click="showDropdown = !showDropdown">
+    <div id="filter-options">
+      <div id="selector-filter">
+        <button id="selector-filter-button" ng-click="showDropdown = !showDropdown">
           <strong>Type:</strong>{{exerciseType}}
         </button>
-        <ul id="exerciseType-filter-dropdown" ng-if="showDropdown">
+        <ul id="selector-filter-dropdown" ng-if="showDropdown">
           <li ng-class="{selected: exerciseType === 'Aerobic'}"
               ng-click="changeExerciseType('Aerobic');$parent.showDropdown = !$parent.showDropdown">
             Aerobic
@@ -19,12 +19,32 @@
           </li>
         </ul>
       </div>
+
+      <div id="search-filter">
+        <input type="text" ng-model="exerciseSearch" placeholder="Filter" />
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </div>
     </div>
 
     <!-- Tarjetas para representar la info -->
-    <div class="row">
+    <div class="row" ng-show="exerciseType === 'Aerobic'">
       <div ng-repeat="exercise in aerobicExerciseList" class="col-lg-3 col-md-4 col-sm-6"
-           ng-click="enterHistory()">
+           ng-click="enterExercise(exercise._id)">
+
+        <div class="exerciseCard">
+
+          <p class="exerciseCard-title">{{exercise.name}}</p>
+          <p class="exerciseCard-desc">{{exercise.description}}</p>
+          <p class="exerciseCard-clasification">{{exercise.category}} - {{exercise.type}}</p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjetas para representar la info -->
+    <div class="row" ng-show="exerciseType === 'Aerobic'">
+      <div ng-repeat="exercise in anaerobicExerciseList" class="col-lg-3 col-md-4 col-sm-6"
+           ng-click="enterExercise(exercise._id)">
 
         <div class="exerciseCard">
 
