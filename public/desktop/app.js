@@ -27,7 +27,6 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
 
         $stateProvider
 
-        // starter screen
             .state('starter', {
                 url: "/starter",
                 templateUrl: "pages/starter/starter-page.state.html",
@@ -35,11 +34,17 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                 onEnter: ['$state', 'authService', checkIsLogged]
             })
 
-            // profile screen
             .state('exercises', {
                 url: "/exercises",
                 templateUrl: "pages/exercises/exercises-page.state.html",
                 controller: "exercisesCtrl",
+                onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]
+            })
+
+            .state('aerobic-marks', {
+                url: "/aerobic-marks/{mark}",
+                templateUrl: "pages/aerobic-marks/aerobic-marks.state.html",
+                controller: "aerobicMarksCtrl",
                 onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]
             });
 
