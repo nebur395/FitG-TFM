@@ -51,11 +51,7 @@ export class UserService {
   logout(): Promise<void> {
     return this.storage.remove('token').then(
       () => {
-        return this.storage.remove('user').then(
-          () => {
-            return this.storage.remove('member');
-          }
-        );
+        return this.storage.remove('user')
       }
     );
   }
