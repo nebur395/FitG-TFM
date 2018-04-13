@@ -1,7 +1,7 @@
 angular.module('fitGApp')
 
-    .controller('exercisesCtrl', ['$scope', 'aerobicExerciseService', 'notificationService',
-        function ($scope, aerobicExerciseService, notificationService) {
+    .controller('exercisesCtrl', ['$scope', 'exerciseService', 'notificationService',
+        function ($scope, exerciseService, notificationService) {
 
             // inputs visual variables
             $scope.aerobicExerciseList = [];
@@ -12,9 +12,8 @@ angular.module('fitGApp')
                 $scope.exerciseType = type;
             };
 
-            // send the login form to the auth service
             $scope.getAerobicExerises = function () {
-                aerobicExerciseService.getExercises()
+                exerciseService.getAerobics()
                     .then(exercises => {
                         $scope.aerobicExerciseList = exercises;
                     })
@@ -24,5 +23,14 @@ angular.module('fitGApp')
             };
             $scope.getAerobicExerises();
 
-
+            $scope.getAnaerobicExerises = function () {
+                exerciseService.getAnaerobics()
+                    .then(exercises => {
+                        $scope.anaerobicExerciseList = exercises;
+                    })
+                    .catch(error => {
+                        notificationService.showError('&#10008', error.message);
+                    });
+            };
+            $scope.getAnaerobicExerises();
         }]);
