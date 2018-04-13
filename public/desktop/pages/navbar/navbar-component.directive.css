@@ -3,3 +3,7 @@
   font-family: 'Audiowide', cursive;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
 }
+
+.nav-item {
+  text-transform: uppercase;
+}
