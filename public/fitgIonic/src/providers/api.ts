@@ -1,14 +1,16 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 /**
- * Api is a generic REST Api handler. Set your API url first.
+ * Api is a generic REST Api handler.
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  url: string = 'http://192.168.1.137:8080';
 
-  constructor(public http: HttpClient) {
+  constructor(
+    private http: HttpClient
+  ) {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
@@ -21,8 +23,8 @@ export class Api {
     // Support easy query params for GET requests
     if (params) {
       reqOpts.params = new HttpParams();
-      for (let k in params) {
-        reqOpts.params = reqOpts.params.set(k, params[k]);
+      for (let param in params) {
+        reqOpts.params = reqOpts.params.set(param, params[param]);
       }
     }
 

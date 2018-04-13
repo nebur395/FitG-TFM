@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { UserService } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
@@ -30,7 +30,7 @@ export class SignupPage {
   constructor(
     private menu: MenuController,
     private navCtrl: NavController,
-    private user: User,
+    private user: UserService,
     private toastCtrl: ToastController,
     private translateService: TranslateService) {
 
