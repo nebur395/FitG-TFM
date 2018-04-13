@@ -58,7 +58,7 @@ var AerobicExerciseSchema = mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ["crawl", "butterfly", "moderate", "marathon", "sprint", "race"]},
+        enum: ["crawl", "butterfly", "trail running", "cross running", "sprint"]},
     custom: {type: Boolean, required: true, default: true},
     idUser: {type: mongoose.Schema.Types.ObjectId},
     description: {type: String}

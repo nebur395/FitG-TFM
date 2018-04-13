@@ -6,12 +6,12 @@ angular.module('fitGApp')
         $scope.logged = false;
 
         // Watches to control if the user is authenticated
-        $scope.$watch(function () {
-            return authService.isAuthenticated();
-        }, function () {
-            $scope.logged = authService.isAuthenticated();
-            $scope.home = $scope.logged ? "exercises" : "starter";
-        });
+        $scope.$watch(
+            () => authService.isAuthenticated(),
+            function () {
+                $scope.logged = authService.isAuthenticated();
+                $scope.home = $scope.logged ? "exercises" : "starter";
+            });
 
         $scope.logout = function () {
             authService.logout();

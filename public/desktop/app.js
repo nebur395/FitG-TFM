@@ -11,13 +11,13 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
 
     .config(function ($stateProvider, $urlRouterProvider) {
 
-        function checkIsLogged($state, authService){
+        function checkIsLogged($state, authService) {
             if (authService.isAuthenticated()) {
                 $state.go('exercises');
             }
         }
 
-        function checkIsNotLogged ($state, authService, notificationService) {
+        function checkIsNotLogged($state, authService, notificationService) {
             if (!authService.isAuthenticated()) {
                 notificationService.showError("Error de autenticación", "Token inválido" +
                     " o no existente. Por favor, envíe un token correcto.");

@@ -1,26 +1,63 @@
-.exerciseCardStyle {
+#exercisesStyle {
+  padding-top: 75px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.exerciseCard {
   /* shadow effect to the exercise box */
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 2px 2px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;
   /* cursor pointer effect when the mouse is over the exercise */
   cursor: pointer;
-  border-radius: 3px;
-  margin: 20px 10px;
-  padding: 10px;
+  height: 200px;
+  margin: 24px -8px;
   background-color: #ffffff;
+  border-radius: 2px;
+  padding: 0 0 48px 0;
   position: relative;
 }
 
 /* change the color shadow when 'hover' */
-.exerciseCardStyle:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 102, 232, 0.2), 0 6px 20px 0 rgba(0, 102, 232, 0.19);
+.exerciseCard:hover {
+  box-shadow: 0 8px 8px rgba(10,16,20,.24), 0 0 8px rgba(10,16,20,.12);
 }
 
-.exerciseCardStyle h1 {
+.exerciseCard-title {
+  text-transform: capitalize;
+  margin: 0;
   text-align: center;
-  margin-top: 0;
+  font-size: 20px;
+  padding: 32px 0 24px;
 }
 
-.exerciseIcons {
-  float: right;
-  margin: 0 2%;
+.exerciseCard:hover .exerciseCard-title {
+  color: #1976d2;
+}
+
+.exerciseCard-desc {
+  font-size: 13px;
+  margin: 0;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.exerciseCard-clasification {
+  text-transform: capitalize;
+  line-height: 32px;
+  padding: 8px 16px;
+  bottom: 0;
+  border-top: .5px solid #dbdbdb;
+  box-sizing: border-box;
+  left:0;
+  right:0;
+  position: absolute;
+  text-align: center;
+  color: #6e6e6e;
+  margin: 0;
+}
+
+.exerciseCard:hover .exerciseCard-clasification {
+  background-color: rgba(25,118,210,.1);
+  color: #1976d2;
 }

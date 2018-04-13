@@ -1,31 +1,9 @@
-#appLogo {
-  color: #fff;
-}
-
-/* navbar buttons */
-.navbar-inverse .navbar-nav > li > a {
-  color: #fff;
-}
-
-/* navbar buttons hover */
-.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
-  color: #fff !important;
-  background-color: #b89588 !important; /* w3-theme-l2 */
-  cursor: pointer;
-}
-
-/* collapsed button focus */
-.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
-  background-color: #b89588; /* w3-theme-l2 */
-}
-
-/* collapsed button border */
-.navbar-inverse .navbar-toggle {
-  border-color: #553c33; /* w3-theme-d3 */
-}
-
 /* font family of the home button */
 .navbar {
-  font-family: 'Noto Serif', serif;
-  font-weight: 600;
+  font-family: 'Audiowide', cursive;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+
+.nav-item {
+  text-transform: uppercase;
 }

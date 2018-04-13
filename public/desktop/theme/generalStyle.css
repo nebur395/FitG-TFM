@@ -3,9 +3,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-color: #f1f1f1f1;
+  background-color: #fafafa;
   font-family: 'Noto Sans', sans-serif;
-  /*font-family: 'Audiowide', cursive;*/
 }
 
 /* remove the underline link style */
@@ -13,16 +12,30 @@ a:focus, a:hover {
   text-decoration: none;
 }
 
-/* add a gap under the navbar */
-#firstContent:before {
-  display: block;
-  content: " ";
-  height: 70px;
-  visibility: hidden;
+.page-title {
+  display: inline-block;
 }
 
-h1 {
-  font-size: 200%;
+.page-title:after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 40%;
+  margin: 24px 0 10px;
+  background: #dbdbdb;
+  clear: both;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+p {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: .3px;
+  font-weight: 400;
 }
 
 .customButton {
@@ -59,13 +72,13 @@ h1 {
 }
 
 ::-webkit-scrollbar {
-  width: .5em;
-  height: .5em;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
   background: #aaaaaa;
 }
 
