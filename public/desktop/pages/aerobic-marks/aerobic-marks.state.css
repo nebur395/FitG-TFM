@@ -15,6 +15,7 @@
 #marks-shadow-box {
   transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
   box-shadow: 0 1px 4px 0 rgba(10,16,20,.37);
+  margin-bottom: 5%;
 }
 
 #marks-box-title {
@@ -25,4 +26,8 @@
   font-weight: 400;
   clear: both;
   font-size: 20px;
+}
+
+#progress-chart {
+  margin: 0 10% 5%;
 }

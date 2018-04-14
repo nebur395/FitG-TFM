@@ -3,43 +3,18 @@
 
     <h1 class="page-title">Visualize your exercise progress</h1>
 
-    <div id="filter-options">
-      <div id="selector-filter">
-        <button id="selector-filter-button" ng-click="showDropdown = !showDropdown">
-          <strong>Type:</strong>{{exerciseType}}
-        </button>
-        <ul id="selector-filter-dropdown" ng-if="showDropdown">
-          <li ng-class="{selected: exerciseType === 'Aerobic'}"
-              ng-click="changeExerciseType('Aerobic');$parent.showDropdown = !$parent.showDropdown">
-            All
-          </li>
-          <li ng-class="{selected: exerciseType === 'Anaerobic'}"
-              ng-click="changeExerciseType('Anaerobic');$parent.showDropdown = !$parent.showDropdown">
-            Distance
-          </li>
-          <li ng-class="{selected: exerciseType === 'Anaerobic'}"
-              ng-click="changeExerciseType('Anaerobic');$parent.showDropdown = !$parent.showDropdown">
-            Time
-          </li>
-          <li ng-class="{selected: exerciseType === 'Anaerobic'}"
-              ng-click="changeExerciseType('Anaerobic');$parent.showDropdown = !$parent.showDropdown">
-            Intensity
-          </li>
-          <li ng-class="{selected: exerciseType === 'Anaerobic'}"
-              ng-click="changeExerciseType('Anaerobic');$parent.showDropdown = !$parent.showDropdown">
-            Heart rate
-          </li>
-        </ul>
-      </div>
-
-
-    </div>
-
     <br/>
 
     <!-- Tarjetas para representar la info -->
     <div ng-hide="!isEmpty()" class="text-center"><p>The exercise has not any marks.</p></div>
     <div ng-hide="isEmpty()">
+
+      <div id="progress-chart">
+        <canvas class="chart chart-line" chart-data="chartData"
+                chart-labels="chartLabels" chart-series="chartSeries" chart-options="chartOptions"
+                chart-dataset-override="chartOverride">
+        </canvas>
+      </div>
 
       <div id="marks-shadow-box">
 
@@ -49,7 +24,7 @@
           <button class="accordion" ng-click="showCard = !showCard"
                   ng-class="{active: showCard}">
             {{mark.date}} <span class="markDate" style="margin-right: 5%">(YYYY-MM-DD)</span>
-            {{mark.time}} <span class="markDate">(HH:MM)</span>
+            {{mark.hour}} <span class="markDate">(HH:MM)</span>
           </button>
 
           <div class="panel" ng-class="{show: showCard}">
