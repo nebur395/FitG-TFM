@@ -7,6 +7,7 @@ import { JwtHelper }    from 'angular2-jwt';
 import { Api } from './api';
 
 import { User } from '../models/User';
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable()
@@ -15,7 +16,8 @@ export class UserService {
   jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
-    private api: Api
+    private api: Api,
+    private http: HttpClient
   ) { }
 
   /**
@@ -43,6 +45,28 @@ export class UserService {
     let seq = this.api.post('users/', accountInfo).share();
     seq.subscribe(() => {}, () => {});
     return seq;
+  }
+
+  updateUser(accountInfo: any): any {
+    return this.storage.get('user')
+      .then((user: User) =>{
+        return this.storage.get('token')
+          .then(token => {
+            let seq = this.http.put(
+              'http://192.168.1.137:8080/users/' + user.email, // End-point
+              accountInfo,  // Body
+              {headers: new Headers({   // Headers
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + token
+                })}).share();
+            seq.subscribe( () => {
+              user.username = accountInfo.username;
+              user.email = accountInfo.email;
+              this.storage.set('user',user);
+            }, () => {});
+            return seq;
+          });
+      });
   }
 
   /**

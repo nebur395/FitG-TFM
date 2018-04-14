@@ -6,7 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { FirstRunPage } from '../pages/pages';
+import { FirstRunPage, MainPage } from '../pages/pages';
+import {UserService} from "../providers/providers";
 
 @Component({
   template: `<ion-menu [content]="nav">
@@ -20,6 +21,9 @@ import { FirstRunPage } from '../pages/pages';
       <ion-list>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
+        </button>
+        <button menuClose ion-item (click)="logout()">
+          Cerrar sesión
         </button>
       </ion-list>
     </ion-content>
@@ -42,7 +46,9 @@ export class MyApp {
     private platform: Platform,
     private config: Config,
     private statusBar: StatusBar,
-    private splashScreen: SplashScreen) {
+    private splashScreen: SplashScreen,
+    private userService: UserService
+  ) {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -50,6 +56,14 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.initTranslate();
+
+    this.userService.checkLogged().then(
+      (logged) => {
+        if (logged) {
+          this.nav.setRoot(MainPage);
+        }
+      }
+    );
   }
 
   initTranslate() {
@@ -72,5 +86,15 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logout(): void {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.userService.logout().then(
+      () => {
+        this.nav.setRoot(FirstRunPage);
+      }
+    );
   }
 }
