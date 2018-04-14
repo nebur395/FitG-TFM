@@ -1,7 +1,7 @@
 angular.module('fitGApp')
 
-    .controller('exercisesCtrl', ['$scope', 'exerciseService', 'notificationService',
-        function ($scope, exerciseService, notificationService) {
+    .controller('exercisesCtrl', ['$scope', '$state', 'exerciseService', 'notificationService',
+        function ($scope, $state, exerciseService, notificationService) {
 
             // inputs visual variables
             $scope.aerobicExerciseList = [];
@@ -33,4 +33,12 @@ angular.module('fitGApp')
                     });
             };
             $scope.getAnaerobicExerises();
+
+            $scope.enterAerobicExercise = function (id) {
+                $state.go('aerobic-marks', { mark: id});
+            };
+
+            $scope.enterAnaerobicExercise = function (id) {
+                $state.go('aerobic-marks', { mark: id});
+            }
         }]);
