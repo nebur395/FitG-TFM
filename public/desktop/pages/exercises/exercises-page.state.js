@@ -34,11 +34,11 @@ angular.module('fitGApp')
             };
             $scope.getAnaerobicExerises();
 
-            $scope.enterAerobicExercise = function (id) {
-                $state.go('aerobic-marks', { mark: id});
+            $scope.enterAerobicExercise = function (exercise) {
+                $state.go('aerobic-marks', { exID: exercise._id, exName: exercise.name});
             };
 
-            $scope.enterAnaerobicExercise = function (id) {
-                $state.go('anaerobic-marks', { mark: id});
+            $scope.enterAnaerobicExercise = function (exercise) {
+                $state.go('anaerobic-marks', { exID: exercise._id, exName: exercise.name});
             }
         }]);

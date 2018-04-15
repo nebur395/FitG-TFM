@@ -4,6 +4,7 @@ angular.module('fitGApp')
         function ($scope, $stateParams, marksService, notificationService) {
 
             // inputs visual variables
+            $scope.exName = $stateParams.exName;
             $scope.marksList = [];
             $scope.chartLabels = [];
             $scope.chartSeries = ['Distance', 'Time', 'Intensity', 'Heart rate'];
@@ -53,7 +54,7 @@ angular.module('fitGApp')
             };
 
             $scope.getMarks = function () {
-                marksService.getAerobics($stateParams.mark)
+                marksService.getAerobics($stateParams.exID)
                     .then(marks => {
                         $scope.formatDates(marks);
                         $scope.marksList = marks;

@@ -40,14 +40,14 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                 })
 
                 .state('aerobic-marks', {
-                    url: "/aerobic-marks/{mark}",
+                    url: "/aerobic-marks/{exID}{exName}",
                     templateUrl: "pages/aerobic-marks/aerobic-marks.state.html",
                     controller: "aerobicMarksCtrl",
                     onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]
                 })
 
                 .state('anaerobic-marks', {
-                    url: "/anaerobic-marks/{mark}",
+                    url: "/anaerobic-marks/{exID}{exName}",
                     templateUrl: "pages/anaerobic-marks/anaerobic-marks.state.html",
                     controller: "anaerobicMarksCtrl",
                     onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]

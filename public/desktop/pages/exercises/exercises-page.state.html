@@ -29,7 +29,7 @@
     <!-- Tarjetas para representar la info -->
     <div class="row" ng-show="exerciseType === 'Aerobic'">
       <div ng-repeat="exercise in aerobicExerciseList | filter: {'name': exerciseSearch}"
-           class="col-lg-3 col-md-4 col-sm-6" ng-click="enterAerobicExercise(exercise._id)">
+           class="col-lg-3 col-md-4 col-sm-6" ng-click="enterAerobicExercise(exercise)">
 
         <div class="exerciseCard">
 
@@ -44,7 +44,7 @@
     <!-- Tarjetas para representar la info -->
     <div class="row" ng-show="exerciseType === 'Anaerobic'">
       <div ng-repeat="exercise in anaerobicExerciseList | filter: {'name': exerciseSearch}"
-           class="col-lg-3 col-md-4 col-sm-6" ng-click="enterAnaerobicExercise(exercise._id)">
+           class="col-lg-3 col-md-4 col-sm-6" ng-click="enterAnaerobicExercise(exercise)">
 
         <div class="exerciseCard">
 
