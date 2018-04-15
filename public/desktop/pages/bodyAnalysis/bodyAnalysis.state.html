@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<div id="anaerobicMarksStyle">
+  <div class="container">
 
-</body>
-</html>
+    <h1 class="page-title">Visualize your body anaylisis progress</h1>
+
+    <br/>
+
+    <!-- Tarjetas para representar la info -->
+    <div ng-hide="!isEmpty()" class="text-center"><p>There is not any body analysis.</p></div>
+    <div ng-hide="isEmpty()">
+
+      <div id="progress-chart">
+        <canvas class="chart chart-line" chart-data="chartData"
+                chart-labels="chartLabels" chart-series="chartSeries" chart-options="chartOptions"
+                chart-dataset-override="chartOverride">
+        </canvas>
+      </div>
+
+      <div id="marks-shadow-box">
+
+        <h2 id="marks-box-title">Explore your body analysis</h2>
+
+        <div class="accordionCard" ng-repeat="analysis in analysisList">
+          <button class="accordion" ng-click="showCard = !showCard"
+                  ng-class="{active: showCard}">
+            {{analysis.dateYMD}} <span class="markDate" style="margin-right: 5%">(YYYY-MM-DD)</span>
+            {{analysis.dateHHMM}} <span class="markDate">(HH:MM)</span>
+          </button>
+
+          <div class="panel" ng-class="{show: showCard}">
+            <p><strong>Weight: </strong>{{analysis.weight}}</p>
+            <p><strong>B.M.I.: </strong>{{analysis.bmi}}</p>
+            <p><strong>Metabolic Age: </strong>{{analysis.metabolicAge}}</p>
+            <p><strong>Basal Metabolism: </strong>{{analysis.basalMetabolism}}</p>
+            <p><strong>Body Fat: </strong>{{analysis.bodyFat}}</p>
+            <p><strong>Muscle Mass: </strong>{{analysis.muscleMass}}</p>
+            <p><strong>Bone Mass: </strong>{{analysis.boneMass}}</p>
+            <p><strong>Body Fluids: </strong>{{analysis.bodyFluids}}</p>
+            <p><strong>Visceral Adiposity: </strong>{{analysis.visceralAdiposity}}</p>
+            <p><strong>Daily Caloric Intake: </strong>{{analysis.dailyCaloricIntake}}</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
