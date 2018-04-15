@@ -8,10 +8,10 @@ angular.module('fitGApp')
         };
 
         //send the login info to the server
-        function getAerobics() {
+        function getAnalysis() {
             return $http({
                 method: 'GET',
-                url: API.GET_AEROBIC_EXERCISE_ENDPOINT,
+                url: API.GET_BODY_ANALYSIS_ENDPOINT,
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
                 }

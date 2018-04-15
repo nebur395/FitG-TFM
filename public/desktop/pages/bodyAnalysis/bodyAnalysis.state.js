@@ -32,20 +32,20 @@ angular.module('fitGApp')
                 }
             };
 
-            $scope.populateChart = function (marks) {
-                $scope.chartData = [[], [], []];
-                for (let i = 0; i < marks.length; i++) {
-                    $scope.chartLabels[i] = marks[i].dateYMD;
-                    $scope.chartData[0][i] = marks[i].weight;
-                    $scope.chartData[1][i] = marks[i].bmi;
-                    $scope.chartData[2][i] = marks[i].metabolicAge;
-                    $scope.chartData[3][i] = marks[i].basalMetabolism;
-                    $scope.chartData[4][i] = marks[i].bodyFat;
-                    $scope.chartData[5][i] = marks[i].muscleMass;
-                    $scope.chartData[6][i] = marks[i].boneMass;
-                    $scope.chartData[7][i] = marks[i].bodyFluids;
-                    $scope.chartData[8][i] = marks[i].visceralAdiposity;
-                    $scope.chartData[9][i] = marks[i].dailyCaloricIntake;
+            $scope.populateChart = function (analysis) {
+                $scope.chartData = [[], [], [], [], [], [], [], [], [], []];
+                for (let i = 0; i < analysis.length; i++) {
+                    $scope.chartLabels[i] = analysis[i].dateYMD;
+                    $scope.chartData[0][i] = analysis[i].weight;
+                    $scope.chartData[1][i] = analysis[i].bmi;
+                    $scope.chartData[2][i] = analysis[i].metabolicAge;
+                    $scope.chartData[3][i] = analysis[i].basalMetabolism;
+                    $scope.chartData[4][i] = analysis[i].bodyFat;
+                    $scope.chartData[5][i] = analysis[i].muscleMass;
+                    $scope.chartData[6][i] = analysis[i].boneMass;
+                    $scope.chartData[7][i] = analysis[i].bodyFluids;
+                    $scope.chartData[8][i] = analysis[i].visceralAdiposity;
+                    $scope.chartData[9][i] = analysis[i].dailyCaloricIntake;
                 }
             };
 
