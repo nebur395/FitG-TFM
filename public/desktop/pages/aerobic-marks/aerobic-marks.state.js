@@ -6,9 +6,9 @@ angular.module('fitGApp')
             // inputs visual variables
             $scope.marksList = [];
             $scope.chartLabels = [];
-            $scope.chartSeries = ['Distance','Time','Intensity','Heart rate'];
+            $scope.chartSeries = ['Distance', 'Time', 'Intensity', 'Heart rate'];
             $scope.chartData = [];
-            $scope.chartOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+            $scope.chartOverride = [{yAxisID: 'y-axis-1'}, {yAxisID: 'y-axis-2'}];
             $scope.chartOptions = {
                 legend: {display: true},
                 scales: {
@@ -31,7 +31,7 @@ angular.module('fitGApp')
             };
 
             $scope.populateChart = function (marks) {
-                $scope.chartData = [[],[],[],[]];
+                $scope.chartData = [[], [], [], []];
                 for (let i = 0; i < marks.length; i++) {
                     $scope.chartLabels[i] = marks[i].date;
                     $scope.chartData[0][i] = marks[i].distance;

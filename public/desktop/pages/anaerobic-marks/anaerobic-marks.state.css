@@ -6,15 +6,15 @@
   margin: 0;
 }
 
-#anaerobicMarksStyle .markDate{
+#anaerobicMarksStyle .markDate {
   font-size: 10px;
   letter-spacing: .3px;
   font-weight: 400;
 }
 
 #marks-shadow-box {
-  transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 1px 4px 0 rgba(10,16,20,.37);
+  transition: box-shadow .28s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0 1px 4px 0 rgba(10, 16, 20, .37);
   margin-bottom: 5%;
 }
 
