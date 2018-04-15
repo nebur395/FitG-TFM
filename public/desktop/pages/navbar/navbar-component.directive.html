@@ -1,13 +1,13 @@
 <!--menu -->
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
 
-  <a class="navbar-brand mr-auto" ng-href="#!/{{home}}">
+  <a class="navbar-brand mr-auto" href="#!/exercises">
     <img src="../../assets/images/navbar-logo.png" alt="logo" style="width:55px;">
   </a>
 
   <!-- collapsed NavBar-->
   <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#myNavbar" ng-if="logged">
+          data-target="#myNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -16,17 +16,17 @@
     <ul class="navbar-nav ml-auto">
 
       <!-- view stats of admin user button -->
-      <li class="nav-item" ng-if="logged">
+      <li class="nav-item">
         <a class="nav-link" href="#!/exercises">Exercises</a>
       </li>
 
       <!-- view stats of admin user button -->
-      <li class="nav-item" ng-if="logged">
+      <li class="nav-item">
         <a class="nav-link" href="#!/analysis">Body Analysis</a>
       </li>
 
       <!-- log out button -->
-      <li class="nav-item" ng-if="logged">
+      <li class="nav-item">
         <a class="nav-link" href="" ng-click="logout()">Logout</a>
       </li>
     </ul>

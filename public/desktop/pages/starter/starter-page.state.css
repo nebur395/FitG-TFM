@@ -3,5 +3,18 @@
 }
 
 #starterStyle input {
-  margin: 5% 0;
+  margin: 3% 0;
+}
+
+#starterStyle h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Audiowide', cursive;
+}
+
+#starterStyle h2 {
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Audiowide', cursive;
 }

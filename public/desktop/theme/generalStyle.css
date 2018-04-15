@@ -40,21 +40,15 @@ p {
 
 .customButton {
   font-weight: 600 !important;
+  text-transform: uppercase;
+  font-family: 'Audiowide', cursive;
   padding: 10px 20px !important;
-  transition: background-color .25s, color .15s, box-shadow .15s, opacity .25s, filter .25s, border .15s;
+  transition: all .2s ease-in-out;
 }
 
 .customButton:hover {
+  transform: scale(1.1);
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.customDisabled {
-  cursor: not-allowed !important;
-  color: #000000 !important;
-  background-color: #e7e7e7 !important;
-  border: 1px solid #c7c7c7 !important;
-  box-shadow: none !important;
-  transition: none !important;
 }
 
 .divider {
