@@ -1,0 +1,44 @@
+<div id="anaerobicMarksStyle">
+  <div class="container">
+
+    <h1 class="page-title">Visualize your exercise progress</h1>
+
+    <br/>
+
+    <!-- Tarjetas para representar la info -->
+    <div ng-hide="!isEmpty()" class="text-center"><p>The exercise has not any marks.</p></div>
+    <div ng-hide="isEmpty()">
+
+      <div id="progress-chart">
+        <canvas class="chart chart-line" chart-data="chartData"
+                chart-labels="chartLabels" chart-series="chartSeries" chart-options="chartOptions"
+                chart-dataset-override="chartOverride">
+        </canvas>
+      </div>
+
+      <div id="marks-shadow-box">
+
+        <h2 id="marks-box-title">Explore your marks</h2>
+
+        <div class="accordionCard" ng-repeat="mark in marksList">
+          <button class="accordion" ng-click="showCard = !showCard"
+                  ng-class="{active: showCard}">
+            {{mark.dateYMD}} <span class="markDate" style="margin-right: 5%">(YYYY-MM-DD)</span>
+            {{mark.dateHHMM}} <span class="markDate">(HH:MM)</span>
+          </button>
+
+          <div class="panel" ng-class="{show: showCard}">
+            <p><strong>Series: </strong>{{mark.series}}</p>
+            <p><strong>Repetitions: </strong>{{mark.repetitions}}</p>
+            <p><strong>Weight: </strong>{{mark.weight}}</p>
+            <p><strong>Time: </strong>{{mark.time}}</p>
+            <p><strong>Comment: </strong>{{mark.comment}}</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
