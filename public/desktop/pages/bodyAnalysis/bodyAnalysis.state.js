@@ -1,6 +1,6 @@
 angular.module('fitGApp')
 
-    .controller('anaerobicMarksCtrl', ['$scope', '$stateParams', 'analysisService', 'notificationService',
+    .controller('bodyAnalysisCtrl', ['$scope', '$stateParams', 'analysisService', 'notificationService',
         function ($scope, $stateParams, analysisService, notificationService) {
 
             // inputs visual variables

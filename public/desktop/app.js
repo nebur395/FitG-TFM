@@ -51,6 +51,14 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                     templateUrl: "pages/anaerobic-marks/anaerobic-marks.state.html",
                     controller: "anaerobicMarksCtrl",
                     onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]
+                })
+
+
+                .state('analysis', {
+                    url: "/analysis",
+                    templateUrl: "pages/bodyAnalysis/bodyAnalysis.state.html",
+                    controller: "bodyAnalysisCtrl",
+                    onEnter: ['$state', 'authService', 'notificationService', checkIsNotLogged]
                 });
 
             $urlRouterProvider.otherwise('starter');
