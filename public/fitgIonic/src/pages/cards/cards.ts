@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, ToastController } from 'ionic-angular';
+
+import {AnaerobicExercise} from "../../models/AnaerobicExercise";
+import {AerobicExercise} from "../../models/AerobicExercise";
+import {Storage} from "@ionic/storage";
+
+import { UserService } from '../../providers/providers';
+import { ExercisesService } from '../../providers/providers';
+import {Observable} from "rxjs/Observable";
+import { FirstRunPage } from '../pages';
+
 
 @IonicPage()
 @Component({
@@ -7,29 +17,57 @@ import { IonicPage, NavController } from 'ionic-angular';
   templateUrl: 'cards.html'
 })
 export class CardsPage {
-  cardItems: any[];
+  storage: Storage = new Storage(null);
+  anaerobicExercises: AnaerobicExercise[] = [];
+  aerobicExercises: AerobicExercise[] = [];
+  loadingData: boolean = false;
 
-  constructor(public navCtrl: NavController) {
-    this.cardItems = [
-      {
-        user: {
-          avatar: 'assets/img/marty-avatar.png',
-          name: 'Marty McFly'
-        },
-        date: 'November 5, 1955',
-        image: 'assets/img/advance-card-bttf.png',
-        content: 'Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.',
-      },
-      {
-        user: {
-          avatar: 'assets/img/sarah-avatar.png.jpeg',
-          name: 'Sarah Connor'
-        },
-        date: 'May 12, 1984',
-        image: 'assets/img/advance-card-tmntr.jpg',
-        content: 'I face the unknown future, with a sense of hope. Because if a machine, a Terminator, can learn the value of human life, maybe we can too.'
+  constructor(
+    private navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
+    private exercisesService: ExercisesService,
+    private userService: UserService
+  ) {
+    this.loadingData = true;
+
+    this.exercisesService.getAerobicExercises().then(
+      (observable: Observable<any>) => {
+        observable.subscribe(
+          (resp) => {
+            this.loadingData = false;
+
+            this.aerobicExercises = resp.exercises as AerobicExercise[];
+
+          }, (err) => {
+            this.loadingData = false;
+
+            // Unable to sign up
+            let toast = this.toastCtrl.create({
+              message: err.error.message,
+              position: 'bottom',
+              duration: 4000,
+              cssClass: 'toast-error'
+            });
+            toast.present();
+
+            if (err.status === 401) {
+              this.tokenErrorHandler();
+            }
+
+          });
       }
-    ];
+    );
+  }
 
+  tokenErrorHandler(): void {
+    this.userService.logout().then(
+      () => {
+        this.navCtrl.setRoot(FirstRunPage, {}, {
+          animate: true,
+          direction: 'forward'
+        });
+      }
+    );
   }
 }

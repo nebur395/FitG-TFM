@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { Items } from '../mocks/providers/items';
 import { UserService } from '../providers/providers';
+import { ExercisesService } from '../providers/providers';
 import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
 
@@ -45,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
     Api,
     Items,
     UserService,
+    ExercisesService,
     SplashScreen,
     StatusBar,
     // Keep this to enable Ionic's runtime error handling during development

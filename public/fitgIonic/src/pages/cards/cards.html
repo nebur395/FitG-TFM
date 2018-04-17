@@ -15,39 +15,28 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col col-6 *ngFor="let exercise of cardItems">
+      <ion-col col-6 col-sm-4 *ngFor="let exercise of aerobicExercises">
 
         <ion-card>
 
           <ion-item>
-            <ion-avatar item-start>
-              <img [src]="exercise.user.avatar">
-            </ion-avatar>
-            <h2>{{exercise.user.name}}</h2>
-            <p>{{exercise.date}}</p>
+            <h2>{{exercise.name}}</h2>
           </ion-item>
 
           <ion-card-content>
-            <p>{{exercise.content}}</p>
+            <p>{{exercise.category}} - {{exercise.type}}</p>
           </ion-card-content>
 
-          <ion-row>
+          <ion-row *ngIf="exercise.custom">
             <ion-col>
               <button ion-button color="primary" clear small icon-start>
-                <ion-icon name='thumbs-up'></ion-icon>
-                12 Likes
+                Edit
               </button>
             </ion-col>
             <ion-col>
               <button ion-button color="primary" clear small icon-start>
-                <ion-icon name='text'></ion-icon>
-                4 Comments
+                Delete
               </button>
-            </ion-col>
-            <ion-col center text-center>
-              <ion-note>
-                11h ago
-              </ion-note>
             </ion-col>
           </ion-row>
         </ion-card>
