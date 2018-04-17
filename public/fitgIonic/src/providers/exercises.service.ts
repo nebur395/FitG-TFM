@@ -27,4 +27,16 @@ export class ExercisesService {
           });
       });
   }
+
+  getAnaerobicExercises(): any {
+    return this.storage.get('user')
+      .then((user: User) =>{
+        return this.storage.get('token')
+          .then(token => {
+            let seq = this.api.get('anaerobicExercises/', null, this.api.createReqOptsAuth(token)).share();
+            seq.subscribe( () => {}, () => {});
+            return seq;
+          });
+      });
+  }
 }

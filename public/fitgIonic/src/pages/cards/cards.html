@@ -5,7 +5,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title>{{ 'CARDS_TITLE' | translate }}</ion-title>
+    <ion-title>Exercises</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,35 +13,82 @@
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col col-6 col-sm-4 *ngFor="let exercise of aerobicExercises">
+  <div padding>
+    <ion-segment [(ngModel)]="exerciseType">
+      <ion-segment-button value="anaerobic">
+        Anaerobics
+      </ion-segment-button>
+      <ion-segment-button value="aerobic">
+        Aerobics
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-        <ion-card>
+  <div [ngSwitch]="exerciseType">
 
-          <ion-item>
-            <h2>{{exercise.name}}</h2>
-          </ion-item>
+    <ion-grid *ngSwitchCase="'anaerobic'">
+      <ion-row>
+        <ion-col col-6 col-sm-4 *ngFor="let exercise of anaerobicExercises">
+          <ion-card>
 
-          <ion-card-content>
-            <p>{{exercise.category}} - {{exercise.type}}</p>
-          </ion-card-content>
+            <ion-item>
+              <h2>{{exercise.name}}</h2>
+            </ion-item>
 
-          <ion-row *ngIf="exercise.custom">
-            <ion-col>
-              <button ion-button color="primary" clear small icon-start>
-                Edit
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button color="primary" clear small icon-start>
-                Delete
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
+            <ion-card-content>
+              <p>{{exercise.category}} - {{exercise.type}}</p>
+            </ion-card-content>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            <ion-row *ngIf="exercise.custom">
+              <ion-col>
+                <button ion-button color="primary" clear small icon-start>
+                  Edit
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button color="primary" clear small icon-start>
+                  Delete
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngSwitchCase="'aerobic'">
+      <ion-row>
+        <ion-col col-6 col-sm-4 *ngFor="let exercise of aerobicExercises">
+          <ion-card>
+
+            <ion-item>
+              <h2>{{exercise.name}}</h2>
+            </ion-item>
+
+            <ion-card-content>
+              <p>{{exercise.category}} - {{exercise.type}}</p>
+            </ion-card-content>
+
+            <ion-row *ngIf="exercise.custom">
+              <ion-col>
+                <button ion-button color="primary" clear small icon-start>
+                  Edit
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button color="primary" clear small icon-start>
+                  Delete
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+  </div>
 </ion-content>
