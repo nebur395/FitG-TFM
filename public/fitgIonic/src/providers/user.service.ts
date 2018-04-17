@@ -7,8 +7,6 @@ import { JwtHelper }    from 'angular2-jwt';
 import { Api } from './api';
 
 import { User } from '../models/User';
-import {HttpClient} from "@angular/common/http";
-
 
 @Injectable()
 export class UserService {
@@ -16,8 +14,7 @@ export class UserService {
   jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(
-    private api: Api,
-    private http: HttpClient
+    private api: Api
   ) { }
 
   /**
@@ -52,13 +49,7 @@ export class UserService {
       .then((user: User) =>{
         return this.storage.get('token')
           .then(token => {
-            let seq = this.http.put(
-              'http://192.168.1.137:8080/users/' + user.email, // End-point
-              accountInfo,  // Body
-              {headers: new Headers({   // Headers
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + token
-                })}).share();
+            let seq = this.api.put('users/' + user._id, accountInfo, this.api.createReqOptsAuth(token)).share();
             seq.subscribe( () => {
               user.username = accountInfo.username;
               user.email = accountInfo.email;

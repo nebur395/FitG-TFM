@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 /**
@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'http://192.168.1.137:8080';
+  url: string = 'http://192.168.1.136:8080';
 
   constructor(
     private http: HttpClient
@@ -45,5 +45,17 @@ export class Api {
 
   patch(endpoint: string, body: any, reqOpts?: any) {
     return this.http.patch(this.url + '/' + endpoint, body, reqOpts);
+  }
+
+  createReqOptsAuth(token): any {
+    let reqOpts = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }),
+      params: new HttpParams()
+    };
+    return reqOpts;
   }
 }
