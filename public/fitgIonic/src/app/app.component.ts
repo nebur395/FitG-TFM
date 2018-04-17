@@ -6,14 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { FirstRunPage, MainPage } from '../pages/pages';
+import { FirstRunPage, MainPage, SettingsPage } from '../pages/pages';
 import {UserService} from "../providers/providers";
 
 @Component({
   template: `<ion-menu [content]="nav">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Pages</ion-title>
+        <ion-title>FitG | Menu</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -37,8 +37,10 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' }
+    { title: 'Cards', component: MainPage },
+    { title: 'Settings', component: SettingsPage },
+    { title: 'Settings', component: SettingsPage },
+    { title: 'Settings', component: SettingsPage }
   ];
 
   constructor(

@@ -51,7 +51,10 @@ export class LoginPage {
   // Attempt to login in through our User service
   doLogin() {
     this.userService.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.setRoot(MainPage, {}, {
+        animate: true,
+        direction: 'forward'
+      });
     }, (err) => {
       // Unable to log in
       let toast = this.toastCtrl.create({

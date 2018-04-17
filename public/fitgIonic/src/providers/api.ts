@@ -48,7 +48,7 @@ export class Api {
   }
 
   createReqOptsAuth(token): any {
-    let reqOpts = {
+    return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -56,6 +56,5 @@ export class Api {
       }),
       params: new HttpParams()
     };
-    return reqOpts;
   }
 }
