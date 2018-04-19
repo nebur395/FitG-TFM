@@ -24,7 +24,9 @@ import {FirstRunPage} from '../pages';
 export class CardsPage {
   storage: Storage = new Storage(null);
   anaerobicExercises: AnaerobicExercise[] = [];
+  anaerobicExercisesFiltered: AnaerobicExercise[] = [];
   aerobicExercises: AerobicExercise[] = [];
+  aerobicExercisesFiltered: AerobicExercise[] = [];
   exerciseType: string = "anaerobic";
 
   constructor(
@@ -40,6 +42,7 @@ export class CardsPage {
         observable.subscribe((resp) => {
 
           this.aerobicExercises = resp.exercises as AerobicExercise[];
+          this.aerobicExercisesFiltered = this.aerobicExercises;
 
         }, (err) => {
           this.errorHandler(err.status, err.error.message)
@@ -51,6 +54,7 @@ export class CardsPage {
             observable.subscribe((resp) => {
 
               this.anaerobicExercises = resp.exercises as AnaerobicExercise[];
+              this.anaerobicExercisesFiltered = this.anaerobicExercises;
 
             }, (err) => {
               this.errorHandler(err.status, err.error.message)
@@ -59,6 +63,24 @@ export class CardsPage {
       );
   }
 
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.aerobicExercisesFiltered = this.aerobicExercises;
+    this.anaerobicExercisesFiltered = this.anaerobicExercises;
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.aerobicExercisesFiltered = this.aerobicExercisesFiltered.filter((exercise) => {
+        return (exercise.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+      this.anaerobicExercisesFiltered = this.anaerobicExercisesFiltered.filter((exercise) => {
+        return (exercise.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
 
   errorHandler(status: number, error: string): void {
     let toast = this.toastCtrl.create({
