@@ -72,8 +72,7 @@ export class CardsPage {
       if (exercise) {
             this.exercisesService.addAnaerobicExercise(exercise)
               .then((observable: Observable<any>) => {
-                observable.subscribe(
-                  (resp) => {
+                observable.subscribe((resp) => {
 
                     let newExercise = resp.exercise as AnaerobicExercise;
                     // User created
@@ -102,8 +101,7 @@ export class CardsPage {
       if (exercise) {
         this.exercisesService.addAerobicExercise(exercise)
           .then((observable: Observable<any>) => {
-            observable.subscribe(
-              (resp) => {
+            observable.subscribe((resp) => {
 
                 let newExercise = resp.exercise as AerobicExercise;
                 // User created
@@ -132,8 +130,7 @@ export class CardsPage {
       if (exercise) {
         this.exercisesService.modifyAnaerobicExercise(exercise)
           .then((observable: Observable<any>) => {
-              observable.subscribe(
-                (resp) => {
+              observable.subscribe((resp) => {
 
                   let index = this.anaerobicExercises.findIndex(index => index._id === exercise._id);
                   this.anaerobicExercises[index] = exercise;
@@ -163,8 +160,7 @@ export class CardsPage {
       if (exercise) {
         this.exercisesService.modifyAerobicExercise(exercise)
           .then((observable: Observable<any>) => {
-              observable.subscribe(
-                (resp) => {
+              observable.subscribe((resp) => {
 
                   let index = this.aerobicExercises.findIndex(index => index._id === exercise._id);
                   this.aerobicExercises[index] = exercise;
