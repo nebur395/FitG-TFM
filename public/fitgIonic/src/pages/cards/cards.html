@@ -48,12 +48,12 @@
 
             <ion-row *ngIf="exercise.custom">
               <ion-col col-6>
-                <button ion-button color="primary" clear small icon-start>
+                <button ion-button (click)="modifyAnaerobicExercise(exercise)" clear small icon-start>
                   Edit
                 </button>
               </ion-col>
               <ion-col col-6>
-                <button ion-button color="primary" clear small icon-start>
+                <button ion-button (click)="addAnaerobicExercise()" clear small icon-start>
                   Delete
                 </button>
               </ion-col>
@@ -84,7 +84,7 @@
 
             <ion-row *ngIf="exercise.custom">
               <ion-col col-6>
-                <button ion-button color="primary" clear small icon-start>
+                <button ion-button (click)="modifyAerobicExercise(exercise)" clear small icon-start>
                   Edit
                 </button>
               </ion-col>

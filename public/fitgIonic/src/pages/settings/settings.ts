@@ -6,7 +6,7 @@ import { Storage }                              from '@ionic/storage';
 import { UserService }     from '../../providers/providers';
 
 import { FirstRunPage } from '../pages';
-import { User } from '../../models/user';
+import { User } from '../../models/User';
 
 import { Observable } from "rxjs/Observable";
 

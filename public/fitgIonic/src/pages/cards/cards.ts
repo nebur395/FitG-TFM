@@ -126,6 +126,68 @@ export class CardsPage {
     addModal.present();
   }
 
+  modifyAnaerobicExercise(exercise): void {
+    let addModal = this.modalCtrl.create('AnaerobicExerciseCreatePage', {exercise: exercise});
+    addModal.onDidDismiss((exercise) => {
+      if (exercise) {
+        this.exercisesService.modifyAnaerobicExercise(exercise)
+          .then((observable: Observable<any>) => {
+              observable.subscribe(
+                (resp) => {
+
+                  let index = this.anaerobicExercises.findIndex(index => index._id === exercise._id);
+                  this.anaerobicExercises[index] = exercise;
+
+                  // User created
+                  let toast = this.toastCtrl.create({
+                    message: resp.message,
+                    position: 'bottom',
+                    duration: 3000,
+                    cssClass: 'toast-success'
+                  });
+                  toast.present();
+
+                }, (err) => {
+                  this.errorHandler(err.status, err.error.message)
+                });
+            }
+          );
+      }
+    });
+    addModal.present();
+  }
+
+  modifyAerobicExercise(exercise): void {
+    let addModal = this.modalCtrl.create('AerobicExerciseCreatePage', {exercise: exercise});
+    addModal.onDidDismiss((exercise) => {
+      if (exercise) {
+        this.exercisesService.modifyAerobicExercise(exercise)
+          .then((observable: Observable<any>) => {
+              observable.subscribe(
+                (resp) => {
+
+                  let index = this.aerobicExercises.findIndex(index => index._id === exercise._id);
+                  this.aerobicExercises[index] = exercise;
+
+                  // User created
+                  let toast = this.toastCtrl.create({
+                    message: resp.message,
+                    position: 'bottom',
+                    duration: 3000,
+                    cssClass: 'toast-success'
+                  });
+                  toast.present();
+
+                }, (err) => {
+                  this.errorHandler(err.status, err.error.message)
+                });
+            }
+          );
+      }
+    });
+    addModal.present();
+  }
+
   getItems(ev: any) {
     // Reset items back to all of the items
     this.aerobicExercisesFiltered = this.aerobicExercises;

@@ -34,7 +34,7 @@ export class AnaerobicExerciseCreatePage {
     if (this.nameParam.get('exercise')) {
       this.form.setValue({
         name: this.nameParam.get('exercise').name,
-        location: this.nameParam.get('exercise').category,
+        category: this.nameParam.get('exercise').category,
         type: this.nameParam.get('exercise').type,
         description: this.nameParam.get('exercise').description
       });
@@ -54,6 +54,11 @@ export class AnaerobicExerciseCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
+    let exercise = this.nameParam.get('exercise');
+    exercise.name = this.form.value.name;
+    exercise.category = this.form.value.category;
+    exercise.type = this.form.value.type;
+    exercise.description = this.form.value.description;
+    this.viewCtrl.dismiss(exercise);
   }
 }
