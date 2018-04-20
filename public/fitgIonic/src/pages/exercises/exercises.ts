@@ -19,9 +19,9 @@ import {FirstRunPage} from '../pages';
 @IonicPage()
 @Component({
   selector: 'page-cards',
-  templateUrl: 'cards.html'
+  templateUrl: 'exercises.html'
 })
-export class CardsPage {
+export class ExercisesPage {
   storage: Storage = new Storage(null);
   anaerobicExercises: AnaerobicExercise[] = [];
   anaerobicExercisesFiltered: AnaerobicExercise[] = [];

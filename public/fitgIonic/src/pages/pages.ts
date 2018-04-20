@@ -3,7 +3,7 @@ export const FirstRunPage = 'WelcomePage';
 
 // The main page the user will see as they use the app over a long period of time.
 // Change this if not using tabs
-export const MainPage = 'CardsPage';
+export const MainPage = 'ExercisesPage';
 
 // The initial root pages for our tabs (remove if not using tabs)
 export const SettingsPage = 'SettingsPage';
