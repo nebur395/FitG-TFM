@@ -184,6 +184,50 @@ export class CardsPage {
     addModal.present();
   }
 
+  deleteAnaerobicExercise(exercise): void {
+    this.exercisesService.deleteAnaerobicExercise(exercise)
+      .then((observable: Observable<any>) => {
+        observable.subscribe((resp) => {
+
+          let toast = this.toastCtrl.create({
+            message: resp.message,
+            position: 'bottom',
+            duration: 3000,
+            cssClass: 'toast-success'
+          });
+          toast.present();
+
+          let index = this.anaerobicExercises.findIndex(index => index._id === exercise._id);
+          this.anaerobicExercises.splice(index, 1);
+
+        }, (err) => {
+          this.errorHandler(err.status, err.error.message)
+        });
+      })
+  }
+
+  deleteAerobicExercise(exercise): void {
+    this.exercisesService.deleteAerobicExercise(exercise)
+      .then((observable: Observable<any>) => {
+        observable.subscribe((resp) => {
+
+          let toast = this.toastCtrl.create({
+            message: resp.message,
+            position: 'bottom',
+            duration: 3000,
+            cssClass: 'toast-success'
+          });
+          toast.present();
+
+          let index = this.aerobicExercises.findIndex(index => index._id === exercise._id);
+          this.aerobicExercises.splice(index, 1);
+
+        }, (err) => {
+          this.errorHandler(err.status, err.error.message)
+        });
+      })
+  }
+
   getItems(ev: any) {
     // Reset items back to all of the items
     this.aerobicExercisesFiltered = this.aerobicExercises;
