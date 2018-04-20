@@ -9,7 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { Items } from '../mocks/providers/items';
 import { UserService } from '../providers/providers';
 import { ExercisesService } from '../providers/providers';
 import { Api } from '../providers/providers';
@@ -44,7 +43,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     Api,
-    Items,
     UserService,
     ExercisesService,
     SplashScreen,

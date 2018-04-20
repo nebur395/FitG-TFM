@@ -36,7 +36,6 @@ export class CardsPage {
     private exercisesService: ExercisesService,
     private userService: UserService
   ) {
-
     this.exercisesService.getAerobicExercises()
       .then((observable: Observable<any>) => {
         observable.subscribe((resp) => {
@@ -61,6 +60,70 @@ export class CardsPage {
             });
           })
       );
+  }
+
+  /**
+   * Prompt the user to add a new mmber. This shows our MemberCreatePageComponent in a
+   * modal and then adds the new member to our data source if the user created one.
+   */
+  addAnaerobicExercise(): void {
+    let addModal = this.modalCtrl.create('AnaerobicExerciseCreatePage');
+    addModal.onDidDismiss((exercise) => {
+      if (exercise) {
+            this.exercisesService.addAnaerobicExercise(exercise)
+              .then((observable: Observable<any>) => {
+                observable.subscribe(
+                  (resp) => {
+
+                    let newExercise = resp.exercise as AnaerobicExercise;
+                    // User created
+                    let toast = this.toastCtrl.create({
+                      message: "Anaerobic exercise successfully created.",
+                      position: 'bottom',
+                      duration: 3000,
+                      cssClass: 'toast-success'
+                    });
+                    toast.present();
+                    this.anaerobicExercises.push(newExercise);
+
+                  }, (err) => {
+                    this.errorHandler(err.status, err.error.message)
+                  });
+              }
+            );
+      }
+    });
+    addModal.present();
+  }
+
+  addAerobicExercise(): void {
+    let addModal = this.modalCtrl.create('AerobicExerciseCreatePage');
+    addModal.onDidDismiss((exercise) => {
+      if (exercise) {
+        this.exercisesService.addAerobicExercise(exercise)
+          .then((observable: Observable<any>) => {
+            observable.subscribe(
+              (resp) => {
+
+                let newExercise = resp.exercise as AerobicExercise;
+                // User created
+                let toast = this.toastCtrl.create({
+                  message: "Aerobic exercise successfully created.",
+                  position: 'bottom',
+                  duration: 3000,
+                  cssClass: 'toast-success'
+                });
+                toast.present();
+                this.aerobicExercises.push(newExercise);
+
+              }, (err) => {
+                this.errorHandler(err.status, err.error.message)
+              });
+          }
+        );
+      }
+    });
+    addModal.present();
   }
 
   getItems(ev: any) {

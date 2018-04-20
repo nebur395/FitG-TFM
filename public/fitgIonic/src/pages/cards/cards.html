@@ -29,6 +29,11 @@
   <div [ngSwitch]="exerciseType">
 
     <ion-grid *ngSwitchCase="'anaerobic'">
+
+      <div padding>
+        <button ion-button (click)="addAnaerobicExercise()" block>Create new anaerobic exercise</button>
+      </div>
+
       <ion-row>
         <ion-col col-6 col-sm-4 *ngFor="let exercise of anaerobicExercisesFiltered">
           <ion-card>
@@ -42,12 +47,12 @@
             </ion-card-content>
 
             <ion-row *ngIf="exercise.custom">
-              <ion-col>
+              <ion-col col-6>
                 <button ion-button color="primary" clear small icon-start>
                   Edit
                 </button>
               </ion-col>
-              <ion-col>
+              <ion-col col-6>
                 <button ion-button color="primary" clear small icon-start>
                   Delete
                 </button>
@@ -60,6 +65,11 @@
     </ion-grid>
 
     <ion-grid *ngSwitchCase="'aerobic'">
+
+      <div padding>
+        <button ion-button (click)="addAerobicExercise()" block>Create new aerobic exercise</button>
+      </div>
+
       <ion-row>
         <ion-col col-6 col-sm-4 *ngFor="let exercise of aerobicExercisesFiltered">
           <ion-card>
@@ -73,12 +83,12 @@
             </ion-card-content>
 
             <ion-row *ngIf="exercise.custom">
-              <ion-col>
+              <ion-col col-6>
                 <button ion-button color="primary" clear small icon-start>
                   Edit
                 </button>
               </ion-col>
-              <ion-col>
+              <ion-col col-6>
                 <button ion-button color="primary" clear small icon-start>
                   Delete
                 </button>
