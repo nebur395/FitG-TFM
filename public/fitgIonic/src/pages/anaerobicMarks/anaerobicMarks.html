@@ -1,0 +1,106 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Exercises</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+  <div padding>
+    <ion-segment [(ngModel)]="exerciseType">
+      <ion-segment-button value="anaerobic">
+        Anaerobics
+      </ion-segment-button>
+      <ion-segment-button value="aerobic">
+        Aerobics
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="exerciseType">
+
+    <ion-grid *ngSwitchCase="'anaerobic'">
+
+      <div padding>
+        <button ion-button (click)="addAnaerobicExercise()" block>Create new anaerobic exercise</button>
+      </div>
+
+      <ion-row>
+        <ion-col col-6 col-sm-4 *ngFor="let exercise of anaerobicExercisesFiltered">
+          <ion-card (click)="openAnaerobicMark(exercise)">
+
+            <ion-item>
+              <h2>{{exercise.name}}</h2>
+            </ion-item>
+
+            <ion-card-content>
+              <p>{{exercise.category}} - {{exercise.type}}</p>
+            </ion-card-content>
+
+            <ion-row *ngIf="exercise.custom">
+              <ion-col col-6>
+                <button ion-button (click)="modifyAnaerobicExercise(exercise)" clear small icon-start>
+                  Edit
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <button ion-button (click)="deleteAnaerobicExercise(exercise)" clear small icon-start>
+                  Delete
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngSwitchCase="'aerobic'">
+
+      <div padding>
+        <button ion-button (click)="addAerobicExercise()" block>Create new aerobic exercise</button>
+      </div>
+
+      <ion-row>
+        <ion-col col-6 col-sm-4 *ngFor="let exercise of aerobicExercisesFiltered">
+          <ion-card>
+
+            <ion-item>
+              <h2>{{exercise.name}}</h2>
+            </ion-item>
+
+            <ion-card-content>
+              <p>{{exercise.category}} - {{exercise.type}}</p>
+            </ion-card-content>
+
+            <ion-row *ngIf="exercise.custom">
+              <ion-col col-6>
+                <button ion-button (click)="modifyAerobicExercise(exercise)" clear small icon-start>
+                  Edit
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <button ion-button (click)="deleteAerobicExercise(exercise)" clear small icon-start>
+                  Delete
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+  </div>
+</ion-content>

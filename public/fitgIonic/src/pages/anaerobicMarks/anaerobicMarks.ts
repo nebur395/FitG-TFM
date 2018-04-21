@@ -7,60 +7,44 @@ import {
 } from 'ionic-angular';
 
 import {AnaerobicExercise} from "../../models/AnaerobicExercise";
-import {AerobicExercise} from "../../models/AerobicExercise";
+import {AnaerobicMark} from "../../models/AnaerobicMark";
 import {Storage} from "@ionic/storage";
 
 import {UserService} from '../../providers/providers';
+import {MarksService} from '../../providers/providers';
 import {ExercisesService} from '../../providers/providers';
 import {Observable} from "rxjs/Observable";
 import {FirstRunPage} from '../pages';
-import {AnaerobicMarksPage} from "../anaerobicMarks/anaerobicMarks";
 
 
 @IonicPage()
 @Component({
-  selector: 'page-cards',
-  templateUrl: 'exercises.html'
+  selector: 'page-anaerobicMarks',
+  templateUrl: 'anaerobicMarks.html'
 })
-export class ExercisesPage {
+export class AnaerobicMarksPage {
   storage: Storage = new Storage(null);
-  anaerobicExercises: AnaerobicExercise[] = [];
-  anaerobicExercisesFiltered: AnaerobicExercise[] = [];
-  aerobicExercises: AerobicExercise[] = [];
-  aerobicExercisesFiltered: AerobicExercise[] = [];
-  exerciseType: string = "anaerobic";
+  anaerobicExercise: AnaerobicExercise;
+  marks: AnaerobicMark[] = [];
 
   constructor(
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
-    private exercisesService: ExercisesService,
+    private marksService: ExercisesService,
     private userService: UserService
   ) {
-    this.exercisesService.getAerobicExercises()
+    this.anaerobicExercise = this.navParams.get('exercise');
+    this.marksService.getAnaerobicMarks(this.anaerobicExercise._id)
       .then((observable: Observable<any>) => {
         observable.subscribe((resp) => {
 
-          this.aerobicExercises = resp.exercises as AerobicExercise[];
-          this.aerobicExercisesFiltered = this.aerobicExercises;
+          this.marks = resp.marks as AnaerobicMark[];
 
         }, (err) => {
           this.errorHandler(err.status, err.error.message)
         });
-      })
-      .then(
-        this.exercisesService.getAnaerobicExercises()
-          .then((observable: Observable<any>) => {
-            observable.subscribe((resp) => {
-
-              this.anaerobicExercises = resp.exercises as AnaerobicExercise[];
-              this.anaerobicExercisesFiltered = this.anaerobicExercises;
-
-            }, (err) => {
-              this.errorHandler(err.status, err.error.message)
-            });
-          })
-      );
+      });
   }
 
   /**
@@ -246,15 +230,6 @@ export class ExercisesPage {
         return (exercise.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
-  }
-
-  /**
-   * Navigate to the detail page for this depot.
-   */
-  openAnaerobicMark(exercise: AnaerobicExercise): void {
-    this.navCtrl.push(AnaerobicMarksPage, {
-      exercise: exercise
-    });
   }
 
   errorHandler(status: number, error: string): void {
