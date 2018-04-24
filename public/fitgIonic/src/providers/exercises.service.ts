@@ -5,7 +5,6 @@ import { Storage }      from '@ionic/storage';
 
 import { Api } from './api';
 
-import { User } from '../models/User';
 import { AerobicExercise } from '../models/AerobicExercise';
 import { AnaerobicExercise } from '../models/AnaerobicExercise';
 
