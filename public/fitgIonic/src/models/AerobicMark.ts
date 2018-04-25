@@ -5,7 +5,7 @@ export class AerobicMark {
   distance: number;
   time: number;
   intensity: number;
-  hearRate: number;
+  heartRate: number;
   creationDate: Date;
   comment: string;
 }
