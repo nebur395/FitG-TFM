@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title><span>{{aerobicExercise.name}}</span> marks</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+      <div padding>
+        <button ion-button (click)="addAerobicMark()" block>Create new aerobic mark</button>
+      </div>
+
+  <div padding>
+    <div class="accordionCard" *ngFor="let mark of marksList">
+      <button class="accordion" (click)="marksShowList.set(mark._id, !marksShowList.get(mark._id))"
+              [ngClass]="{'active': marksShowList.get(mark._id)}">
+        {{mark.creationDate.slice(0, 10)}} <span class="markDate" style="margin-right: 5%">(YYYY-MM-DD)</span>
+        {{mark.creationDate.slice(11, 16)}} <span class="markDate">(HH:MM)</span>
+      </button>
+
+      <div class="panel" [ngClass]="{'show': marksShowList.get(mark._id)}">
+        <p><strong>Distance: </strong>{{mark.distance}}</p>
+        <p><strong>Time: </strong>{{mark.time}}</p>
+        <p><strong>Intensity: </strong>{{mark.intensity}}</p>
+        <p><strong>Heart rate: </strong>{{mark.time}}</p>
+        <p><strong>Comment: </strong>{{mark.comment}}</p>
+
+        <ion-row>
+          <ion-col col-6 text-center>
+            <button ion-button (click)="modifyAerobicMark(mark)" clear small icon-start>
+              Edit
+            </button>
+          </ion-col>
+          <ion-col col-6 text-center>
+            <button ion-button (click)="deleteAerobicMark(mark)" clear small icon-start>
+              Delete
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </div>
+    </div>
+  </div>
+
+</ion-content>

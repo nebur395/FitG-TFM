@@ -72,7 +72,7 @@
 
       <ion-row>
         <ion-col col-6 col-sm-4 *ngFor="let exercise of aerobicExercisesFiltered">
-          <ion-card>
+          <ion-card (click)="openAerobicMark(exercise)">
 
             <ion-item>
               <h2>{{exercise.name}}</h2>

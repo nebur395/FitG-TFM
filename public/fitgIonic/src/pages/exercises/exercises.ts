@@ -257,6 +257,12 @@ export class ExercisesPage {
     });
   }
 
+  openAerobicMark(exercise: AerobicExercise): void {
+    this.navCtrl.push('AerobicMarksPage', {
+      exercise: exercise
+    });
+  }
+
   errorHandler(status: number, error: string): void {
     let toast = this.toastCtrl.create({
       message: error,
