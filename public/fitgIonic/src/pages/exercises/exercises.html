@@ -47,13 +47,13 @@
             </ion-card-content>
 
             <ion-row *ngIf="exercise.custom">
-              <ion-col col-6>
-                <button ion-button (click)="modifyAnaerobicExercise(exercise)" clear small icon-start>
+              <ion-col col-6 text-center>
+                <button ion-button (click)="modifyAnaerobicExercise(exercise); $event.stopPropagation()" clear small icon-start>
                   Edit
                 </button>
               </ion-col>
-              <ion-col col-6>
-                <button ion-button (click)="deleteAnaerobicExercise(exercise)" clear small icon-start>
+              <ion-col col-6 text-center>
+                <button ion-button (click)="deleteAnaerobicExercise(exercise); $event.stopPropagation()" clear small icon-start>
                   Delete
                 </button>
               </ion-col>
@@ -83,13 +83,13 @@
             </ion-card-content>
 
             <ion-row *ngIf="exercise.custom">
-              <ion-col col-6>
-                <button ion-button (click)="modifyAerobicExercise(exercise)" clear small icon-start>
+              <ion-col col-6 text-center>
+                <button ion-button (click)="modifyAerobicExercise(exercise); $event.stopPropagation()" clear small icon-start>
                   Edit
                 </button>
               </ion-col>
-              <ion-col col-6>
-                <button ion-button (click)="deleteAerobicExercise(exercise)" clear small icon-start>
+              <ion-col col-6 text-center>
+                <button ion-button (click)="deleteAerobicExercise(exercise); $event.stopPropagation()" clear small icon-start>
                   Delete
                 </button>
               </ion-col>

@@ -55,10 +55,19 @@ export class AerobicExerciseCreatePage {
   done() {
     if (!this.form.valid) { return; }
     let exercise = this.nameParam.get('exercise');
-    exercise.name = this.form.value.name;
-    exercise.category = this.form.value.category;
-    exercise.type = this.form.value.type;
-    exercise.description = this.form.value.description;
+    if (exercise) {
+      exercise.name = this.form.value.name;
+      exercise.category = this.form.value.category;
+      exercise.type = this.form.value.type;
+      exercise.description = this.form.value.description;
+    } else {
+      exercise = {
+        name: this.form.value.name,
+        category: this.form.value.category,
+        type: this.form.value.type,
+        description: this.form.value.description
+      }
+    }
     this.viewCtrl.dismiss(exercise);
   }
 }
