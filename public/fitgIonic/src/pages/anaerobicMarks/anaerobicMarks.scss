@@ -1,4 +1,8 @@
 page-anaerobicMarks {
+  ion-title span {
+    text-transform: capitalize;
+  }
+
   /* Style the buttons that are used to open and close the accordion panel */
   .accordionCard button.accordion {
     background-color: #d7d7d7;

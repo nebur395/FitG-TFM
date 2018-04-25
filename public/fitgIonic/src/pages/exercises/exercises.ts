@@ -19,7 +19,7 @@ import {AnaerobicMarksPage} from "../anaerobicMarks/anaerobicMarks";
 
 @IonicPage()
 @Component({
-  selector: 'page-cards',
+  selector: 'page-exercise',
   templateUrl: 'exercises.html'
 })
 export class ExercisesPage {

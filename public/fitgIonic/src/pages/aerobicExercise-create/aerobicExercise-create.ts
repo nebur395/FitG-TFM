@@ -4,7 +4,7 @@ import {IonicPage, NavParams, ViewController} from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'anaerobicExercise-create',
+  selector: 'aerobicExercise-create',
   templateUrl: 'aerobicExercise-create.html'
 })
 export class AerobicExerciseCreatePage {

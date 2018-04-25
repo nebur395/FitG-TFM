@@ -1,15 +1,14 @@
-page-cards {
-  ion-card {
-    min-height: 150px;
-  }
-
-  h2 {
+anaerobicExercise-create {
+  ion-avatar {
     text-align: center;
-    text-transform: capitalize;
-  }
+    margin: 20px 0;
 
-  p {
-    text-align: center;
-    text-transform: capitalize;
+    img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+
+      display: inline-block;
+    }
   }
 }
