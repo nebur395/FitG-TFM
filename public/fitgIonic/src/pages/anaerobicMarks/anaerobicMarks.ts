@@ -3,7 +3,7 @@ import {
   IonicPage,
   NavController,
   ModalController,
-  ToastController
+  ToastController, NavParams
 } from 'ionic-angular';
 
 import {AnaerobicExercise} from "../../models/AnaerobicExercise";
@@ -12,7 +12,6 @@ import {Storage} from "@ionic/storage";
 
 import {UserService} from '../../providers/providers';
 import {MarksService} from '../../providers/providers';
-import {ExercisesService} from '../../providers/providers';
 import {Observable} from "rxjs/Observable";
 import {FirstRunPage} from '../pages';
 
@@ -25,13 +24,15 @@ import {FirstRunPage} from '../pages';
 export class AnaerobicMarksPage {
   storage: Storage = new Storage(null);
   anaerobicExercise: AnaerobicExercise;
-  marks: AnaerobicMark[] = [];
+  marksList: AnaerobicMark[] = [];
+  marksShowList: Map<string, boolean> = new Map<string,boolean>();
 
   constructor(
     private navCtrl: NavController,
+    private navParams: NavParams,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
-    private marksService: ExercisesService,
+    private marksService: MarksService,
     private userService: UserService
   ) {
     this.anaerobicExercise = this.navParams.get('exercise');
@@ -39,8 +40,10 @@ export class AnaerobicMarksPage {
       .then((observable: Observable<any>) => {
         observable.subscribe((resp) => {
 
-          this.marks = resp.marks as AnaerobicMark[];
-
+          this.marksList = resp.marks as AnaerobicMark[];
+          for (let i = 0; i < this.marksList.length; i++) {
+            this.marksShowList.set(this.marksList[i]._id, false);
+          }
         }, (err) => {
           this.errorHandler(err.status, err.error.message)
         });
@@ -51,24 +54,25 @@ export class AnaerobicMarksPage {
    * Prompt the user to add a new mmber. This shows our MemberCreatePageComponent in a
    * modal and then adds the new member to our data source if the user created one.
    */
-  addAnaerobicExercise(): void {
-    let addModal = this.modalCtrl.create('AnaerobicExerciseCreatePage');
-    addModal.onDidDismiss((exercise) => {
-      if (exercise) {
-            this.exercisesService.addAnaerobicExercise(exercise)
+  addAnaerobicMark(): void {
+    let addModal = this.modalCtrl.create('AnaerobicMarkCreatePage');
+    addModal.onDidDismiss((mark) => {
+      if (mark) {
+            this.marksService.addAnaerobicMark(this.anaerobicExercise._id, mark)
               .then((observable: Observable<any>) => {
                 observable.subscribe((resp) => {
 
-                    let newExercise = resp.exercise as AnaerobicExercise;
+                    let newMark = resp.exercise as AnaerobicMark;
                     // User created
                     let toast = this.toastCtrl.create({
-                      message: "Anaerobic exercise successfully created.",
+                      message: "Anaerobic mark successfully created.",
                       position: 'bottom',
                       duration: 3000,
                       cssClass: 'toast-success'
                     });
                     toast.present();
-                    this.anaerobicExercises.push(newExercise);
+                    this.marksList.unshift(newMark);
+                    this.marksShowList.set(newMark._id, false);
 
                   }, (err) => {
                     this.errorHandler(err.status, err.error.message)
@@ -80,45 +84,16 @@ export class AnaerobicMarksPage {
     addModal.present();
   }
 
-  addAerobicExercise(): void {
-    let addModal = this.modalCtrl.create('AerobicExerciseCreatePage');
-    addModal.onDidDismiss((exercise) => {
-      if (exercise) {
-        this.exercisesService.addAerobicExercise(exercise)
-          .then((observable: Observable<any>) => {
-            observable.subscribe((resp) => {
-
-                let newExercise = resp.exercise as AerobicExercise;
-                // User created
-                let toast = this.toastCtrl.create({
-                  message: "Aerobic exercise successfully created.",
-                  position: 'bottom',
-                  duration: 3000,
-                  cssClass: 'toast-success'
-                });
-                toast.present();
-                this.aerobicExercises.push(newExercise);
-
-              }, (err) => {
-                this.errorHandler(err.status, err.error.message)
-              });
-          }
-        );
-      }
-    });
-    addModal.present();
-  }
-
-  modifyAnaerobicExercise(exercise): void {
-    let addModal = this.modalCtrl.create('AnaerobicExerciseCreatePage', {exercise: exercise});
-    addModal.onDidDismiss((exercise) => {
-      if (exercise) {
-        this.exercisesService.modifyAnaerobicExercise(exercise)
+  modifyAnaerobicMark(mark): void {
+    let addModal = this.modalCtrl.create('AnaerobicMarkCreatePage', {mark: mark});
+    addModal.onDidDismiss((mark) => {
+      if (mark) {
+        this.marksService.modifyAnaerobicMark(this.anaerobicExercise._id, mark)
           .then((observable: Observable<any>) => {
               observable.subscribe((resp) => {
 
-                  let index = this.anaerobicExercises.findIndex(index => index._id === exercise._id);
-                  this.anaerobicExercises[index] = exercise;
+                  let index = this.marksList.findIndex(index => index._id === mark._id);
+                  this.marksList[index] = mark;
 
                   // User created
                   let toast = this.toastCtrl.create({
@@ -139,38 +114,8 @@ export class AnaerobicMarksPage {
     addModal.present();
   }
 
-  modifyAerobicExercise(exercise): void {
-    let addModal = this.modalCtrl.create('AerobicExerciseCreatePage', {exercise: exercise});
-    addModal.onDidDismiss((exercise) => {
-      if (exercise) {
-        this.exercisesService.modifyAerobicExercise(exercise)
-          .then((observable: Observable<any>) => {
-              observable.subscribe((resp) => {
-
-                  let index = this.aerobicExercises.findIndex(index => index._id === exercise._id);
-                  this.aerobicExercises[index] = exercise;
-
-                  // User created
-                  let toast = this.toastCtrl.create({
-                    message: resp.message,
-                    position: 'bottom',
-                    duration: 3000,
-                    cssClass: 'toast-success'
-                  });
-                  toast.present();
-
-                }, (err) => {
-                  this.errorHandler(err.status, err.error.message)
-                });
-            }
-          );
-      }
-    });
-    addModal.present();
-  }
-
-  deleteAnaerobicExercise(exercise): void {
-    this.exercisesService.deleteAnaerobicExercise(exercise)
+  deleteAnaerobicMark(mark): void {
+    this.marksService.deleteAnaerobicMark(this.anaerobicExercise._id, mark)
       .then((observable: Observable<any>) => {
         observable.subscribe((resp) => {
 
@@ -182,8 +127,9 @@ export class AnaerobicMarksPage {
           });
           toast.present();
 
-          let index = this.anaerobicExercises.findIndex(index => index._id === exercise._id);
-          this.anaerobicExercises.splice(index, 1);
+          let index = this.marksList.findIndex(index => index._id === mark._id);
+          this.marksList.splice(index, 1);
+          this.marksShowList.delete(mark._id);
 
         }, (err) => {
           this.errorHandler(err.status, err.error.message)
@@ -191,45 +137,10 @@ export class AnaerobicMarksPage {
       })
   }
 
-  deleteAerobicExercise(exercise): void {
-    this.exercisesService.deleteAerobicExercise(exercise)
-      .then((observable: Observable<any>) => {
-        observable.subscribe((resp) => {
-
-          let toast = this.toastCtrl.create({
-            message: resp.message,
-            position: 'bottom',
-            duration: 3000,
-            cssClass: 'toast-success'
-          });
-          toast.present();
-
-          let index = this.aerobicExercises.findIndex(index => index._id === exercise._id);
-          this.aerobicExercises.splice(index, 1);
-
-        }, (err) => {
-          this.errorHandler(err.status, err.error.message)
-        });
-      })
-  }
-
-  getItems(ev: any) {
-    // Reset items back to all of the items
-    this.aerobicExercisesFiltered = this.aerobicExercises;
-    this.anaerobicExercisesFiltered = this.anaerobicExercises;
-
-    // set val to the value of the searchbar
-    let val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.aerobicExercisesFiltered = this.aerobicExercisesFiltered.filter((exercise) => {
-        return (exercise.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-      this.anaerobicExercisesFiltered = this.anaerobicExercisesFiltered.filter((exercise) => {
-        return (exercise.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
+  showMark(id: string):void {
+    console.log(this.marksShowList);
+    this.marksShowList.set(id, !this.marksShowList.get(id));
+    console.log(this.marksShowList);
   }
 
   errorHandler(status: number, error: string): void {

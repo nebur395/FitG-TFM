@@ -252,7 +252,7 @@ export class ExercisesPage {
    * Navigate to the detail page for this depot.
    */
   openAnaerobicMark(exercise: AnaerobicExercise): void {
-    this.navCtrl.push(AnaerobicMarksPage, {
+    this.navCtrl.push('AnaerobicMarksPage', {
       exercise: exercise
     });
   }
