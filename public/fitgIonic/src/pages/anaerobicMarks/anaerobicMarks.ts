@@ -44,6 +44,7 @@ export class AnaerobicMarksPage {
           for (let i = 0; i < this.marksList.length; i++) {
             this.marksShowList.set(this.marksList[i]._id, false);
           }
+          this.marksList.reverse();
         }, (err) => {
           this.errorHandler(err.status, err.error.message)
         });
@@ -62,7 +63,7 @@ export class AnaerobicMarksPage {
               .then((observable: Observable<any>) => {
                 observable.subscribe((resp) => {
 
-                    let newMark = resp.exercise as AnaerobicMark;
+                    let newMark = resp.mark as AnaerobicMark;
                     // User created
                     let toast = this.toastCtrl.create({
                       message: "Anaerobic mark successfully created.",
