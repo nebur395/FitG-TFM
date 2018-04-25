@@ -31,6 +31,20 @@
         <p><strong>Weight: </strong>{{mark.weight[0]}}</p>
         <p><strong>Time: </strong>{{mark.time[0]}}</p>
         <p><strong>Comment: </strong>{{mark.comment}}</p>
+
+        <ion-row>
+          <ion-col col-6 text-center>
+            <button ion-button (click)="modifyAnaerobicMark(mark)" clear small icon-start>
+              Edit
+            </button>
+          </ion-col>
+          <ion-col col-6 text-center>
+            <button ion-button (click)="deleteAnaerobicMark(mark)" clear small icon-start>
+              Delete
+            </button>
+          </ion-col>
+        </ion-row>
+
       </div>
     </div>
   </div>

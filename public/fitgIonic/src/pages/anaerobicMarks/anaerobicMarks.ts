@@ -138,12 +138,6 @@ export class AnaerobicMarksPage {
       })
   }
 
-  showMark(id: string):void {
-    console.log(this.marksShowList);
-    this.marksShowList.set(id, !this.marksShowList.get(id));
-    console.log(this.marksShowList);
-  }
-
   errorHandler(status: number, error: string): void {
     let toast = this.toastCtrl.create({
       message: error,
