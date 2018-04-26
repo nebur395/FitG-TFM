@@ -1,0 +1,77 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>New body analysis</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">
+        <span showWhen="ios">
+          Cancel
+        </span>
+        <ion-icon name="md-close" showWhen="core,android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+        <span showWhen="ios">
+          Create
+        </span>
+        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="done()">
+
+    <ion-avatar>
+      <img src="assets/imgs/logo.png" alt="FitG image"/>
+    </ion-avatar>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Weight" formControlName="weight"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="B.M.I." formControlName="bmi"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Metabolic Age" formControlName="metabolicAge"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Basal Metabolism" formControlName="basalMetabolism"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Body Fat" formControlName="bodyFat"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Muscle Mass" formControlName="muscleMass"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Bone Mass" formControlName="boneMass"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Body Fluids" formControlName="bodyFluids"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Visceral Adiposity" formControlName="visceralAdiposity"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Daily Caloric Intake" formControlName="dailyCaloricIntake"></ion-input>
+      </ion-item>
+
+    </ion-list>
+  </form>
+</ion-content>
