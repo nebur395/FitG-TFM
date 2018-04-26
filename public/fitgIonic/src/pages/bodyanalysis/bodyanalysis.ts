@@ -6,45 +6,42 @@ import {
   ToastController, NavParams
 } from 'ionic-angular';
 
-import {AnaerobicExercise} from "../../models/AnaerobicExercise";
-import {AnaerobicMark} from "../../models/AnaerobicMark";
+import {BodyAnalysis} from "../../models/BodyAnalysis";
 import {Storage} from "@ionic/storage";
 
 import {UserService} from '../../providers/providers';
-import {MarksService} from '../../providers/providers';
+import {AnalysisService} from "../../providers/analysis.service";
 import {Observable} from "rxjs/Observable";
 import {FirstRunPage} from '../pages';
 
 
 @IonicPage()
 @Component({
-  selector: 'page-anaerobicMarks',
-  templateUrl: 'anaerobicMarks.html'
+  selector: 'page-bodyAnalysis',
+  templateUrl: 'bodyanalysis.html'
 })
-export class AnaerobicMarksPage {
+export class BodyAnalysisPage {
   storage: Storage = new Storage(null);
-  anaerobicExercise: AnaerobicExercise;
-  marksList: AnaerobicMark[] = [];
-  marksShowList: Map<string, boolean> = new Map<string,boolean>();
+  analysisList: BodyAnalysis[] = [];
+  analysisShowList: Map<string, boolean> = new Map<string,boolean>();
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
-    private marksService: MarksService,
+    private analysisService: AnalysisService,
     private userService: UserService
   ) {
-    this.anaerobicExercise = this.navParams.get('exercise');
-    this.marksService.getAnaerobicMarks(this.anaerobicExercise._id)
+    this.analysisService.getBodyAnalysis()
       .then((observable: Observable<any>) => {
         observable.subscribe((resp) => {
 
-          this.marksList = resp.marks as AnaerobicMark[];
-          for (let i = 0; i < this.marksList.length; i++) {
-            this.marksShowList.set(this.marksList[i]._id, false);
+          this.analysisList = resp.analysis as BodyAnalysis[];
+          for (let i = 0; i < this.analysisList.length; i++) {
+            this.analysisShowList.set(this.analysisList[i]._id, false);
           }
-          this.marksList.reverse();
+          this.analysisList.reverse();
         }, (err) => {
           this.errorHandler(err.status, err.error.message)
         });
@@ -56,24 +53,24 @@ export class AnaerobicMarksPage {
    * modal and then adds the new member to our data source if the user created one.
    */
   addAnaerobicMark(): void {
-    let addModal = this.modalCtrl.create('AnaerobicMarkCreatePage');
-    addModal.onDidDismiss((mark) => {
-      if (mark) {
-            this.marksService.addAnaerobicMark(this.anaerobicExercise._id, mark)
+    let addModal = this.modalCtrl.create('BodyAnalysisCreatePage');
+    addModal.onDidDismiss((analysis) => {
+      if (analysis) {
+            this.analysisService.addBodyAnalysis(analysis)
               .then((observable: Observable<any>) => {
                 observable.subscribe((resp) => {
 
-                    let newMark = resp.mark as AnaerobicMark;
+                    let newAnalysis = resp.analysis as BodyAnalysis;
                     // User created
                     let toast = this.toastCtrl.create({
-                      message: "Anaerobic mark successfully created.",
+                      message: "Body analysis successfully created.",
                       position: 'bottom',
                       duration: 3000,
                       cssClass: 'toast-success'
                     });
                     toast.present();
-                    this.marksList.unshift(newMark);
-                    this.marksShowList.set(newMark._id, false);
+                    this.analysisList.unshift(newAnalysis);
+                    this.analysisShowList.set(newAnalysis._id, false);
 
                   }, (err) => {
                     this.errorHandler(err.status, err.error.message)
@@ -85,16 +82,16 @@ export class AnaerobicMarksPage {
     addModal.present();
   }
 
-  modifyAnaerobicMark(mark): void {
-    let addModal = this.modalCtrl.create('AnaerobicMarkCreatePage', {mark: mark});
-    addModal.onDidDismiss((mark) => {
-      if (mark) {
-        this.marksService.modifyAnaerobicMark(this.anaerobicExercise._id, mark)
+  modifyAnaerobicMark(analysis): void {
+    let addModal = this.modalCtrl.create('BodyAnalysisCreatePage', {analysis: analysis});
+    addModal.onDidDismiss((analysis) => {
+      if (analysis) {
+        this.analysisService.modifyBodyAnalysis(analysis)
           .then((observable: Observable<any>) => {
               observable.subscribe((resp) => {
 
-                  let index = this.marksList.findIndex(index => index._id === mark._id);
-                  this.marksList[index] = mark;
+                  let index = this.analysisList.findIndex(index => index._id === analysis._id);
+                  this.analysisList[index] = analysis;
 
                   // User created
                   let toast = this.toastCtrl.create({
@@ -115,8 +112,8 @@ export class AnaerobicMarksPage {
     addModal.present();
   }
 
-  deleteAnaerobicMark(mark): void {
-    this.marksService.deleteAnaerobicMark(this.anaerobicExercise._id, mark)
+  deleteAnaerobicMark(analysis): void {
+    this.analysisService.deleteBodyAnalysis(analysis)
       .then((observable: Observable<any>) => {
         observable.subscribe((resp) => {
 
@@ -128,9 +125,9 @@ export class AnaerobicMarksPage {
           });
           toast.present();
 
-          let index = this.marksList.findIndex(index => index._id === mark._id);
-          this.marksList.splice(index, 1);
-          this.marksShowList.delete(mark._id);
+          let index = this.analysisList.findIndex(index => index._id === analysis._id);
+          this.analysisList.splice(index, 1);
+          this.analysisShowList.delete(analysis._id);
 
         }, (err) => {
           this.errorHandler(err.status, err.error.message)

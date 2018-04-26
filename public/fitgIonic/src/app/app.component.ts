@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { FirstRunPage, MainPage, SettingsPage } from '../pages/pages';
+import { FirstRunPage, MainPage, SettingsPage, BodyAnalysisPage } from '../pages/pages';
 import {UserService} from "../providers/providers";
 
 @Component({
@@ -37,9 +37,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Cards', component: MainPage },
-    { title: 'Settings', component: SettingsPage },
-    { title: 'Settings', component: SettingsPage },
+    { title: 'Exercises', component: MainPage },
+    { title: 'Body Analysis', component: BodyAnalysisPage },
     { title: 'Settings', component: SettingsPage }
   ];
 

@@ -5,7 +5,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title><span>{{anaerobicExercise.name}}</span> marks</ion-title>
+    <ion-title>Body Analysis</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,31 +15,37 @@
 
 
       <div padding>
-        <button ion-button (click)="addAnaerobicMark()" block>Create new anaerobic mark</button>
+        <button ion-button (click)="addAnaerobicMark()" block>Create new body analysis</button>
       </div>
 
   <div padding>
-    <div class="accordionCard" *ngFor="let mark of marksList">
-      <button class="accordion" (click)="marksShowList.set(mark._id, !marksShowList.get(mark._id))"
-              [ngClass]="{'active': marksShowList.get(mark._id)}">
-        {{mark.creationDate.slice(0, 10)}} <span class="markDate" style="margin-right: 5%">(YYYY-MM-DD)</span>
-        {{mark.creationDate.slice(11, 16)}} <span class="markDate">(HH:MM)</span>
+    <div class="accordionCard" *ngFor="let analysis of analysisList">
+      <button class="accordion" (click)="analysisShowList.set(analysis._id, !analysisShowList.get(analysis._id))"
+              [ngClass]="{'active': analysisShowList.get(analysis._id)}">
+        {{analysis.creationDate.slice(0, 10)}} <span class="analysisDate" style="margin-right: 5%">(YYYY-MM-DD)</span>
+        {{analysis.creationDate.slice(11, 16)}} <span class="analysisDate">(HH:MM)</span>
       </button>
 
-      <div class="panel" [ngClass]="{'show': marksShowList.get(mark._id)}">
-        <p><strong>Repetitions: </strong>{{mark.repetitions[0]}}</p>
-        <p><strong>Weight: </strong>{{mark.weight[0]}}</p>
-        <p><strong>Time: </strong>{{mark.time[0]}}</p>
-        <p><strong>Comment: </strong>{{mark.comment}}</p>
+      <div class="panel" [ngClass]="{'show': analysisShowList.get(analysis._id)}">
+        <p><strong>Weight: </strong>{{analysis.weight}}</p>
+        <p><strong>B.M.I.: </strong>{{analysis.bmi}}</p>
+        <p><strong>Metabolic Age: </strong>{{analysis.metabolicAge}}</p>
+        <p><strong>Basal Metabolism: </strong>{{analysis.basalMetabolism}}</p>
+        <p><strong>Body Fat: </strong>{{analysis.bodyFat}}</p>
+        <p><strong>Muscle Mass: </strong>{{analysis.muscleMass}}</p>
+        <p><strong>Bone Mass: </strong>{{analysis.boneMass}}</p>
+        <p><strong>Body Fluids: </strong>{{analysis.bodyFluids}}</p>
+        <p><strong>Visceral Adiposity: </strong>{{analysis.visceralAdiposity}}</p>
+        <p><strong>Daily Caloric Intake: </strong>{{analysis.dailyCaloricIntake}}</p>
 
         <ion-row>
           <ion-col col-6 text-center>
-            <button ion-button (click)="modifyAnaerobicMark(mark)" clear small icon-start>
+            <button ion-button (click)="modifyAnaerobicMark(analysis)" clear small icon-start>
               Edit
             </button>
           </ion-col>
           <ion-col col-6 text-center>
-            <button ion-button (click)="deleteAnaerobicMark(mark)" clear small icon-start>
+            <button ion-button (click)="deleteAnaerobicMark(analysis)" clear small icon-start>
               Delete
             </button>
           </ion-col>

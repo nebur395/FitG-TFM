@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { AnaerobicMarksPage } from './anaerobicMarks';
+import { BodyAnalysisPage } from './bodyanalysis';
 
 @NgModule({
   declarations: [
-    AnaerobicMarksPage,
+    BodyAnalysisPage,
   ],
   imports: [
-    IonicPageModule.forChild(AnaerobicMarksPage),
+    IonicPageModule.forChild(BodyAnalysisPage),
     TranslateModule.forChild()
   ],
   exports: [
-    AnaerobicMarksPage
+    BodyAnalysisPage
   ]
 })
-export class AnaerobicMarksPageModule { }
+export class BodyAnalysisPageModule { }
