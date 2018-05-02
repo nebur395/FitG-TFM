@@ -17,32 +17,32 @@
     <ion-list>
 
       <ion-item>
-        <ion-label>Nombre</ion-label>
-        <ion-input type="text" placeholder="Nombre de la cuenta"
+        <ion-label>Username</ion-label>
+        <ion-input type="text" placeholder="Username"
                    formControlName="username"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Correo</ion-label>
-        <ion-input type="email" placeholder="Nombre de la cuenta"
+        <ion-label>Email</ion-label>
+        <ion-input type="email" placeholder="Email"
                    formControlName="email"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Contraseña actual</ion-label>
-        <ion-input type="password" placeholder="Contraseña actual"
+        <ion-label>Current password</ion-label>
+        <ion-input type="password" placeholder="Current password"
                    formControlName="oldPassword"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Contraseña nueva</ion-label>
-        <ion-input type="password" placeholder="Contraseña nueva"
+        <ion-label>New password</ion-label>
+        <ion-input type="password" placeholder="New password"
                    formControlName="password"></ion-input>
       </ion-item>
 
       <div padding>
         <button ion-button type="submit" color="secondary"
-                [disabled]="!isReadyToSave" block>Guardar cambios</button>
+                [disabled]="!isReadyToSave" block>Save changes</button>
       </div>
 
     </ion-list>

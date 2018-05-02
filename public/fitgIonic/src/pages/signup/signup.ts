@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, ToastController, MenuController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, ToastController, MenuController} from 'ionic-angular';
 
-import { UserService } from '../../providers/providers';
+import {UserService} from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -25,18 +24,12 @@ export class SignupPage {
     rePassword: ''
   };
 
-  // Our translated text strings
-  private signupErrorString: string;
 
   constructor(
     private menu: MenuController,
     private user: UserService,
-    private toastCtrl: ToastController,
-    private translateService: TranslateService) {
-
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
+    private toastCtrl: ToastController
+  ) {
   }
 
   ionViewDidEnter(): void {
