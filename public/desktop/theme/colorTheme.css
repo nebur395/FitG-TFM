@@ -1,10 +1,5 @@
-.primary-color {color: #ffffff !important; background-color: #3f51b5 !important}
-.primary-light-color {color: #000000 !important; background-color: #757de8 !important}
-.primary-dark-color {color: #ffffff !important; background-color: #002984 !important}
+.primary-color {color: #000000 !important; background-color: #ffab40 !important}
+.primary-light-color {color: #000000 !important; background-color: #ffdd71 !important}
+.primary-dark-color {color: #000000 !important; background-color: #c77c02 !important}
 
-.secondary-color {color: #000000 !important; background-color: #ffab40 !important}
-.secondary-light-color {color: #000000 !important; background-color: #ffdd71 !important}
-.secondary-dark-color {color: #000000 !important; background-color: #c77c02 !important}
-
-.primary-text-color {color: #3f51b5 !important;}
-.secondary-text-color {color: #ffab40 !important;}
+.primary-text-color {color: #ffab40 !important;}

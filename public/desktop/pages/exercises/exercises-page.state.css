@@ -32,7 +32,7 @@
 }
 
 .exerciseCard:hover .exerciseCard-title {
-  color: #1976d2;
+  color: #1976d2 !important;
 }
 
 .exerciseCard-desc {
@@ -43,6 +43,7 @@
 }
 
 .exerciseCard-clasification {
+  background-color: #ffdd71;
   text-transform: capitalize;
   line-height: 32px;
   padding: 8px 16px;
@@ -58,6 +59,6 @@
 }
 
 .exerciseCard:hover .exerciseCard-clasification {
-  background-color: rgba(25,118,210,.1);
-  color: #1976d2;
+  background-color: rgba(25,118,210,.1) !important;
+  color: #1976d2 !important;
 }
