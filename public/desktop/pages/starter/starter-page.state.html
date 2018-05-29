@@ -1,9 +1,17 @@
 <div id="starterStyle">
+
+  <div id="diagonalShadow">
+    <div id="diagonalDiv">
+      <div id="headerImg"></div>
+    </div>
+  </div>
+
+
   <div class="container">
 
     <!-- used for right align the form -->
     <div class="col-xs-8 col-xs-offset-2">
-      <h1>Welcome to FitG!</h1>
+      <h1>Welcome to <span class="secondary-text-color">FitG!</span></h1>
       <h2>A way to visualize your fitness goals</h2>
 
       <form role="form" ng-submit="login()">
@@ -31,3 +39,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Random bg, Math.random controls bg range [0..5]
+  document.getElementById("headerImg").style.backgroundImage =
+    'url(assets/images/sports-' + (Math.floor(Math.random() * 5)) + '.png';
+  setInterval(changeBgImg, 30000);
+  function changeBgImg() {
+    // Random bg, Math.random controls bg range [0..5]
+    document.getElementById("headerImg").style.backgroundImage =
+      'url(assets/images/sports-' + (Math.floor(Math.random() * 5)) + '.png';
+  }
+</script>
