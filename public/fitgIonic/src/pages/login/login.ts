@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { MenuController, IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { UserService } from '../../providers/providers';
@@ -22,19 +21,12 @@ export class LoginPage {
     password: ''
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
-
   constructor(
     private navCtrl: NavController,
     private userService: UserService,
     private menu: MenuController,
-    private toastCtrl: ToastController,
-    private translateService: TranslateService
+    private toastCtrl: ToastController
   ) {
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
   }
 
   ionViewDidEnter(): void {

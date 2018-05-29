@@ -23,7 +23,7 @@ import {UserService} from "../providers/providers";
           {{p.title}}
         </button>
         <button menuClose ion-item (click)="logout()">
-          Cerrar sesión
+          Log out
         </button>
       </ion-list>
     </ion-content>
@@ -73,7 +73,8 @@ export class MyApp {
     const browserLang = this.translate.getBrowserLang();
 
     if (browserLang === 'es') {
-      this.translate.use(this.translate.getBrowserLang());
+      //this.translate.use(this.translate.getBrowserLang());
+      this.translate.use('en'); // Set your language here
     } else {
       this.translate.use('en'); // Set your language here
     }

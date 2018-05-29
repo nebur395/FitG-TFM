@@ -3,7 +3,7 @@ import {
   IonicPage,
   NavController,
   ModalController,
-  ToastController, NavParams
+  ToastController
 } from 'ionic-angular';
 
 import {BodyAnalysis} from "../../models/BodyAnalysis";
@@ -27,7 +27,6 @@ export class BodyAnalysisPage {
 
   constructor(
     private navCtrl: NavController,
-    private navParams: NavParams,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private analysisService: AnalysisService,

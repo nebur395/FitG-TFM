@@ -14,7 +14,6 @@ import {UserService} from '../../providers/providers';
 import {ExercisesService} from '../../providers/providers';
 import {Observable} from "rxjs/Observable";
 import {FirstRunPage} from '../pages';
-import {AnaerobicMarksPage} from "../anaerobicMarks/anaerobicMarks";
 
 
 @IonicPage()
