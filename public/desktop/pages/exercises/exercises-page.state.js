@@ -16,6 +16,7 @@ angular.module('fitGApp')
                 exerciseService.getAerobics()
                     .then(exercises => {
                         $scope.aerobicExerciseList = exercises;
+                        $scope.sortExercises($scope.aerobicExerciseList);
                     })
                     .catch(error => {
                         notificationService.showError('&#10008', error.message);
@@ -27,6 +28,7 @@ angular.module('fitGApp')
                 exerciseService.getAnaerobics()
                     .then(exercises => {
                         $scope.anaerobicExerciseList = exercises;
+                        $scope.sortExercises($scope.anaerobicExerciseList);
                     })
                     .catch(error => {
                         notificationService.showError('&#10008', error.message);
@@ -40,5 +42,15 @@ angular.module('fitGApp')
 
             $scope.enterAnaerobicExercise = function (exercise) {
                 $state.go('anaerobic-marks', { exID: exercise._id, exName: exercise.name});
+            };
+
+            $scope.sortExercises = function (exerciseList) {
+                exerciseList.sort(function(a,b) {
+                    let x = a.name.toLowerCase();
+                    let y = b.name.toLowerCase();
+                    if (x < y) return -1;
+                    if (x > y) return 1;
+                    return 0;
+                })
             }
         }]);
