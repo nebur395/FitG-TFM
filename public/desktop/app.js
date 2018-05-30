@@ -71,7 +71,7 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
             $httpProvider.interceptors.push(['$q', '$injector', function ($q, $injector) {
                 return {
                     'request': function (config) {
-                        let authService = $injector.get('authService');
+                        const authService = $injector.get('authService');
                         config.headers = config.headers || {};
                         if (authService.getToken()) {
                             config.headers.Authorization = 'Bearer ' + authService.getToken();
@@ -81,11 +81,9 @@ angular.module('fitGApp', ['ui.router', 'base64', 'ui-notification', 'chart.js',
                     'responseError': function (response) {
 
                         if (response.status === 401 || response.status === 403) {
-                            let authService = $injector.get('authService');
+                            const authService = $injector.get('authService');
 
-                            if (!authService.getToken()) {
-                                authService.logout();
-                            } else if (authService.getToken() && authService.isTokenExpired()) {
+                            if (!authService.getToken() || (authService.getToken() && authService.isTokenExpired())) {
                                 authService.logout();
                             }
                         }

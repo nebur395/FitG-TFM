@@ -37,19 +37,23 @@ angular.module('fitGApp')
             $scope.getAnaerobicExerises();
 
             $scope.enterAerobicExercise = function (exercise) {
-                $state.go('aerobic-marks', { exID: exercise._id, exName: exercise.name});
+                $state.go('aerobic-marks', {exID: exercise._id, exName: exercise.name});
             };
 
             $scope.enterAnaerobicExercise = function (exercise) {
-                $state.go('anaerobic-marks', { exID: exercise._id, exName: exercise.name});
+                $state.go('anaerobic-marks', {exID: exercise._id, exName: exercise.name});
             };
 
             $scope.sortExercises = function (exerciseList) {
-                exerciseList.sort(function(a,b) {
-                    let x = a.name.toLowerCase();
-                    let y = b.name.toLowerCase();
-                    if (x < y) return -1;
-                    if (x > y) return 1;
+                exerciseList.sort(function (a, b) {
+                    const x = a.name.toLowerCase();
+                    const y = b.name.toLowerCase();
+                    if (x < y) {
+                        return -1;
+                    }
+                    if (x > y) {
+                        return 1;
+                    }
                     return 0;
                 })
             }

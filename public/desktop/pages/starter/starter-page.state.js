@@ -9,7 +9,7 @@ angular.module('fitGApp')
 
             // send the login form to the auth service
             $scope.login = function () {
-                let user = {
+                const user = {
                     email: $scope.email,
                     password: $scope.password
                 };

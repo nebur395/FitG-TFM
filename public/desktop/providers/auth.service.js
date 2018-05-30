@@ -24,7 +24,7 @@ angular.module('fitGApp')
             if (_authenticated) {
                 return _authenticated;
             } else {
-                let tmp = angular.fromJson(localStorage.userIdentity);
+                const tmp = angular.fromJson(localStorage.userIdentity);
                 if (typeof tmp !== 'undefined' && tmp !== null) {
                     this.authenticate(tmp);
                     return _authenticated;
