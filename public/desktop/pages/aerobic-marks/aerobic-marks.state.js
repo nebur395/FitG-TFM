@@ -58,6 +58,7 @@ angular.module('fitGApp')
                     .then(marks => {
                         $scope.formatDates(marks);
                         $scope.marksList = marks;
+                        $scope.marksList.reverse();
                         $scope.populateChart(marks);
                     })
                     .catch(error => {
