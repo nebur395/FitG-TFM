@@ -36,3 +36,56 @@
     }
   }
 }
+
+@font-face{
+  font-family: Audiowide;
+  src: url('../assets/fonts/Audiowide-Regular.ttf') format('truetype');
+}
+
+ion-menu {
+  font-family: 'Audiowide', cursive;
+  text-transform: uppercase !important;
+  button {
+    font-family: 'Audiowide', cursive;
+    text-transform: uppercase !important;
+  }
+}
+
+.menu-inner .toolbar-background {
+  background-color: #343a40 !important;
+}
+
+.menu-inner .toolbar-title {
+  color: #ffab40 !important;
+}
+
+.menu-inner .item {
+  background-color: #454d54 !important;
+  color: rgba(255,255,255,.5) !important;
+}
+
+.menu-inner .content {
+  background-color: #454d54 !important;
+  color: rgba(255,255,255,.5) !important;
+}
+
+ion-header ion-navbar .toolbar-background {
+  background-color: #343a40 !important;
+}
+
+ion-header ion-navbar .toolbar-title {
+  font-family: 'Audiowide', cursive;
+  color: rgba(255,255,255,.5) !important;
+}
+
+ion-header ion-navbar button[menuToggle] {
+  color: rgba(255,255,255,.5) !important;
+}
+
+ion-header ion-navbar button.back-button {
+  color: rgba(255,255,255,.5) !important;
+}
+
+ion-header ion-navbar ion-buttons button {
+  color: #ffab40 !important;
+}
