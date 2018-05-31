@@ -13,6 +13,7 @@ import { IonicPage, NavController, MenuController } from 'ionic-angular';
   templateUrl: 'welcome.html'
 })
 export class WelcomePage {
+  intervalBgImgs: any;
 
   constructor(
     private navCtrl: NavController,
@@ -29,11 +30,26 @@ export class WelcomePage {
     this.menu.enable(true);
   }
 
+  ngAfterViewInit(): void {
+    // Random bg, Math.random controls bg range [0..5]
+    document.getElementById("splash-bg").style.backgroundImage =
+      'url(assets/img/sports-' + (Math.floor(Math.random() * 5)) + '.png';
+    this.intervalBgImgs = setInterval(this.changeBgImg, 30000);
+  }
+
+  changeBgImg() {
+    // Random bg, Math.random controls bg range [0..5]
+    document.getElementById("splash-bg").style.backgroundImage =
+      'url(assets/img/sports-' + (Math.floor(Math.random() * 5)) + '.png';
+  }
+
   login() {
+    clearInterval(this.intervalBgImgs);
     this.navCtrl.push('LoginPage');
   }
 
   signup() {
+    clearInterval(this.intervalBgImgs);
     this.navCtrl.push('SignupPage');
   }
 }

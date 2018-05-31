@@ -41,6 +41,7 @@ export class ExercisesPage {
         observable.subscribe((resp) => {
 
           this.aerobicExercises = resp.exercises as AerobicExercise[];
+          this.sortExercises(this.aerobicExercises);
           this.aerobicExercisesFiltered = this.aerobicExercises;
 
         }, (err) => {
@@ -53,6 +54,7 @@ export class ExercisesPage {
             observable.subscribe((resp) => {
 
               this.anaerobicExercises = resp.exercises as AnaerobicExercise[];
+              this.sortExercises(this.anaerobicExercises);
               this.anaerobicExercisesFiltered = this.anaerobicExercises;
 
             }, (err) => {
@@ -260,6 +262,20 @@ export class ExercisesPage {
     this.navCtrl.push('AerobicMarksPage', {
       exercise: exercise
     });
+  }
+
+  sortExercises(exerciseList: any): void {
+    exerciseList.sort(function (a, b) {
+      const x = a.name.toLowerCase();
+      const y = b.name.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    })
   }
 
   errorHandler(status: number, error: string): void {

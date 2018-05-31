@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'http://192.168.1.137:8080';
+  url: string = 'http://192.168.1.8:8080';
 
   constructor(
     private http: HttpClient
