@@ -94,6 +94,9 @@ export class AnaerobicMarkCreatePage {
     }
     let mark = this.nameParam.get('mark');
     if (mark) {
+      mark.repetitions = [];
+      mark.weight = [];
+      mark.time = [];
       for (let i = 0; i < this.form.value.series.length; i++) {
         mark.repetitions.push(this.form.value.series[i].repetitions);
         mark.weight.push(this.form.value.series[i].weight);
@@ -114,7 +117,21 @@ export class AnaerobicMarkCreatePage {
         mark.time.push(this.form.value.series[i].time);
 
       }
-      this.viewCtrl.dismiss(mark);
     }
+    for (let i = 0; i < mark.repetitions.length; i++) {
+      if (!mark.repetitions[i]) {
+        mark.repetitions = [];
+      }
+      if (!mark.weight[i]) {
+        mark.weight = [];
+      }
+      if (!mark.time[i]) {
+        mark.time = [];
+      }
+    }
+    if ((mark.repetitions.length == 0) && (mark.weight.length == 0) && (mark.time.length == 0)) {
+      return;
+    }
+    this.viewCtrl.dismiss(mark);
   }
 }
