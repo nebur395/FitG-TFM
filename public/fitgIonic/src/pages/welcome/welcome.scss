@@ -1,6 +1,9 @@
 page-welcome {
   font-family: 'Audiowide', cursive;
   text-transform: uppercase !important;
+  ion-content {
+    background-color: #e9ecef !important;
+  }
 
   .splash-bg {
     position: relative;
