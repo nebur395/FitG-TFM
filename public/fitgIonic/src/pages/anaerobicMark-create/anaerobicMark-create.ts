@@ -1,5 +1,5 @@
 import { Component, ViewChild }                 from '@angular/core';
-import { FormBuilder, FormGroup }   from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray }   from '@angular/forms';
 import {IonicPage, NavParams, ViewController} from 'ionic-angular';
 
 @IonicPage()
@@ -11,6 +11,7 @@ export class AnaerobicMarkCreatePage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
+  series: number = 1;
 
   form: FormGroup;
 
@@ -20,9 +21,9 @@ export class AnaerobicMarkCreatePage {
     private nameParam: NavParams
   ) {
     this.form = this.formBuilder.group({
-      repetitions: [''],
-      weight: [''],
-      time: [''],
+      series: this.formBuilder.array([
+        this.newSerieInputDefinition()
+      ]),
       comment: ['']
     });
 
@@ -32,12 +33,47 @@ export class AnaerobicMarkCreatePage {
     });
 
     if (this.nameParam.get('mark')) {
-      this.form.setValue({
-        repetitions: this.nameParam.get('mark').repetitions[0],
-        weight: this.nameParam.get('mark').weight[0],
-        time: this.nameParam.get('mark').time[0],
-        comment: this.nameParam.get('mark').comment
+      this.form.controls['comment'].setValue(this.nameParam.get('mark').comment);
+      for (let i = 0; i < this.nameParam.get('mark').repetitions.length; i++) {
+        let serie = {
+          repetitions: this.nameParam.get('mark').repetitions[i],
+          weight: this.nameParam.get('mark').weight[i],
+          time: this.nameParam.get('mark').time[i]
+        };
+        this.addSerie(serie);
+      }
+      const control = <FormArray>this.form.controls.series;
+      control.removeAt(0);
+    }
+  }
+
+  newSerieInputDefinition(serie?: any) : FormGroup {
+    if (serie) {
+      return this.formBuilder.group({
+        repetitions: serie.repetitions,
+        weight: serie.weight,
+        time: serie.time
       });
+    } else {
+      return this.formBuilder.group({
+        repetitions: [''],
+        weight: [''],
+        time: ['']
+      });
+    }
+  }
+
+  addSerie(serie?: any) {
+    this.series++;
+    const control = <FormArray>this.form.controls.series;
+    control.push(this.newSerieInputDefinition(serie));
+  }
+
+  removeSerie() {
+    if (this.series > 1) {
+      const control = <FormArray>this.form.controls.series;
+      control.removeAt(control.length-1);
+      this.series--;
     }
   }
 
@@ -53,21 +89,32 @@ export class AnaerobicMarkCreatePage {
    * back to the presenter.
    */
   done() {
-    if (!this.form.valid) { return; }
+    if (!this.form.valid) {
+      return;
+    }
     let mark = this.nameParam.get('mark');
     if (mark) {
-      mark.repetitions = [this.form.value.repetitions];
-      mark.weight = [this.form.value.weight];
-      mark.time = [this.form.value.time];
+      for (let i = 0; i < this.form.value.series.length; i++) {
+        mark.repetitions.push(this.form.value.series[i].repetitions);
+        mark.weight.push(this.form.value.series[i].weight);
+        mark.time.push(this.form.value.series[i].time);
+
+      }
       mark.comment = this.form.value.comment;
     } else {
       mark = {
-        repetitions: [this.form.value.repetitions],
-        weight: [this.form.value.weight],
-        time: [this.form.value.time],
+        repetitions: [],
+        weight: [],
+        time: [],
         comment: this.form.value.comment
+      };
+      for (let i = 0; i < this.form.value.series.length; i++) {
+        mark.repetitions.push(this.form.value.series[i].repetitions);
+        mark.weight.push(this.form.value.series[i].weight);
+        mark.time.push(this.form.value.series[i].time);
+
       }
+      this.viewCtrl.dismiss(mark);
     }
-    this.viewCtrl.dismiss(mark);
   }
 }

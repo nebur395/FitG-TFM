@@ -32,17 +32,38 @@
 
     <ion-list>
 
-      <ion-item>
-        <ion-input type="number" placeholder="Repetitions" formControlName="repetitions"></ion-input>
-      </ion-item>
+      <div padding style="color: #919191">
+        Current series: {{series}}
+        <div style="float:right">
+          Add/Remove serie:
+          <ion-icon margin-left margin-right name="add"(click)="addSerie()"></ion-icon>
+          <ion-icon name="remove"(click)="removeSerie()"></ion-icon>
+        </div>
+      </div>
 
-      <ion-item>
-        <ion-input type="number" placeholder="Weight" formControlName="weight"></ion-input>
-      </ion-item>
+      <ion-grid formArrayName="series">
+        <ion-row [formGroupName]="i"
+                 *ngFor="let serie of form.controls.series.controls; let i = index">
+          <ion-col>
+            <ion-item>
+              <ion-input type="number" placeholder="Repetitions" formControlName="repetitions"></ion-input>
+            </ion-item>
+          </ion-col>
 
-      <ion-item>
-        <ion-input type="number" placeholder="Time" formControlName="time"></ion-input>
-      </ion-item>
+          <ion-col>
+            <ion-item>
+              <ion-input type="number" placeholder="Weight" formControlName="weight"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-input type="number" placeholder="Time" formControlName="time"></ion-input>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
 
       <ion-item>
         <ion-textarea type="text" rows="5" placeholder="Comment"
