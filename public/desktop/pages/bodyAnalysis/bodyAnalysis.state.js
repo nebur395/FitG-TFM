@@ -66,6 +66,7 @@ angular.module('fitGApp')
                         $scope.formatList(analysis);
                         $scope.analysisList = analysis;
                         $scope.populateChart(analysis);
+                        $scope.analysisList.reverse();
                     })
                     .catch(error => {
                         notificationService.showError('&#10008', error.message);

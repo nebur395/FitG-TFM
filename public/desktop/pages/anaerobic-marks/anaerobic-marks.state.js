@@ -63,8 +63,8 @@ angular.module('fitGApp')
                     .then(marks => {
                         $scope.formatList(marks);
                         $scope.marksList = marks;
-                        $scope.marksList.reverse();
                         $scope.populateChart(marks);
+                        $scope.marksList.reverse();
                     })
                     .catch(error => {
                         notificationService.showError('&#10008', error.message);
