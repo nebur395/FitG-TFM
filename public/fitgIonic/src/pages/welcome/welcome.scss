@@ -5,19 +5,133 @@ page-welcome {
     background-color: #e9ecef !important;
   }
 
-  .splash-bg {
+  #splash-bg {
     position: relative;
-    background: url('../assets/img/splashbg.png') no-repeat transparent;
+    //background: url('../assets/img/sports-0.png') no-repeat transparent;
     background-size: cover;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+    overflow: hidden;
+    margin: -5px 0 -5px 0;
     height: 45%;
-    z-index: 1;
-    background-repeat: repeat-x;
-    animation: animatedBackground 40s linear infinite;
+    -webkit-animation: fadein 30s ease-in infinite, slowmove 30s linear infinite;
+    -moz-animation: fadein 30s ease-in infinite, slowmove 30s linear infinite;
+    -ms-animation: fadein 30s ease-in infinite, slowmove 30s linear infinite;
+    -o-animation: fadein 30s ease-in infinite, slowmove 30s linear infinite;
+    animation: fadein 30s ease-in infinite, slowmove 30s linear infinite;
   }
 
-  @keyframes animatedBackground {
-    from { background-position: 0 0; }
-    to { background-position: 100% 0; }
+  /* BG FadeIn keyframes */
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    2% {
+      opacity: 1;
+    }
+    98% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-moz-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-ms-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @-o-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* BG slowmove keyframes */
+  @keyframes slowmove {
+    from {
+      transform: scale(1.1, 1.1) translateX(-5%);
+    }
+    to {
+      transform: scale(1.3, 1.3) translateX(5%);
+    }
+  }
+
+  @-moz-keyframes slowmove {
+    from {
+      -moz-transform: scale(1.1, 1.1) translateX(-5%);
+    }
+    to {
+      -moz-transform: scale(1.3, 1.3) translateX(5%);
+    }
+  }
+
+  @-webkit-keyframes slowmove {
+    from {
+      -webkit-transform: scale(1.1, 1.1) translateX(-5%);
+    }
+    to {
+      -webkit-transform: scale(1.3, 1.3) translateX(5%);
+    }
+  }
+
+  @-ms-keyframes slowmove {
+    from {
+      -ms-transform: scale(1.1, 1.1) translateX(-5%);
+    }
+    to {
+      -ms-transform: scale(1.3, 1.3) translateX(5%);
+    }
+  }
+
+  @-o-keyframes slowmove {
+    from {
+      -o-transform: scale(1.1, 1.1) translateX(-5%);
+    }
+    to {
+      -o-transform: scale(1.3, 1.3) translateX(5%);
+    }
   }
 
   .splash-info {
@@ -28,7 +142,6 @@ page-welcome {
   }
   .splash-logo {
     margin: auto;
-    background: url('../assets/img/appicon.png') repeat transparent;
     background-size: 100%;
     width: 128px;
     height: 128px;
@@ -38,6 +151,9 @@ page-welcome {
     font-weight: bold;
     max-width: 80%;
     margin: auto;
+    span {
+      color: #ffab40;
+    }
   }
   button.login {
     margin-top: 25px;
