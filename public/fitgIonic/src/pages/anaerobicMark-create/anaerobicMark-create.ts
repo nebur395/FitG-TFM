@@ -44,6 +44,7 @@ export class AnaerobicMarkCreatePage {
       }
       const control = <FormArray>this.form.controls.series;
       control.removeAt(0);
+      this.series--;
     }
   }
 
